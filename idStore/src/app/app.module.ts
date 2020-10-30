@@ -7,25 +7,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { MaterialModule } from './material/material.module';
-import { LoginComponent } from './login/login.component';
-import { FlexLayoutModule } from '@angular/flex-layout/typings/module';
-import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavComponent,
-    LoginComponent
+    NavComponent
   ],
   imports: [
     MaterialModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    ReactiveFormsModule 
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
