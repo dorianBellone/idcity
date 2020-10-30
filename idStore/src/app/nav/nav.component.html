@@ -1,0 +1,34 @@
+<mat-toolbar>
+    <mat-toolbar-row class="couleur">
+      <h6 class="titre" (click)=redirection()>
+        ID STORE
+      </h6>
+      
+      
+      <div class="container-fluid">
+        <div class="row backcolor size">
+            <div class="col-md-10 ml-2">
+            </div>
+        </div>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+  <mat-sidenav-container autosize class="example-container" style="height:100vh">
+    <mat-sidenav class="couleurdefond" #drawer mode="side" opened role="navigation">
+      <mat-nav-list >
+        <a class="couleurdetexte" mat-list-item >Developpement</a>
+        <a class="couleurdetexte" mat-list-item >Reflexion</a>
+        <a class="couleurdetexte" mat-list-item >Environnement</a>
+        
+
+
+
+        
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

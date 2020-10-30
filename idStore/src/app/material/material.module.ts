@@ -90,6 +90,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
       MatTableModule,
       MatPaginatorModule
   ],
-
+  
 })
 export class MaterialModule { }

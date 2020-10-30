@@ -1,0 +1,25 @@
+.titre{
+    color: white;
+    font-size : 35px;
+    text-shadow: 2px 2px 3px black;
+}
+
+
+
+    .couleur{
+        background-color: #8b8589;
+    
+    }
+
+
+    .couleurdefond{
+        background-color: #8b8589;
+    }
+
+    .couleurdetexte{
+        color: white;
+    }
+
+    .droit{
+        float: right;
+    }
