@@ -7,19 +7,30 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { MaterialModule } from './material/material.module';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { DeveloppementComponent } from './aspects/developpement/developpement.component';
+import { ReflexionComponent } from './aspects/reflexion/reflexion.component';
+import { FormsModule } from '@angular/forms';
+import { ListeComponent } from './liste/liste.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavComponent
+    NavComponent,
+    DeveloppementComponent,
+    ReflexionComponent,
+    ListeComponent
   ],
   imports: [
+    Ng2SearchPipeModule,
     MaterialModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

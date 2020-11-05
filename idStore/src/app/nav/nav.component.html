@@ -4,6 +4,11 @@
         ID STORE
       </h6>
       
+      <div  class="search">
+        <input class="form-control icon" type="text" name="search" autocomplete="off" placeholder="&#61442;  Rechercher un cours">
+      </div>
+
+      
       
       <div class="container-fluid">
         <div class="row backcolor size">
@@ -17,10 +22,34 @@
 
   <mat-sidenav-container autosize class="example-container" style="height:100vh">
     <mat-sidenav class="couleurdefond" #drawer mode="side" opened role="navigation">
+      <form>
+        <mat-form-field appearance="fill">
+          <mat-label style="color: white;">Choix de la classe</mat-label>
+          <mat-select [(ngModel)]="selectedValue" name="classe">
+            <mat-option *ngFor="let classe of classes" [value]="classe.valeur">
+              {{classe.nom}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+
+
       <mat-nav-list >
-        <a class="couleurdetexte" mat-list-item >Developpement</a>
-        <a class="couleurdetexte" mat-list-item >Reflexion</a>
-        <a class="couleurdetexte" mat-list-item >Environnement</a>
+        <a class="couleurdetexte" (click)="displayDeveloppement()" mat-list-item><h2>Developpement</h2></a>
+
+        <div *ngIf="developpement">
+            <a *ngFor="let item of Matieres">
+              <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)" 
+                mat-list-item>
+                <div>
+                  <H4>{{ item.matiere }}</H4>
+               
+                </div>
+              </a>
+            </a>
+        </div>
+        <a class="couleurdetexte" mat-list-item ><h2>Reflexion</h2></a>
+        <a class="couleurdetexte" mat-list-item ><h2>Environnement</h2></a>
         
 
 
