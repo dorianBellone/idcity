@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar *ngIf="isLoggedIn$ | async ">
     <mat-toolbar-row class="couleur">
       <h6 class="titre" (click)=redirection()>
         ID STORE
@@ -20,7 +20,7 @@
   </mat-toolbar>
 
 
-  <mat-sidenav-container autosize class="example-container" style="height:100vh">
+  <mat-sidenav-container autosize class="example-container" style="height:100vh" *ngIf="isLoggedIn$ | async">
     <mat-sidenav class="couleurdefond" #drawer mode="side" opened role="navigation">
       <form>
         <mat-form-field appearance="fill">

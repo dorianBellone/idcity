@@ -1,0 +1,20 @@
+<div class="card shadow-lg p-3 mb-5 bg-white rounded">
+    <div style="font-size:xx-large;">Page d’authentification</div>
+    <div class="form">
+        <form>
+            <div style="margin-top: 5%;">
+                <div style="font-size:medium;">Nom d’utilisateur</div>
+                <input type=text [(ngModel)]=login name=login>
+            </div>
+            <div style="margin-top: 40px;">
+                <div style="font-size:medium;">Mot de passe</div>
+                 <input type=password [(ngModel)]=password name=password>
+                 
+                 
+                 <div class="bouton">   <button class="login100-form-btn" (click)="handleLogin()">Se connecter</button>
+                </div>
+            </div>
+            <div [hidden]="erreur">Identifiants incorrects</div>
+        </form>
+    </div>
+</div>

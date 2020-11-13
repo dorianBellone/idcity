@@ -12,6 +12,7 @@ import { DeveloppementComponent } from './aspects/developpement/developpement.co
 import { ReflexionComponent } from './aspects/reflexion/reflexion.component';
 import { FormsModule } from '@angular/forms';
 import { ListeComponent } from './liste/liste.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -22,7 +23,8 @@ import { ListeComponent } from './liste/liste.component';
     NavComponent,
     DeveloppementComponent,
     ReflexionComponent,
-    ListeComponent
+    ListeComponent,
+    LoginComponent
   ],
   imports: [
     Ng2SearchPipeModule,

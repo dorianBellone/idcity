@@ -1,6 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { LoginService } from '../service/login.service';
 import { MatiereService } from '../service/matiere.service';
 
 interface Classe {
@@ -24,6 +26,8 @@ export class NavComponent implements OnInit {
   selectedValue: string;
   searchText;
 
+  isLoggedIn$: Observable<boolean>; 
+
   classes: Classe[] = [
     { nom: 'B1', valeur: '1'},
     { nom: 'B2', valeur: '2'},
@@ -34,12 +38,12 @@ export class NavComponent implements OnInit {
 
   Matieres= [{matiere: 'Java'},{matiere: 'CSharp'},{matiere: 'C'}];    
 
-  constructor( private router: Router,private matiereService: MatiereService) {}
+  constructor( private router: Router,private matiereService: MatiereService,private loginService: LoginService) {}
 
   ngOnInit() {
+    
+    this.isLoggedIn$ = this.loginService.isLoggedIn;
    this.developpement = false;
-
-  
   }
 
   sendTextValue(matiere){
