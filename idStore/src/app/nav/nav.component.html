@@ -23,7 +23,7 @@
   </mat-toolbar>
 
 
-  <mat-sidenav-container autosize class="example-container" style="height:100vh" *ngIf="isLoggedIn$ | async">
+  <mat-sidenav-container autosize class="example-container" style="height:96vh" *ngIf="isLoggedIn$ | async">
     <mat-sidenav class="couleurdefond" #drawer mode="side" opened role="navigation">
       <form>
         <mat-form-field appearance="fill">
@@ -61,6 +61,10 @@
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
+      
       <router-outlet></router-outlet>
     </mat-sidenav-content>
+
+
+
   </mat-sidenav-container>
