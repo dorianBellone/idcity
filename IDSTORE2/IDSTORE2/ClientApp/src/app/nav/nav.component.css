@@ -1,0 +1,53 @@
+.titre {
+  color: white;
+  font-size: 35px;
+  text-shadow: 2px 2px 3px black;
+}
+
+.search {
+  position: absolute; /* postulat de départ */
+  top: 4.5%;
+  left: 54.5%; /* à 50%/50% du parent référent */
+  transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+  padding-bottom: 50px;
+}
+
+.form-control.icon {
+  margin-top: 6px;
+  height: 35px;
+  width: 300px;
+  font-size: x-large;
+}
+
+.form-control {
+  box-shadow: 0 10px 40px 0 #B0C1D9;
+}
+
+.couleur {
+  background-color: #b40b0b;
+}
+
+input.icon {
+  padding: 5px;
+}
+
+  input.icon::-webkit-input-placeholder {
+    font-family: 'FontAwesome';
+  }
+
+  input.icon::-moz-placeholder {
+    font-family: 'FontAwesome';
+  }
+
+
+.couleurdefond {
+  background-color: #b40b0b;
+}
+
+.couleurdetexte {
+  color: white;
+}
+
+.droit {
+  float: right;
+}
