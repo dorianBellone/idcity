@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { MaterialModule } from './material/material.module';
 import { NavComponent } from './nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthGuard } from './services/auth.guard';
 
 @NgModule({
   declarations: [
@@ -26,8 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RouterModule.forRoot([
       { path: '', pathMatch: 'full', redirectTo: 'login' },
       { path: 'login', component: LoginComponent },
-      { path: 'home', component: HomeComponent },
-      { path: 'liste', component: ListeComponent },
+      { path: 'home', component: HomeComponent /*,canActivate: [AuthGuard] */},
+      { path: 'liste', component: ListeComponent /*,canActivate: [AuthGuard]*/ },
     ]),
     MaterialModule,
     BrowserAnimationsModule
