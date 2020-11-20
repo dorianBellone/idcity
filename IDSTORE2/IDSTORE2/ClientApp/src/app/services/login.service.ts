@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 
 export class LoginService {
 
-  personneConnect: String;
+  public connectedUser = new Subject<string>();;
   isLoggedin = false;
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}
 
@@ -29,4 +29,15 @@ export class LoginService {
   logout() {
     this.isLoggedin = false;
   }
+
+  loadUser(data) {
+
+    this.connectedUser.next(data);
+
+  }
 }
+
+
+
+
+

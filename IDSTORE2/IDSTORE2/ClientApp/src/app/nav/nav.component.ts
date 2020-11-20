@@ -20,7 +20,7 @@ interface Matiere {
 })
 export class NavComponent implements OnInit {
 
-
+  mySubjectVal: string;
   developpement: boolean = false;
   selectedValue: string;
   searchText;
@@ -40,7 +40,12 @@ export class NavComponent implements OnInit {
   constructor(private router: Router, private matiereService: MatiereService, private loginService: LoginService) { }
 
   ngOnInit() {
-
+    this.loginService.connectedUser.subscribe(
+      data => {
+        this.mySubjectVal = data;
+        console.log(data);
+      }
+    );
     this.isLoggedIn$ = this.loginService.isLoggedIn;
     this.developpement = false;
   }
@@ -60,3 +65,4 @@ export class NavComponent implements OnInit {
 
 
 }
+

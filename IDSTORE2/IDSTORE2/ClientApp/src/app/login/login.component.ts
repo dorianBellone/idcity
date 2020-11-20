@@ -20,8 +20,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handleLogin() {
-    this.loginservice.personneConnect = this.login;
+  handleLogin(data) {
     /*if (this.password === "admin") {
       this.loginservice.login();
     }
@@ -29,6 +28,12 @@ export class LoginComponent implements OnInit {
       this.erreur = false
     }
   }*/
+    this.sendTextValue(data);
     this.loginservice.login();
   }
+
+  sendTextValue(data) {
+    this.loginservice.loadUser(data);
+  }
+
 }
