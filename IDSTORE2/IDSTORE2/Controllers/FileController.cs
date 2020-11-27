@@ -22,18 +22,26 @@ namespace IDSTORE2.Controllers
             folderPath = "E:\\Bureau\\M2\\IDCity_IDStore\\RessourceFile";
             //_logger = logger;
         }
-        
+        //[HttpGet]
+        //public string Get()
+        //{
+        //    Console.WriteLine("TOTOT");
+        //    return "toto";
+        //}
         [HttpGet]
-        public List<File> Get()
+        public List<String> Get()
         {
             List<File> response = new List<File>();
+            List<String> responseCONIO = new List<String>();
+
             string[] filePaths = Directory.GetFiles(folderPath);
 
-            foreach(string path in filePaths.ToList())
+            foreach (string path in filePaths.ToList())
             {
                 response.Add(new File(null, path, null));
+                responseCONIO.Add(path);
             }
-            return response;
+            return responseCONIO;
         }
     }
 

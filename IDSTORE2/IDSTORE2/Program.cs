@@ -14,8 +14,7 @@ namespace IDSTORE2
     {
         public static void Main(string[] args)
         {
-            FileController fc = new FileController();
-            var toto = fc.Get();
+          
             CreateHostBuilder(args).Build().Run();
 
         }

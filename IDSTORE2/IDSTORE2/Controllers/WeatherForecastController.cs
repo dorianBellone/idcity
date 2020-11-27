@@ -9,7 +9,7 @@ namespace IDSTORE2.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class WeatherForecastController : ControllerBase 
     {
         private static readonly string[] Summaries = new[]
         {
