@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-//import { type } from 'os';
 import { ApiService } from '../services/api.service';
+import { File } from '../models/file';
 
 
 @Component({
@@ -11,12 +11,14 @@ import { ApiService } from '../services/api.service';
   templateUrl: './home.component.html',
 })
 @Injectable()
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   private baseApiUrl: string;
   private apiDownloadUrl: string;
   private apiUploadUrl: string;
   private apiFileUrl: string;
-  private result: string;
+  private result: File[];
+
+
 
   constructor(private httpClient: HttpClient, private apiService: ApiService) {
     this.baseApiUrl = 'https://localhost:44373/api/';
@@ -25,7 +27,17 @@ export class HomeComponent {
     this.apiFileUrl = this.baseApiUrl + 'files';
   }
 
-  public downloadFile(): string  {
+  ngOnInit(): void {
+    this.apiService.Test().subscribe(
+      data =>
+        this.apiService.liste = data);
+    console.log(this.apiService.liste);
+  }
+
+
+
+
+  public downloadFile(): File[]  {
     this.apiService.Test().subscribe((data) => this.result = data)
     return this.result;
 
@@ -33,11 +45,12 @@ export class HomeComponent {
   public downloadFile2(){
     console.log('OK');
     
-  }
+  } /*
   public uploadFile(file: Blob): Observable<HttpEvent<void>> {
     const formData = new FormData();
+    const fichier = new File();
     formData.append('file', file);
-
+    
     return this.httpClient.request(new HttpRequest(
       'POST',
       this.apiUploadUrl,
@@ -46,7 +59,7 @@ export class HomeComponent {
         reportProgress: true
       }));
   }
-
+*/
   public getFiles(): Observable<string[]> {
     return this.httpClient.get<string[]>(this.apiFileUrl);
   }

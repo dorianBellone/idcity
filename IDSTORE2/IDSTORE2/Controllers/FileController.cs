@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using IDSTORE2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -19,7 +20,8 @@ namespace IDSTORE2.Controllers
 
         public FileController(/*ILogger<WeatherForecastController> logger*/)
         {
-            folderPath = "E:\\Bureau\\M2\\IDCity_IDStore\\RessourceFile";
+            //folderPath = "E:\\Bureau\\M2\\IDCity_IDStore\\RessourceFile";
+            folderPath = "C:\\RessourceFile";
             //_logger = logger;
         }
         //[HttpGet]
@@ -29,35 +31,23 @@ namespace IDSTORE2.Controllers
         //    return "toto";
         //}
         [HttpGet]
-        public List<String> Get()
+        public List<Fichier> Get()
         {
-            List<File> response = new List<File>();
+            List<Fichier> response = new List<Fichier>();
             List<String> responseCONIO = new List<String>();
-
+            byte[] content = null;
             string[] filePaths = Directory.GetFiles(folderPath);
+           
 
             foreach (string path in filePaths.ToList())
             {
-                response.Add(new File(null, path, null));
+                FileInfo fi = new FileInfo(path);
+                string extension = fi.Extension;
+                content = System.IO.File.ReadAllBytes(path);
+                response.Add(new Fichier(content, path, extension));
                 responseCONIO.Add(path);
             }
-            return responseCONIO;
+            return response;
         }
-    }
-
-    public class File
-    {
-        public File(byte[] content, string name, string type)
-        {
-            this.Content = content;
-            this.Name = name;
-            this.Type = type;
-        }
-
-        private Byte[] Content { get; set; }
-        private String Name { get; set; }
-
-        private String Type { get; set; }
-
     }
 }

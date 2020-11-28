@@ -1,15 +1,24 @@
 <p>home works!</p>
 
-<div class="container-upload">
-  <button [disabled]="disabled" [ngClass]="{'disabled': disabled}" class="button upload" (click)="inputFile.click()">
-    UPLOAD
-  </button>
-  <input name="file" id="file" (change)="upload($event)" type="file" #inputFile hidden>
-</div>
 
-<button [disabled]="disabled"
-        class="button download"
-        [ngClass]="{'disabled': disabled}"
-        (click)="downloadFile()">
-  download
-</button>
+
+
+<div *ngFor="let item of this.apiService.liste">
+
+  {{item.path}}
+  {{item.type}}
+  {{item.content}}
+  <button [disabled]="disabled"
+          class="button download"
+          [ngClass]="{'disabled': disabled}"
+          (click)="downloadFile()">
+    download
+  </button><div class="container-upload">
+    <button [disabled]="disabled" [ngClass]="{'disabled': disabled}" class="button upload" (click)="inputFile.click()">
+      UPLOAD
+    </button>
+    <input name="file" id="file" (change)="upload($event)" type="file" #inputFile hidden>
+  </div>
+
+
+</div>
