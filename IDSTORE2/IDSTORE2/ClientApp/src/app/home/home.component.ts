@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiService } from '../services/api.service';
-import { File } from '../models/file';
+import { Fichier } from '../models/fichier';
+import { BaseDestroyableComponent } from '../common/baseOnInit.component';
+import { catchError } from 'rxjs/operators';
 
 
 @Component({
@@ -11,35 +13,42 @@ import { File } from '../models/file';
   templateUrl: './home.component.html',
 })
 @Injectable()
-export class HomeComponent implements OnInit{
+export class HomeComponent extends BaseDestroyableComponent{
+ 
   private baseApiUrl: string;
   private apiDownloadUrl: string;
   private apiUploadUrl: string;
   private apiFileUrl: string;
-  private result: File[];
-
+  private data: Fichier[];
+  errorMessage: string;
 
 
   constructor(private httpClient: HttpClient, private apiService: ApiService) {
+    super();
     this.baseApiUrl = 'https://localhost:44373/api/';
     this.apiDownloadUrl = this.baseApiUrl + 'download';
     this.apiUploadUrl = this.baseApiUrl + 'upload';
     this.apiFileUrl = this.baseApiUrl + 'files';
   }
 
+  ngAfterViewInit(): void {}
+
   ngOnInit(): void {
-    this.apiService.Test().subscribe(
-      data =>
-        this.apiService.liste = data);
-    console.log(this.apiService.liste);
+
+    this.apiService.Test()
+      .subscribe(
+      data => {
+        this.data = data;
+      }
+    );
   }
 
 
 
-
-  public downloadFile(): File[]  {
-    this.apiService.Test().subscribe((data) => this.result = data)
-    return this.result;
+/*
+  public downloadFile(): Fichier[]  {
+    this.apiService.Test().subscribe((data) => this.data = data)
+    return this.data;
 
   }
   public downloadFile2(){
@@ -60,8 +69,9 @@ export class HomeComponent implements OnInit{
       }));
   }
 */
-  public getFiles(): Observable<string[]> {
+
+ /* public getFiles(): Observable<string[]> {
     return this.httpClient.get<string[]>(this.apiFileUrl);
   }
-
+  */
 }

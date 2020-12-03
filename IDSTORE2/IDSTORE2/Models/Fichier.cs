@@ -13,10 +13,10 @@ namespace IDSTORE2.Models
             this.Name = name;
             this.Type = type;
         }
-        private Byte[] Content { get; set; }
-        private String Name { get; set; }
+        public byte[] Content { get; set; }
+        public string Name { get; set; }
 
-        private String Type { get; set; }
+        public string Type { get; set; }
     }
 }
 

@@ -3,22 +3,23 @@
 
 
 
-<div *ngFor="let item of this.apiService.liste">
+<div *ngFor="let item of data">
 
-  {{item.path}}
-  {{item.type}}
-  {{item.content}}
-  <button [disabled]="disabled"
-          class="button download"
-          [ngClass]="{'disabled': disabled}"
-          (click)="downloadFile()">
-    download
-  </button><div class="container-upload">
-    <button [disabled]="disabled" [ngClass]="{'disabled': disabled}" class="button upload" (click)="inputFile.click()">
-      UPLOAD
+
+  <h4>Nom : {{item.name}}</h4> 
+  <h4>Type : {{item.type}}</h4>
+  
+    <button [disabled]="disabled"
+            class="button download"
+            [ngClass]="{'disabled': disabled}"
+            (click)="downloadFile()">
+      download
     </button>
-    <input name="file" id="file" (change)="upload($event)" type="file" #inputFile hidden>
-  </div>
-
+      <button [disabled]="disabled" [ngClass]="{'disabled': disabled}" class="button upload" (click)="inputFile.click()">
+        UPLOAD
+      </button>
+      <input name="file" id="file" (change)="upload($event)" type="file" #inputFile hidden>
+    
+  <hr />
 
 </div>

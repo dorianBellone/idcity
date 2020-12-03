@@ -2,24 +2,26 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { File } from '../models/file';
+import { tap } from 'rxjs/operators';
+import { Fichier } from '../models/fichier';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
 
-  liste: File[] = [];
+  liste: Fichier[] = [];
 
   constructor(private http: HttpClient) {
   }
 
-  
 
-  public Test(): Observable<File[]> {
-    return this.http.get<File[]>('https://localhost:44373/file/');
+
+  public Test(): Observable<Fichier[]> {
+    return this.http.get<Fichier[]>('https://localhost:44373/file/')
+
+
   }
+
+
 }
-
-
-
 
 
