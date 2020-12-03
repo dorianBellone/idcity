@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -8,7 +8,7 @@ import { NgxFileSaverService } from '@clemox/ngx-file-saver';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-
+  private apiDownloadUrl: string;
   liste: Fichier[] = [];
   result: BlobPart[] = [];
   constructor(private http: HttpClient, private fileSaver: NgxFileSaverService) {
@@ -36,6 +36,10 @@ export class ApiService {
     this.fileSaver.saveBlob(file, "test.pdf");
   }
 
+  public downloadFile(name: string): Observable<Blob>  {
+    console.log('https://localhost:44373/file/dl/' + name);
+    return this.http.get('https://localhost:44373/file/dl/' + name, { responseType: 'blob' });
+  }
 }
 
 

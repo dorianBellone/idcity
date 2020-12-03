@@ -31,32 +31,12 @@ namespace IDSTORE2.Controllers
             folderPath = "C:\\RessourceFile";
             //_logger = logger;
         }
-        //[HttpGet]
-        //public string Get()
-        //{
-        //    Console.WriteLine("TOTOT");
-        //    return "toto";
-        //}
-        [HttpGet("dwn")]
-        public void Dwn()
-        {
-            string remoteUri = "C:\\RessourceFile\\";
-            string fileName = "rrr.pdf", myStringWebResource = null;
-            // Create a new WebClient instance.
-            WebClient myWebClient = new WebClient();
-            // Concatenate the domain with the Web resource filename.
-            myStringWebResource = remoteUri + fileName;
-            Console.WriteLine("Downloading File \"{0}\" from \"{1}\" .......\n\n", fileName, myStringWebResource);
-            // Download the Web resource and save it into the current filesystem folder.
-            myWebClient.DownloadFile(myStringWebResource, fileName);
-            Console.WriteLine("Successfully Downloaded File \"{0}\" from \"{1}\"", fileName, myStringWebResource);
-            //Console.WriteLine("\nDownloaded file saved in the following file system folder:\n\t" + Application.StartupPath);
-        }
+
         [HttpGet]
-        [Route("dl")]
-        public async Task<IActionResult> Dl([FromQuery] string file)
+        [Route("dl/{path}")]
+        public async Task<IActionResult> Dl(string path)
         {
-        var filePath = "C:\\RessourceFile\\rrr.pdf";
+        var filePath = "C:\\RessourceFile\\" + path;
 
             var memory = new MemoryStream();
             using (var stream = new FileStream(filePath, FileMode.Open))
@@ -65,7 +45,7 @@ namespace IDSTORE2.Controllers
             }
             memory.Position = 0;
 
-            return File(memory, GetContentType(filePath), file);
+            return File(memory, GetContentType(filePath), filePath);
         }
 
         private string GetContentType(string path)
@@ -96,51 +76,6 @@ namespace IDSTORE2.Controllers
             }
             Console.WriteLine(response);
             return response;
-        }
-        [HttpGet("getget")]
-        public async Task<HttpResponseMessage> GetGet()
-        {
-            var fileName = "C:\\RessourceFile\\rrr.pdf";
-            var contentType = GetMimeType(fileName);
-
-            var result = new HttpResponseMessage(System.Net.HttpStatusCode.OK);
-            var stream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-            result.Content = new StreamContent(stream);
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
-            return result;
-        }
-        [HttpGet ("dlmm")]
-        public FileStreamResult Download()
-        {
-            var file = "C:\\RessourceFile\\rrr.pdf";
-            var memory = new MemoryStream();
-            using (var stream = new FileStream(file, FileMode.Open))
-            {
-                stream.CopyToAsync(memory);
-            }
-
-            memory.Position = 0;
-            return File(memory, GetMimeType(file), file);
-        }
-
-
-        private string GetMimeType(string file)
-        {
-            string extension = Path.GetExtension(file).ToLowerInvariant();
-            switch (extension)
-            {
-                case ".txt": return "text/plain";
-                case ".pdf": return "application/pdf";
-                case ".doc": return "application/vnd.ms-word";
-                case ".docx": return "application/vnd.ms-word";
-                case ".xls": return "application/vnd.ms-excel";
-                case ".png": return "image/png";
-                case ".jpg": return "image/jpeg";
-                case ".jpeg": return "image/jpeg";
-                case ".gif": return "image/gif";
-                case ".csv": return "text/csv";
-                default: return "";
-            }
         }
     }
 }

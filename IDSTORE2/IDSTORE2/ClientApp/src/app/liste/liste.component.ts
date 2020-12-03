@@ -5,6 +5,7 @@ import { Fichier } from '../models/fichier';
 import { ApiService } from '../services/api.service';
 import { MatiereService } from '../services/matiere.service';
 import { saveAs } from 'file-saver';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-liste',
@@ -17,6 +18,8 @@ export class ListeComponent extends BaseDestroyableComponent {
   //@Output('myOutputVal') myOutputVal = new EventEmitter();
   matiere: String;
   data: Fichier[];
+  da: any;
+  blob: Blob;
 
   constructor(private matiereService: MatiereService, private apiService: ApiService, private fileSaver: NgxFileSaverService
   ) {
@@ -39,32 +42,20 @@ export class ListeComponent extends BaseDestroyableComponent {
       );
   }
 
-  private download(): void {
-    this.apiService.get();
-    //this.apiService.getFile()
-    //  .subscribe(
-    //    (data: Blob) => {
-    //      saveAs(data, `rrr.pdf`); // from file-saver library
-    //    },
-    //    (err: any) => {
-    //      console.log(`Unable to save file ${JSON.stringify(err)}`)
-    //    }
-    //  );
+  download(name: string) {
+
+    console.log(name);
+     this.apiService.downloadFile(name).subscribe((data) => {
+
+       this.blob = new Blob([data], { type: 'application/pdf' });
+
+       var downloadURL = window.URL.createObjectURL(data);
+       var link = document.createElement('a');
+       link.href = downloadURL;
+       link.download = name;
+       link.click();
+     });
   }
-
-
-  DownloadFile(filePath: string, fileType: string): Observable<any> {
-    let fileExtension = fileType;
-    let input = filePath;
-    return this.apiService.post("http://localhost:21021/api/services/app/FormAttachment/DownloadFile?fileName=" + input, '',
-      { responseType: ResponseContentType.Blob })
-      .map(
-        (res) => {
-          var blob = new Blob([res.blob()], { type: fileExtension })
-          return blob;
-        });
-  }
-
 
   ngOnDestroy() {
     console.log("inside child component ngOnDestroy");
