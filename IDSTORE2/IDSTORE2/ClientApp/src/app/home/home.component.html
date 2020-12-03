@@ -2,24 +2,3 @@
 
 
 
-
-<div *ngFor="let item of data">
-
-
-  <h4>Nom : {{item.name}}</h4> 
-  <h4>Type : {{item.type}}</h4>
-  
-    <button [disabled]="disabled"
-            class="button download"
-            [ngClass]="{'disabled': disabled}"
-            (click)="downloadFile()">
-      download
-    </button>
-      <button [disabled]="disabled" [ngClass]="{'disabled': disabled}" class="button upload" (click)="inputFile.click()">
-        UPLOAD
-      </button>
-      <input name="file" id="file" (change)="upload($event)" type="file" #inputFile hidden>
-    
-  <hr />
-
-</div>

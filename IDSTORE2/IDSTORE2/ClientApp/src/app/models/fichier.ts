@@ -1,5 +1,5 @@
 export class Fichier {
-  public content: String;
+  public content: BlobPart;
   public name: String;
   public type: String;
 }

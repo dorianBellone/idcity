@@ -11,6 +11,7 @@ import { MaterialModule } from './material/material.module';
 import { NavComponent } from './nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './services/auth.guard';
+import { NgxFileSaverModule } from '@clemox/ngx-file-saver';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AuthGuard } from './services/auth.guard';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    NgxFileSaverModule,
     RouterModule.forRoot([
       { path: '', pathMatch: 'full', redirectTo: 'login' },
       { path: 'login', component: LoginComponent },
