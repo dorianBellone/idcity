@@ -6,6 +6,8 @@ import { ApiService } from '../services/api.service';
 import { MatiereService } from '../services/matiere.service';
 import { saveAs } from 'file-saver';
 import { Router } from '@angular/router';
+import { ClasseService } from '../services/classe.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-liste',
@@ -20,9 +22,11 @@ export class ListeComponent extends BaseDestroyableComponent {
   data: Fichier[];
   da: any;
   blob: Blob;
+  classe: string;
 
-  constructor(private matiereService: MatiereService, private apiService: ApiService, private fileSaver: NgxFileSaverService
-  ) {
+
+
+  constructor(private matiereService: MatiereService, private apiService: ApiService, private classeService : ClasseService) {
     super();
   }
 
@@ -34,16 +38,15 @@ export class ListeComponent extends BaseDestroyableComponent {
   }
 
   ngOnInit(): void {
-    this.apiService.Test()
+    this.apiService.getFile()
       .subscribe(
         data => {
           this.data = data;
         }
-      );
+    );
   }
 
   download(name: string) {
-
     console.log(name);
      this.apiService.downloadFile(name).subscribe((data) => {
 

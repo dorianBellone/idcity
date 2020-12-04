@@ -29,7 +29,7 @@
     <form>
       <mat-form-field appearance="fill">
         <mat-label style="color: white;">Choix de la classe</mat-label>
-        <mat-select [(ngModel)]="selectedValue" name="classe">
+        <mat-select [(ngModel)]="selectedValue"  (ngModelChange)="sendClasseValue($event)" name="classe">
           <mat-option *ngFor="let classe of classes" [value]="classe.valeur">
             {{classe.nom}}
           </mat-option>
@@ -38,11 +38,13 @@
     </form>
 
 
+    
+
     <mat-nav-list>
       <a class="couleurdetexte" (click)="displayDeveloppement()" mat-list-item><h2>Developpement</h2></a>
 
       <div *ngIf="developpement">
-        <a *ngFor="let item of Matieres">
+        <div *ngFor="let item of Matieres">
           <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
              mat-list-item>
             <div>
@@ -50,7 +52,7 @@
 
             </div>
           </a>
-        </a>
+        </div>
       </div>
       <a class="couleurdetexte" mat-list-item><h2>Reflexion</h2></a>
       <a class="couleurdetexte" mat-list-item><h2>Environnement</h2></a>

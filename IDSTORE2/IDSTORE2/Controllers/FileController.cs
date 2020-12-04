@@ -77,6 +77,27 @@ namespace IDSTORE2.Controllers
             Console.WriteLine(response);
             return response;
         }
+        [HttpGet]
+        [Route("getByClasse/{classe}")]
+        public List<Fichier> GetByClasse(string classe)
+        {
+            List<Fichier> response = new List<Fichier>();
+            byte[] content;
+            folderPath = folderPath + "\\" + classe;
+            string[] filePaths = Directory.GetFiles(folderPath);
+            string s;
+            foreach (string path in filePaths.ToList())
+            {
+                s = path;
+                FileInfo fi = new FileInfo(path);
+                string extension = fi.Extension;
+                content = System.IO.File.ReadAllBytes(path);
+                s = s.Remove(0, 21);
+                response.Add(new Fichier(content, s, extension));
+            }
+            Console.WriteLine(response);
+            return response;
+        }
     }
 }
 

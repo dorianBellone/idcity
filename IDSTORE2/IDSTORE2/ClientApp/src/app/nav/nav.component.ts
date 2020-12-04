@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MatiereService } from '../services/matiere.service';
 import { LoginService } from '../services/login.service';
+import { ClasseService } from '../services/classe.service';
 
 interface Classe {
   nom: string;
@@ -37,9 +38,10 @@ export class NavComponent implements OnInit {
 
   Matieres = [{ matiere: 'Java' }, { matiere: 'CSharp' }, { matiere: 'C' }];
 
-  constructor(private router: Router, private matiereService: MatiereService, private loginService: LoginService) { }
+  constructor(private router: Router, private matiereService: MatiereService, private loginService: LoginService,private classeService: ClasseService) { }
 
   ngOnInit() {
+    this.selectedValue = "1";
     this.loginService.connectedUser.subscribe(
       data => {
         this.mySubjectVal = data;
@@ -52,6 +54,11 @@ export class NavComponent implements OnInit {
 
   sendTextValue(matiere) {
     this.matiereService.loadMatiere(matiere);
+    this.router.navigate(['/liste']);
+  }
+
+  sendClasseValue(classe) {
+    this.classeService.loadClasse(classe);
     this.router.navigate(['/liste']);
   }
 

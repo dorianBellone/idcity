@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   constructor(private httpClient: HttpClient, private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.apiService.Test().subscribe(
+    this.apiService.getFile().subscribe(
       data => this.apiService.liste = data);
     console.log("app component");
     console.log(this.apiService.liste);
