@@ -12,6 +12,7 @@ import { NavComponent } from './nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './services/auth.guard';
 import { NgxFileSaverModule } from '@clemox/ngx-file-saver';
+import { ClasseComponent } from './classe/classe.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NgxFileSaverModule } from '@clemox/ngx-file-saver';
     HomeComponent,
     ListeComponent,
     LoginComponent,
-    NavComponent
+    NavComponent,
+    ClasseComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -31,6 +33,7 @@ import { NgxFileSaverModule } from '@clemox/ngx-file-saver';
       { path: 'login', component: LoginComponent },
       { path: 'home', component: HomeComponent /*,canActivate: [AuthGuard] */},
       { path: 'liste', component: ListeComponent /*,canActivate: [AuthGuard]*/ },
+      { path: 'classe/:classe', component: ClasseComponent }
     ]),
     MaterialModule,
     BrowserAnimationsModule

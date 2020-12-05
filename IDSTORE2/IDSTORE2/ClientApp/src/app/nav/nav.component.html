@@ -30,7 +30,7 @@
       <mat-form-field appearance="fill">
         <mat-label style="color: white;">Choix de la classe</mat-label>
         <mat-select [(ngModel)]="selectedValue"  (ngModelChange)="sendClasseValue($event)" name="classe">
-          <mat-option *ngFor="let classe of classes" [value]="classe.valeur">
+          <mat-option *ngFor="let classe of classes" [value]="classe.nom"  >>
             {{classe.nom}}
           </mat-option>
         </mat-select>

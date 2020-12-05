@@ -1,0 +1,31 @@
+
+
+<div >
+
+  <h1>cours pour la classe {{classe }}</h1>
+
+
+
+  <div *ngFor="let item of data">
+    <div class="card">
+      <div class="card-body">
+        <p class="card-text">
+          <mat-list>
+            <h2>{{item.name}}</h2>
+            <mat-list-item>
+              <mat-icon>add_circle_outline </mat-icon>
+              <h4> {{item.type}}</h4>
+            </mat-list-item>
+          </mat-list>
+
+          <button (click)="download(this.item.name)">
+            download
+          </button>
+
+</div>
+    </div>
+  </div>
+
+
+</div>
+

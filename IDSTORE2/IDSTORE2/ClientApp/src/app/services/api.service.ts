@@ -11,15 +11,29 @@ export class ApiService {
   private apiDownloadUrl: string;
   liste: Fichier[] = [];
   result: BlobPart[] = [];
-  constructor(private http: HttpClient, private fileSaver: NgxFileSaverService) {
+  public title = new Subject<string>();
+  test: string = "";
+
+  constructor(private http: HttpClient) {
+  }
+
+  loadClasse(data): Observable<Fichier[]> {
+    this.title.next(data);
+    this.title.subscribe(data => this.test = data);
+    console.log(this.test);
+    return this.http.get<Fichier[]>('https://localhost:44373/file/getByClasse/' + this.test);
   }
 
   public getFile(): Observable<Fichier[]> {
     return this.http.get<Fichier[]>('https://localhost:44373/file/')
   }
 
-  public getFileByClasse(classe: String): Observable<Fichier[]> {
+  public getFileByClasse(classe : string): Observable<Fichier[]> {
+    this.title.subscribe(data => this.test = data);
+    classe = this.test;
+
     return this.http.get<Fichier[]>('https://localhost:44373/file/getByClasse/' + classe);
+
   }
 
 

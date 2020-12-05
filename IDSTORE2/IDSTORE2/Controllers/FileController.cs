@@ -92,7 +92,7 @@ namespace IDSTORE2.Controllers
                 FileInfo fi = new FileInfo(path);
                 string extension = fi.Extension;
                 content = System.IO.File.ReadAllBytes(path);
-                s = s.Remove(0, 21);
+                s = s.Remove(0, 20);
                 response.Add(new Fichier(content, s, extension));
             }
             Console.WriteLine(response);

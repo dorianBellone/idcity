@@ -38,7 +38,6 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\common\baseOnInit.component.ts" />
     <None Remove="ClientApp\src\app\models\fichier.ts" />
-    <None Remove="ClientApp\src\app\services\classe.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
