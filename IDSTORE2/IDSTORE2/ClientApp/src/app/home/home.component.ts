@@ -33,45 +33,7 @@ export class HomeComponent extends BaseDestroyableComponent{
 
   ngAfterViewInit(): void {}
 
-  ngOnInit(): void {
-
-    this.apiService.Test()
-      .subscribe(
-      data => {
-        this.data = data;
-      }
-    );
-  }
-
-
-
-/*
-  public downloadFile(): Fichier[]  {
-    this.apiService.Test().subscribe((data) => this.data = data)
-    return this.data;
-
-  }
-  public downloadFile2(){
-    console.log('OK');
-    
-  } /*
-  public uploadFile(file: Blob): Observable<HttpEvent<void>> {
-    const formData = new FormData();
-    const fichier = new File();
-    formData.append('file', file);
-    
-    return this.httpClient.request(new HttpRequest(
-      'POST',
-      this.apiUploadUrl,
-      formData,
-      {
-        reportProgress: true
-      }));
-  }
-*/
-
- /* public getFiles(): Observable<string[]> {
-    return this.httpClient.get<string[]>(this.apiFileUrl);
-  }
-  */
+  ngOnInit(): void {}
 }
+
+

@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MatiereService } from '../services/matiere.service';
 import { LoginService } from '../services/login.service';
+import { ApiService } from '../services/api.service';
 
 interface Classe {
   nom: string;
-  valeur: string;
 }
 
 interface Matiere {
@@ -28,18 +28,19 @@ export class NavComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
 
   classes: Classe[] = [
-    { nom: 'B1', valeur: '1' },
-    { nom: 'B2', valeur: '2' },
-    { nom: 'B3', valeur: '3' },
-    { nom: 'M1', valeur: '4' },
-    { nom: 'M2', valeur: '5' }
+    { nom: 'B1' },
+    { nom: 'B2' },
+    { nom: 'B3' },
+    { nom: 'M1' },
+    { nom: 'M2' }
   ];
 
   Matieres = [{ matiere: 'Java' }, { matiere: 'CSharp' }, { matiere: 'C' }];
 
-  constructor(private router: Router, private matiereService: MatiereService, private loginService: LoginService) { }
+  constructor(private router: Router, private matiereService: MatiereService, private loginService: LoginService, private apiService: ApiService) { }
 
   ngOnInit() {
+    this.selectedValue = "Choix de votre classe";
     this.loginService.connectedUser.subscribe(
       data => {
         this.mySubjectVal = data;
@@ -53,6 +54,12 @@ export class NavComponent implements OnInit {
   sendTextValue(matiere) {
     this.matiereService.loadMatiere(matiere);
     this.router.navigate(['/liste']);
+  }
+
+  sendClasseValue(classe) {
+    this.apiService.loadClasse(classe);
+   // this.router.navigate(['/liste/']);
+    this.router.navigate(['/classe', classe]);
   }
 
   redirection() {

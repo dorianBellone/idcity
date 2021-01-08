@@ -1,0 +1,21 @@
+.mid {
+  position: absolute; /* postulat de départ */
+  top: 4.5%;
+  left: 54.5%; /* à 50%/50% du parent référent */
+  transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+  padding-bottom: 50px;
+}
+
+
+.test {
+  margin-top: auto;
+  text-align: center;
+}
+
+.card {
+  margin: auto;
+}
+
+.mat-list-item {
+  font-size: x-large;
+}
