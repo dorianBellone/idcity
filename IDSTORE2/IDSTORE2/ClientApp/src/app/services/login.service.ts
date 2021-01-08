@@ -10,10 +10,9 @@ export class LoginService {
 
   public connectedUser = new Subject<string>();;
   isLoggedin = false;
-  private loggedIn = new BehaviorSubject<boolean>(false); // {1}
-
+  private loggedIn = new BehaviorSubject<boolean>(false);
   get isLoggedIn() {
-    return this.loggedIn.asObservable(); // {2}
+    return this.loggedIn.asObservable();
   }
 
   constructor(
@@ -31,9 +30,7 @@ export class LoginService {
   }
 
   loadUser(data) {
-
     this.connectedUser.next(data);
-
   }
 }
 
