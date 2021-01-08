@@ -13,6 +13,7 @@ export class ClasseComponent implements OnInit {
   private sub: any;
   data: Fichier[];
   blob: Blob;
+  details: Boolean;
 
 
 
@@ -29,6 +30,7 @@ export class ClasseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.details = false;
     if (this.classe == null) {
       this.classe = "";
     }
@@ -49,5 +51,9 @@ export class ClasseComponent implements OnInit {
       link.download = name;
       link.click();
     });
+  }
+
+  displayDetails() {
+    this.details = !this.details;
   }
 }
