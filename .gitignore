@@ -1,3 +1,4 @@
 *.v2
 IDSTORE2/.vs/IDSTORE2/v16/.suo
 IDSTORE2/.vs/IDSTORE2/config/applicationhost.config
+*.config
