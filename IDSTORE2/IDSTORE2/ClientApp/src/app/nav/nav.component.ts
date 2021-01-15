@@ -47,6 +47,35 @@ export class NavComponent implements OnInit {
   pratiqueB1 = [{ matiere: 'IDlabs' }, { matiere: 'Projet individuel' }];
   proB1 = [{ matiere: 'Stage' }];
 
+  reflexionB2 = [{ matiere: 'Sciences Appliquées' }, { matiere: 'Algorithmique' }, { matiere: 'Méthodologie' }];
+  fonctionnementB2 = [{ matiere: 'Architecture des systèmes d’informations' }, { matiere: 'Virtualisation' }, { matiere: 'Réseaux' }, { matiere: 'Outils Logiciels' }];
+  developpementB2 = [{ matiere: 'Langages C' }, { matiere: 'Langages C++' }, { matiere: 'Langages C et C++' }, { matiere: 'Java' }, { matiere: 'C#' }, { matiere: 'PHP' }, { matiere: 'Python' }, { matiere: 'Javascript' }, { matiere: 'Manipulation des données' }];
+  environementB2 = [{ matiere: 'Anglais' }, { matiere: 'Economie' }, { matiere: 'Droit' }];
+  pratiqueB2 = [{ matiere: 'Projet individuel' }];
+  proB2 = [{ matiere: 'Stage' }];
+
+  reflexionB3 = [{ matiere: 'Méthodologie' }];
+  fonctionnementB3 = [{ matiere: 'Outils Logiciels' }];
+  developpementB3 = [{ matiere: 'Java' }, { matiere: 'C#' }, { matiere: 'PHP' }, { matiere: 'Python' }, { matiere: 'Javascript' }];
+  environementB3 = [{ matiere: 'Anglais' }, { matiere: 'Droit' }];
+  pratiqueB3 = [{ matiere: 'IDlabs' }, { matiere: 'Présentation du projet Unity' }, { matiere: 'Projet collaboratif' }, { matiere: 'IDcity' }];
+  proB3 = [{ matiere: 'Présentation projets en entreprise' }, { matiere: 'Réalisation du projet' }, { matiere: 'Rédaction du mémoire' }, { matiere: 'Soutenance du projet' }];
+
+  reflexionM1 = [{ matiere: 'Les algorithmes pour l’informatique distribuée' }, { matiere: 'La block chain' }, { matiere : 'Méthodologie'}];
+  fonctionnementM1 = [{ matiere: 'Outils logiciels' }];
+  developpementM1 = [{ matiere: 'Java' }, { matiere: 'C#' }, { matiere: 'PHP' }, { matiere: 'Python' }, { matiere: 'Javascript' }];
+  environementM1 = [{ matiere: 'Anglais' }, { matiere: 'Economie' }, { matiere: 'Droit' }, { matiere: 'Culture informatique' }];
+  pratiqueM1 = [{ matiere: 'IDlabs' }, { matiere: 'IDcity' }];
+  proM1 = [{ matiere: 'Présentation des objectifs du projet individuel en entreprise' }, { matiere: 'Réalisation du projet' }, { matiere: 'Rédaction du mémoire' }, { matiere: 'Soutenance du projet' }];
+
+  reflexionM2 = [{ matiere: 'Méthodologie' }];
+  developpementM2 = [{ matiere: 'Langages C' }, { matiere: 'Java' }, { matiere: 'C#' }, { matiere: 'Python' }, { matiere: 'F#' }];
+  environementM2 = [{ matiere: 'Anglais' }, { matiere: 'L’aspect financier cadrage d’un projet informatique' }, { matiere: 'Economie' }, { matiere: 'Droit' }];
+  pratiqueM2 = [{ matiere: 'IDcity' }];
+  proM2 = [{ matiere: 'Présentation des objectifs du projet individuel en entreprise' }, { matiere: 'Réalisation du projet' }, { matiere: 'Rédaction du mémoire' }, { matiere: 'Soutenance du projet' }];
+
+
+
 
   Matieres2 = [{ matiere: 'Java' }, { matiere: 'CSharp' }, { matiere: 'C' }, { matiere: 'C' }, { matiere: 'C' }, { matiere: 'C' }];
 
