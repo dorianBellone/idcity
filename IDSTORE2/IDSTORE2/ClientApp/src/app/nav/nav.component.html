@@ -4,9 +4,6 @@
       ID STORE
     </h6>
 
-    <div class="search">
-      <input class="form-control icon" type="text" name="search" autocomplete="off" placeholder="&#61442;  Rechercher un cours">
-    </div>
     <div class="log">
       Bienvenue {{mySubjectVal}} 
 
@@ -29,39 +26,402 @@
     <form>
       <mat-form-field appearance="fill">
         <mat-label style="color: white;">Choix de la classe</mat-label>
-        <mat-select [(ngModel)]="selectedValue"  (ngModelChange)="sendClasseValue($event)" name="classe">
-          <mat-option *ngFor="let classe of classes" [value]="classe.nom"  >>
+        <mat-select [(ngModel)]="selectedValue" (ngModelChange)="sendClasseValue($event)" name="classe">
+          <mat-option *ngFor="let classe of classes" [value]="classe.nom">
+            >
             {{classe.nom}}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </form>
 
+    <div *ngIf="selectedValue=== 'B1'">
+      <mat-nav-list>
 
-    
-
-    <mat-nav-list>
-      <a class="couleurdetexte" (click)="displayDeveloppement()" mat-list-item><h2>Developpement</h2></a>
-
-      <div *ngIf="developpement">
-        <div *ngFor="let item of Matieres">
-          <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
-             mat-list-item>
-            <div>
-              <H4>{{ item.matiere }}</H4>
-
-            </div>
-          </a>
+        <a class="couleurdetexte" (click)="displayReflexion()" mat-list-item><h2>Reflexion</h2></a>
+        <div *ngIf="reflexion">
+          <div *ngFor="let item of reflexionB1">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
         </div>
-      </div>
-      <a class="couleurdetexte" mat-list-item><h2>Reflexion</h2></a>
-      <a class="couleurdetexte" mat-list-item><h2>Environnement</h2></a>
+
+        <a class="couleurdetexte" (click)="displayDeveloppement()" mat-list-item><h2>Developpement</h2></a>
+        <div *ngIf="developpement">
+          <div *ngFor="let item of developpementB1">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayFonctionnement()" mat-list-item><h2>Fonctionnement</h2></a>
+        <div *ngIf="fonctionnement">
+          <div *ngFor="let item of fonctionnementB1">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayEnvironnement()" mat-list-item><h2>Environnement</h2></a>
+        <div *ngIf="environnement">
+          <div *ngFor="let item of environementB1">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayExperience()" mat-list-item><h2>Experience Pro</h2></a>
+        <div *ngIf="experience">
+          <div *ngFor="let item of proB1">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayPratique()" mat-list-item><h2>Pratique</h2></a>
+        <div *ngIf="pratique">
+          <div *ngFor="let item of pratiqueB1">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+      </mat-nav-list>
+    </div>
+
+    <div *ngIf="selectedValue=== 'B2'">
+      <mat-nav-list>
+
+        <a class="couleurdetexte" (click)="displayReflexion()" mat-list-item><h2>Reflexion</h2></a>
+        <div *ngIf="reflexion">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayDeveloppement()" mat-list-item><h2>Developpement</h2></a>
+        <div *ngIf="developpement">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayFonctionnement()" mat-list-item><h2>Fonctionnement</h2></a>
+        <div *ngIf="fonctionnement">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayEnvironnement()" mat-list-item><h2>Environnement</h2></a>
+        <div *ngIf="environnement">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayExperience()" mat-list-item><h2>Experience</h2></a>
+        <div *ngIf="experience">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayPratique()" mat-list-item><h2>Pratique</h2></a>
+        <div *ngIf="pratique">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+      </mat-nav-list>
+    </div>
 
 
 
+    <div *ngIf="selectedValue=== 'B3'">
+      <mat-nav-list>
 
+        <a class="couleurdetexte" (click)="displayReflexion()" mat-list-item><h2>Reflexion</h2></a>
+        <div *ngIf="reflexion">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
 
-    </mat-nav-list>
+        <a class="couleurdetexte" (click)="displayDeveloppement()" mat-list-item><h2>Developpement</h2></a>
+        <div *ngIf="developpement">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayFonctionnement()" mat-list-item><h2>Fonctionnement</h2></a>
+        <div *ngIf="fonctionnement">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayEnvironnement()" mat-list-item><h2>Environnement</h2></a>
+        <div *ngIf="environnement">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayExperience()" mat-list-item><h2>Experience</h2></a>
+        <div *ngIf="experience">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayPratique()" mat-list-item><h2>Pratique</h2></a>
+        <div *ngIf="pratique">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+      </mat-nav-list>
+    </div>
+
+    <div *ngIf="selectedValue=== 'M1'">
+      <mat-nav-list>
+
+        <a class="couleurdetexte" (click)="displayReflexion()" mat-list-item><h2>Reflexion</h2></a>
+        <div *ngIf="reflexion">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayDeveloppement()" mat-list-item><h2>Developpement</h2></a>
+        <div *ngIf="developpement">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayFonctionnement()" mat-list-item><h2>Fonctionnement</h2></a>
+        <div *ngIf="fonctionnement">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayEnvironnement()" mat-list-item><h2>Environnement</h2></a>
+        <div *ngIf="environnement">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayExperience()" mat-list-item><h2>Experience</h2></a>
+        <div *ngIf="experience">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayPratique()" mat-list-item><h2>Pratique</h2></a>
+        <div *ngIf="pratique">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+      </mat-nav-list>
+    </div>
+
+    <div *ngIf="selectedValue=== 'M2'">
+      <mat-nav-list>
+
+        <a class="couleurdetexte" (click)="displayReflexion()" mat-list-item><h2>Reflexion</h2></a>
+        <div *ngIf="reflexion">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayDeveloppement()" mat-list-item><h2>Developpement</h2></a>
+        <div *ngIf="developpement">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayFonctionnement()" mat-list-item><h2>Fonctionnement</h2></a>
+        <div *ngIf="fonctionnement">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayEnvironnement()" mat-list-item><h2>Environnement</h2></a>
+        <div *ngIf="environnement">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayExperience()" mat-list-item><h2>Experience</h2></a>
+        <div *ngIf="experience">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="couleurdetexte" (click)="displayPratique()" mat-list-item><h2>Pratique</h2></a>
+        <div *ngIf="pratique">
+          <div *ngFor="let item of Matieres">
+            <a style="color: rgb(255, 255, 255); margin-left: 10px;" (click)="sendTextValue(item.matiere)"
+               mat-list-item>
+              <div>
+                <H4>{{ item.matiere }}</H4>
+              </div>
+            </a>
+          </div>
+        </div>
+      </mat-nav-list>
+    </div>
+
   </mat-sidenav>
   <mat-sidenav-content>
 

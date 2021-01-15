@@ -1,35 +1,46 @@
 
 
 <div>
+  <div>
+    <div style="">
+      <h1>Cours pour la classe {{classe }} </h1>
+    </div>
+    
+    <div class="search">
+      <input class="form-control icon" [(ngModel)]="mySubjectVal"
+             type="text" name="search" autocomplete="off"
+             placeholder="&#61442;  Rechercher un cours">
+    </div>
+  </div>
 
-  <h1>cours pour la classe {{classe }}</h1>
 
 
 
-  <div *ngFor="let item of data">
-    <div class="card">
-      <div class="card-body">
-        <p class="card-text">
-          <mat-list>
-            <h2>{{item.name}}</h2>
-            <mat-list-item>
-              <div *ngIf="details">
+  <div style="margin-top:50px;">
+    <div *ngFor="let item of data | filter:mySubjectVal">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text">
+            <mat-list>
+              <h2>{{item.name}}</h2>
+              <mat-list-item>
+                <div *ngIf="details">
                   description du cours affichée.
-              </div>
+                </div>
 
-              <button mat-button (click)="displayDetails()">
-                <mat-icon>add_circle_outline</mat-icon>
-                Afficher details
-              </button>
-              <button mat-button (click)="download(this.item.name)">
-              <mat-icon>south</mat-icon>
-               Télécharger
-              </button>
-              
-            </mat-list-item>
-          </mat-list>
+                <button mat-button (click)="displayDetails()">
+                  <mat-icon>add_circle_outline</mat-icon>
+                  Afficher details
+                </button>
+                <button mat-button (click)="download(this.item.name)">
+                  <mat-icon>south</mat-icon>
+                  Télécharger
+                </button>
+
+              </mat-list-item>
+            </mat-list>
+        </div>
       </div>
     </div>
   </div>
 </div>
-

@@ -1,5 +1,7 @@
 <h1 class="test">Liste de cours pour la matiere: <strong>{{mySubjectVal }} </strong></h1>
 
+
+
 <div *ngFor="let item of data">
   <div class="card">
     <div class="card-body">
@@ -7,24 +9,21 @@
         <mat-list>
           <h2>{{item.name}}</h2>
           <mat-list-item>
-            <mat-icon>add_circle_outline </mat-icon>
-            <h4> {{item.type}}</h4>
+            <div *ngIf="details">
+              description du cours affichée.
+            </div>
+
+            <button mat-button (click)="displayDetails()">
+              <mat-icon>add_circle_outline</mat-icon>
+              Afficher details
+            </button>
+            <button mat-button (click)="download(this.item.name)">
+              <mat-icon>south</mat-icon>
+              Télécharger
+            </button>
+
           </mat-list-item>
         </mat-list>
-
-        <button (click)="download(this.item.name)">
-          download
-        </button>
-        <button [disabled]="disabled" [ngClass]="{'disabled': disabled}" class="button upload" (click)="inputFile.click()">
-          UPLOAD
-        </button>
-        <input name="file" id="file" (change)="upload($event)" type="file" #inputFile hidden>
-       
-
-</div>
+    </div>
   </div>
 </div>
-
-
-
-

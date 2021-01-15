@@ -21,10 +21,15 @@ interface Matiere {
 export class NavComponent implements OnInit {
 
   mySubjectVal: string;
-  developpement: boolean = false;
   selectedValue: string;
   searchText;
 
+  reflexion: boolean = false;
+  fonctionnement: boolean = false;
+  developpement: boolean = false;
+  environnement: boolean = false;
+  experience  : boolean = false;
+  pratique: boolean = false;
   isLoggedIn$: Observable<boolean>;
 
   classes: Classe[] = [
@@ -35,30 +40,44 @@ export class NavComponent implements OnInit {
     { nom: 'M2' }
   ];
 
-  Matieres = [{ matiere: 'Java' }, { matiere: 'CSharp' }, { matiere: 'C' }];
+  reflexionB1 = [{ matiere: 'Sciences Appliquées' }, { matiere: 'Algorithmique' }, { matiere: 'Méthodologie' }];
+  fonctionnementB1 = [{ matiere: 'Electronique' }, { matiere: 'Architecture des systèmes d’informations' }, { matiere: 'Système d’exploitation' }, { matiere: 'Réseaux' }, { matiere: 'Outils Bureautiques' }];
+  developpementB1 = [{ matiere: 'Langages C' }, { matiere: 'PHP' }, { matiere: 'Javascript' }, { matiere: 'Langage pour le web' }, { matiere: 'Manipulation des données' }];
+  environementB1 = [{ matiere: 'Anglais' }, { matiere: 'Expresion orale' }, { matiere: 'Expresion écrite' }, { matiere: 'Economie' }, { matiere: 'Droit' }, { matiere: 'Culture informatique' }];
+  pratiqueB1 = [{ matiere: 'IDlabs' }, { matiere: 'Projet individuel' }];
+  proB1 = [{ matiere: 'Stage' }];
+
+
+  Matieres2 = [{ matiere: 'Java' }, { matiere: 'CSharp' }, { matiere: 'C' }, { matiere: 'C' }, { matiere: 'C' }, { matiere: 'C' }];
 
   constructor(private router: Router, private matiereService: MatiereService, private loginService: LoginService, private apiService: ApiService) { }
 
   ngOnInit() {
+    
     this.selectedValue = "Choix de votre classe";
     this.loginService.connectedUser.subscribe(
       data => {
         this.mySubjectVal = data;
+        this.mySubjectVal = this.mySubjectVal.substring(0, this.mySubjectVal.indexOf("@"));
+        this.mySubjectVal = this.mySubjectVal.replace('.','\ ');
         console.log(data);
       }
     );
     this.isLoggedIn$ = this.loginService.isLoggedIn;
     this.developpement = false;
+    this.reflexion = false;
+    this.fonctionnement = false;
+    this.environnement = false;
+    this.experience = false;
+    this.pratique = false;
   }
 
   sendTextValue(matiere) {
     this.matiereService.loadMatiere(matiere);
-    this.router.navigate(['/liste']);
   }
 
   sendClasseValue(classe) {
     this.apiService.loadClasse(classe);
-   // this.router.navigate(['/liste/']);
     this.router.navigate(['/classe', classe]);
   }
 
@@ -70,6 +89,24 @@ export class NavComponent implements OnInit {
     this.developpement = !this.developpement;
   }
 
+  displayReflexion() {
+    this.reflexion = !this.reflexion;
+  }
 
+  displayFonctionnement() {
+    this.fonctionnement = !this.fonctionnement;
+  }
+
+  displayEnvironnement() {
+    this.environnement = !this.environnement;
+  }
+
+  displayExperience() {
+    this.experience = !this.experience;
+  }
+
+  displayPratique() {
+    this.pratique = !this.pratique;
+  }
 }
 
