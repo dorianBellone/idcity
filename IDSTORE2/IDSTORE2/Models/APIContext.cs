@@ -20,8 +20,6 @@ namespace IDSTORE2.Models
             //modelBuilder.Entity<File>()
             //    .Property(b => b.Name)
             //    .IsRequired();
-        }
-        //protected override void OnConfiguring(DbContextOptionsBuilder options)
-        //  => options.UseSqlite("Data Source=DB_API_IDSTORE.db");
+        }       
     }
 }

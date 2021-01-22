@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace IDSTORE2.Models
 {
@@ -24,7 +21,7 @@ namespace IDSTORE2.Models
             if (_name != null)
             {
                 Name = _name;
-                // Test Pour voir si on retrouve bien le fichier en paramétre dans la DB 
+                // Test Pour voir si on retrouve bien le fichier en paramétre dans la DB. a voir plus tard si on ajoute le path et type dans la table File  
                 if(context.Files.Count() != 0)
                 {
                     var FileInDB = context.Files.FirstOrDefault(f => f.Name == Name);
