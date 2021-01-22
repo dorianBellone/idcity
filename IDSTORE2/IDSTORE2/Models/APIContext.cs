@@ -14,6 +14,13 @@ namespace IDSTORE2.Models
 
         public DbSet<File> Files { get; set; }
         public DbSet<Tag> Tags { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<File>()
+            //    .Property(b => b.Name)
+            //    .IsRequired();
+        }
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //  => options.UseSqlite("Data Source=DB_API_IDSTORE.db");
     }

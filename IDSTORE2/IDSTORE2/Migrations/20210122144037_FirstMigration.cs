@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IDSTORE2.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,9 +11,9 @@ namespace IDSTORE2.Migrations
                 name: "Files",
                 columns: table => new
                 {
-                    FileId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: true)
+                    FileId = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -24,10 +24,10 @@ namespace IDSTORE2.Migrations
                 name: "Tags",
                 columns: table => new
                 {
-                    TagId = table.Column<int>(type: "INTEGER", nullable: false)
+                    TagId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    FileId = table.Column<Guid>(type: "TEXT", nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    FileId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {

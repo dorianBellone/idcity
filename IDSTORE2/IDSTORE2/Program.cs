@@ -32,7 +32,9 @@ namespace IDSTORE2
                 try
                 {
                     var context = services.GetRequiredService<APIContext>();
-                    DbInitializer.Initialize(context);
+                    var logger = services.GetRequiredService<ILogger<FileController>>();
+
+                    DbInitializer.Initialize(logger, context);
                 }
                 catch (Exception ex)
                 {
@@ -51,30 +53,23 @@ namespace IDSTORE2
 
     public static class DbInitializer
     {
-        public static void Initialize(APIContext context)
+        public static void Initialize(ILogger<FileController> logger, APIContext context)
         {
             context.Database.EnsureCreated();
-
             // Look for any students.
-            if (context.Files.Any())
+            var count = context.Files.Count();
+            if (count  != 0)
             {
-                return;   // DB has been seeded
+                context.Files.RemoveRange(context.Files);
+                //return;   // DB has been seeded
             }
-
-            var Files = new File[]
+            FileController fc = new FileController(logger,context);
+            var Files = fc.Get();
+         
+            foreach (FileOverride f in Files)
             {
-            new File{Name="Carson",Description="Alexander"},
-            new File{Name="Meredith",Description="Alonso"},
-            new File{Name="Arturo",Description="Anand"},
-            new File{Name="Gytis",Description="Barzdukas"},
-            new File{Name="Yan",Description="Li"},
-            new File{Name="Peggy",Description="Justice"},
-            new File{Name="Laura",Description="Norman"},
-            new File{Name="Nino",Description="Olivetto"}
-            };
-            foreach (File f in Files)
-            {
-                context.Files.Add(f);
+                var file = new File { Name = f.Name, Description = f.Description };
+                context.Files.Add(file);
             }
             context.SaveChanges();
 

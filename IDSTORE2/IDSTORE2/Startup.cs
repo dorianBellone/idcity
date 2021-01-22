@@ -24,8 +24,9 @@ namespace IDSTORE2
         {
             services.AddDbContext<APIContext>(options =>
                     options.UseSqlite(Configuration.GetConnectionString("SQL_LiteConnection")));
+            services.AddScoped<APIContext>();
 
-            services.AddControllersWithViews();
+            services.AddControllers();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
