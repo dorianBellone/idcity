@@ -10,6 +10,8 @@ namespace IDSTORE2.Models
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Type { get; set; }
+
         public List<Tag> Tags { get; } = new List<Tag>();
    
     }

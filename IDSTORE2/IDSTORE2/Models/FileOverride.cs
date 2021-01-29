@@ -43,7 +43,6 @@ namespace IDSTORE2.Models
 
         }
         public byte[] Content { get; set; }
-        public string Type { get; set; }
     }
 }
 
