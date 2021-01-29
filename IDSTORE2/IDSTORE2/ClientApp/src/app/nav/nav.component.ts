@@ -23,7 +23,7 @@ export class NavComponent implements OnInit {
   mySubjectVal: string;
   selectedValue: string;
   searchText;
-
+  adminMode: boolean = false;
   reflexion: boolean = false;
   fonctionnement: boolean = false;
   developpement: boolean = false;
@@ -79,7 +79,7 @@ export class NavComponent implements OnInit {
 
   Matieres2 = [{ matiere: 'Java' }, { matiere: 'CSharp' }, { matiere: 'C' }, { matiere: 'C' }, { matiere: 'C' }, { matiere: 'C' }];
 
-  constructor(private router: Router, private matiereService: MatiereService, private loginService: LoginService, private apiService: ApiService) { }
+  constructor(private router: Router, private matiereService: MatiereService, private loginService: LoginService, private apiService: ApiService, private loginService : LoginService) { }
 
   ngOnInit() {
     
@@ -88,17 +88,25 @@ export class NavComponent implements OnInit {
       data => {
         this.mySubjectVal = data;
         this.mySubjectVal = this.mySubjectVal.substring(0, this.mySubjectVal.indexOf("@"));
-        this.mySubjectVal = this.mySubjectVal.replace('.','\ ');
-        console.log(data);
+        this.mySubjectVal = this.mySubjectVal.replace('.', '\ ');
+        console.log(this.mySubjectVal);
+        if (this.mySubjectVal === "admin") {
+          this.adminMode = true;
+          this.loginService.user = this.mySubjectVal;
+        }
       }
     );
     this.isLoggedIn$ = this.loginService.isLoggedIn;
+    this.adminMode = false;
     this.developpement = false;
     this.reflexion = false;
     this.fonctionnement = false;
     this.environnement = false;
     this.experience = false;
     this.pratique = false;
+    this.apiService.getFileByClasse("B1");
+   
+    
   }
 
   sendTextValue(matiere) {

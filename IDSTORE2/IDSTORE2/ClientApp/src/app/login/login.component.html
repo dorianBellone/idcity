@@ -1,21 +1,32 @@
-<div class="card shadow-lg p-3 mb-5 bg-white rounded">
-  <div style="font-size:xx-large;">Page d’authentification</div>
-  <div class="form">
-    <form>
-      <div style="margin-top: 5%;">
-        <div style="font-size:medium;">Nom d’utilisateur</div>
-        <input type=text [(ngModel)]=login name=login>
-      </div>
-      <div style="margin-top: 40px;">
-        <div style="font-size:medium;">Mot de passe</div>
-        <input type=password [(ngModel)]=password name=password>
+<div style="background-color:black; height:100%;">
+
+  <div style="margin-left:45%;">
+    <img src="https://nicolaspietri.netlify.app/images/logo-carre-2.png" style="width:10%; position: absolute;">
+  </div>
+
+  <div class="container">
+    <img src="https://images6.alphacoders.com/389/thumb-1920-389875.jpg" style="width:100%; margin-top:20%">
+    
+    <div class=" shadow-lg p-3 mb-5 bg-white rounded centered">
+      <div style="font-size:xx-large; color:black">Page d’authentification</div>
+      <div class="form">
+        <form>
+          <div style="margin-top: 10%;">
+            <div style="font-size:medium; color:black">Nom d’utilisateur</div>
+            <input type=text [(ngModel)]=login name=login>
+          </div>
+          <div style="margin-top: 40px;">
+            <div style="font-size:medium; color:black">Mot de passe</div>
+            <input type=password [(ngModel)]=password name=password>
 
 
-        <div class="bouton">
-          <button type="button" class="login100-form-btn" (click)="handleLogin(login)">Se connecter</button>
-        </div>
+            <div class="bouton">
+              <button type="button" class="login100-form-btn" (click)="handleLogin(login)">Se connecter</button>
+            </div>
+          </div>
+          <div [hidden]="erreur">Identifiants incorrects</div>
+        </form>
       </div>
-      <div [hidden]="erreur">Identifiants incorrects</div>
-    </form>
+    </div>
   </div>
 </div>
