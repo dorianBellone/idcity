@@ -32,7 +32,7 @@ namespace IDSTORE2
                     var context = services.GetRequiredService<APIContext>();
                     var logger = services.GetRequiredService<ILogger<FileController>>();
 
-                    //DbInitializer.Initialize(logger, context);
+                    DbInitializer.Initialize(logger, context);
                 }
                 catch (Exception ex)
                 {
