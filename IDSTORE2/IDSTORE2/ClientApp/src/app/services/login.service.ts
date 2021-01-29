@@ -10,6 +10,7 @@ export class LoginService {
 
   public connectedUser = new Subject<string>();;
   isLoggedin = false;
+  user: string;
   private loggedIn = new BehaviorSubject<boolean>(false);
   get isLoggedIn() {
     return this.loggedIn.asObservable();

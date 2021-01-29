@@ -2,6 +2,8 @@ import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Fichier } from '../models/fichier';
 import { ApiService } from '../services/api.service';
+import { MatiereService } from '../services/matiere.service';
+import 
 
 @Component({
   selector: 'app-classe',
@@ -14,13 +16,16 @@ export class ClasseComponent implements OnInit {
   data: Fichier[];
   blob: Blob;
   details: Boolean;
+  mySubjectVal: string;
+  searchText: string;
+  admin: boolean;
 
 
-
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router) {
+  constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router, private matiereService: MatiereService, private loginService: LoginService) {
+     
     this.route.url.subscribe(url => {
-      console.log(url);
       this.data = [];
+      console.log(this.classe);
       this.apiService.getFileByClasse(this.classe)
         .subscribe(
           data => {
@@ -30,13 +35,22 @@ export class ClasseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.admin = false;
     this.details = false;
     if (this.classe == null) {
       this.classe = "";
     }
+    this.matiereService.title.subscribe(
+      data => {
+        this.mySubjectVal = data;
+      });
     this.route.paramMap.subscribe(params => {
       this.classe = params.get('classe');
     });
+    this.searchText = this.mySubjectVal;
+    if (this.loginService.user === "admin") {
+      this.admin = true;
+    }
   }
 
   download(name: string) {
