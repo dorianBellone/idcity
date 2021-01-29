@@ -61,7 +61,7 @@ namespace IDSTORE2
                 //return;   // DB has been seeded
             }
             FileController fc = new FileController(logger,context);
-            var Files = fc.Get();
+            var Files = fc.GetAll();
          
             foreach (FileOverride f in Files)
             {

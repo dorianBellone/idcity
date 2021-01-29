@@ -81,6 +81,27 @@ namespace IDSTORE2.Controllers
             return response;
         }
         [HttpGet]
+        [Route("getAll")]
+        public List<FileOverride> GetAll()
+        {
+            List<FileOverride> response = new List<FileOverride>();
+            byte[] content;
+            string[] filePaths = Directory.GetFiles(folderPath, "*.*",
+            SearchOption.AllDirectories);
+            string fileDefaultName;
+            foreach (string path in filePaths.ToList())
+            {
+                
+                FileInfo fi = new FileInfo(path);
+                string extension = fi.Extension;
+                fileDefaultName = fi.Name;
+                content = System.IO.File.ReadAllBytes(path);
+                response.Add(new FileOverride(context, content, fileDefaultName, extension));
+            }
+            Console.WriteLine(response);
+            return response;
+        }
+        [HttpGet]
         [Route("getByClasse/{classe}")]
         public List<FileOverride> GetByClasse(string classe)
         {
@@ -100,6 +121,35 @@ namespace IDSTORE2.Controllers
             }
             Console.WriteLine(response);
             return response;
+        }
+
+        
+        public Boolean RenameFile(Dictionary<Guid,String> _dicoFile_IDName)
+        {
+
+            string[] filePaths = Directory.GetFiles(folderPath, "*.*",SearchOption.AllDirectories);
+            string fileDefaultName;
+            foreach (string path in filePaths.ToList())
+            {
+                foreach (KeyValuePair<Guid, String> kvp in _dicoFile_IDName)
+                {
+
+                }
+                //fileDefaultName = path;
+                //FileInfo fi = new FileInfo(path);
+                //string extension = fi.Extension;
+                //fileDefaultName = fileDefaultName.Remove(0, 17);
+                //System.IO.File.Move(oldNameFullPath, newNameFullPath);
+            }
+
+            //foreach (KeyValuePair<Guid, String> kvp in _dicoFile_IDName)
+            //{ 
+            
+            //}
+
+
+            return false;
+
         }
 
         //add getbyclassebymatter
