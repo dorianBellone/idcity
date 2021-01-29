@@ -9,6 +9,7 @@ namespace IDSTORE2.Models
         public Guid FileId { get; set; }
         [Required]
         public string Name { get; set; }
+        public string Path { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
 

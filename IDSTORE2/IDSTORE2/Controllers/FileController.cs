@@ -72,10 +72,8 @@ namespace IDSTORE2.Controllers
             {
                 fileDefaultName = path;
                 FileInfo fi = new FileInfo(path);
-                string extension = fi.Extension;
                 content = System.IO.File.ReadAllBytes(path);
-                fileDefaultName = fileDefaultName.Remove(0, 17);
-                response.Add(new FileOverride(context,content, fileDefaultName, extension));
+                response.Add(new FileOverride(context,content, fi.Name, fi.Extension, null,fi.FullName));
             }
             Console.WriteLine(response);
             return response;
@@ -93,10 +91,8 @@ namespace IDSTORE2.Controllers
             {
                 
                 FileInfo fi = new FileInfo(path);
-                string extension = fi.Extension;
-                fileDefaultName = fi.Name;
                 content = System.IO.File.ReadAllBytes(path);
-                response.Add(new FileOverride(context, content, fileDefaultName, extension));
+                response.Add(new FileOverride(context, content, fi.Name, fi.Extension,null,fi.FullName));
             }
             Console.WriteLine(response);
             return response;
@@ -112,12 +108,9 @@ namespace IDSTORE2.Controllers
             string fileDefaultName;
             foreach (string path in filePaths.ToList())
             {
-                fileDefaultName = path;
                 FileInfo fi = new FileInfo(path);
-                string extension = fi.Extension;
                 content = System.IO.File.ReadAllBytes(path);
-                fileDefaultName = fileDefaultName.Remove(0, 20);
-                response.Add(new FileOverride(context, content, fileDefaultName, extension));
+                response.Add(new FileOverride(context, content, fi.Name, fi.Extension,null,fi.FullName));
             }
             Console.WriteLine(response);
             return response;

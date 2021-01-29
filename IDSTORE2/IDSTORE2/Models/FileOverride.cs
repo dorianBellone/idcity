@@ -11,7 +11,7 @@ namespace IDSTORE2.Models
         //    this.Content = content;
         //}
 
-        public FileOverride(APIContext _context, byte[] content, string _name, string _type = null, string _description = null)
+        public FileOverride(APIContext _context, byte[] content, string _name, string _type = null, string _description = null, string _path = null)
         {
             context = _context;
             if (content != null)
@@ -39,6 +39,10 @@ namespace IDSTORE2.Models
             if (_description != null)
             {
                 Description = _description;
+            }
+            if (_path != null)
+            {
+                Path = _path;
             }
 
         }
