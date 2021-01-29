@@ -79,7 +79,7 @@ export class NavComponent implements OnInit {
 
   Matieres2 = [{ matiere: 'Java' }, { matiere: 'CSharp' }, { matiere: 'C' }, { matiere: 'C' }, { matiere: 'C' }, { matiere: 'C' }];
 
-  constructor(private router: Router, private matiereService: MatiereService, private loginService: LoginService, private apiService: ApiService, private loginService : LoginService) { }
+  constructor(private router: Router, private matiereService: MatiereService, private loginService: LoginService, private apiService: ApiService) { }
 
   ngOnInit() {
     

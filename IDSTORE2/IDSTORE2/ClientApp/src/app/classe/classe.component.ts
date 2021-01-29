@@ -2,8 +2,8 @@ import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Fichier } from '../models/fichier';
 import { ApiService } from '../services/api.service';
+import { LoginService } from '../services/login.service';
 import { MatiereService } from '../services/matiere.service';
-import 
 
 @Component({
   selector: 'app-classe',
