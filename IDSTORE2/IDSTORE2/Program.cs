@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using IDSTORE2.Controllers;
 using IDSTORE2.Models;
@@ -17,7 +18,7 @@ namespace IDSTORE2
 
             var host = CreateHostBuilder(args).Build();
 
-            //CreateDbIfNotExists(host);
+            CreateDbIfNotExists(host);
 
             host.Run();
         }
@@ -65,10 +66,17 @@ namespace IDSTORE2
          
             foreach (FileOverride f in Files)
             {
-                var file = new File { Name = f.Name, Description = f.Description };
+                var file = new File { Name = f.Name, Description = f.Description, Type = f.Type, Path = f.Path };
                 context.Files.Add(file);
             }
             context.SaveChanges();
+
+            var FilesDB = context.Files;
+            Dictionary<Guid, String> dico = new Dictionary<Guid, string>(Files.Count);
+            foreach (File _file in Files)
+            {
+
+            }
             
         }
     }
