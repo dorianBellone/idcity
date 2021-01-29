@@ -21,22 +21,25 @@ namespace IDSTORE2.Controllers
     public class FileController : ControllerBase
     {
         private string folderPath { get; set; }
-        
 
-        //private readonly ILogger<WeatherForecastController> _logger;
+        private readonly APIContext context;
+        private readonly ILogger<FileController> logger;
 
-        public FileController(/*ILogger<WeatherForecastController> logger*/)
+        public FileController(ILogger<FileController> _logger, APIContext _context)
         {
             //folderPath = "E:\\Bureau\\M2\\IDCity_IDStore\\RessourceFile";
             folderPath = "C:\\RessourceFile";
-            //_logger = logger;
+
+            logger = _logger;
+            context = _context;
+            //var listDataFile = _context.Files.ToList();
         }
 
         [HttpGet]
         [Route("dl/{path}")]
         public async Task<IActionResult> Dl(string path)
         {
-        var filePath = "C:\\RessourceFile\\" + path;
+            var filePath = "C:\\RessourceFile\\" + path;
 
             var memory = new MemoryStream();
             using (var stream = new FileStream(filePath, FileMode.Open))
@@ -59,41 +62,41 @@ namespace IDSTORE2.Controllers
             return contentType;
         }
 
-        public List<Fichier> Get()
+        public List<FileOverride> Get()
         {
-            List<Fichier> response = new List<Fichier>();
+            List<FileOverride> response = new List<FileOverride>();
             byte[] content;
             string[] filePaths = Directory.GetFiles(folderPath);
-            string s;
+            string fileDefaultName;
             foreach (string path in filePaths.ToList())
             {
-                s = path;
+                fileDefaultName = path;
                 FileInfo fi = new FileInfo(path);
                 string extension = fi.Extension;
                 content = System.IO.File.ReadAllBytes(path);
-                s = s.Remove(0, 17);
-                response.Add(new Fichier(content, s, extension));
+                fileDefaultName = fileDefaultName.Remove(0, 17);
+                response.Add(new FileOverride(context,content, fileDefaultName, extension));
             }
             Console.WriteLine(response);
             return response;
         }
         [HttpGet]
         [Route("getByClasse/{classe}")]
-        public List<Fichier> GetByClasse(string classe)
+        public List<FileOverride> GetByClasse(string classe)
         {
-            List<Fichier> response = new List<Fichier>();
+            List<FileOverride> response = new List<FileOverride>();
             byte[] content;
             folderPath = folderPath + "\\" + classe;
             string[] filePaths = Directory.GetFiles(folderPath);
-            string s;
+            string fileDefaultName;
             foreach (string path in filePaths.ToList())
             {
-                s = path;
+                fileDefaultName = path;
                 FileInfo fi = new FileInfo(path);
                 string extension = fi.Extension;
                 content = System.IO.File.ReadAllBytes(path);
-                s = s.Remove(0, 20);
-                response.Add(new Fichier(content, s, extension));
+                fileDefaultName = fileDefaultName.Remove(0, 20);
+                response.Add(new FileOverride(context, content, fileDefaultName, extension));
             }
             Console.WriteLine(response);
             return response;
