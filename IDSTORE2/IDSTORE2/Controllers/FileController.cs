@@ -39,8 +39,8 @@ namespace IDSTORE2.Controllers
         [Route("dl/{path}")]
         public async Task<IActionResult> Dl(string path)
         {
-            var filePath = "C:\\RessourceFile\\" + path;
-
+            //var filePath = "C:\\\\" + path;
+            var filePath = "/home/idStore/idcity/RessourceFile" + path;
             var memory = new MemoryStream();
             using (var stream = new FileStream(filePath, FileMode.Open))
             {
