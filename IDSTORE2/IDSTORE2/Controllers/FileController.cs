@@ -28,8 +28,8 @@ namespace IDSTORE2.Controllers
         public FileController(ILogger<FileController> _logger, APIContext _context)
         {
             //folderPath = "E:\\Bureau\\M2\\IDCity_IDStore\\RessourceFile";
-            folderPath = "C:\\RessourceFile";
-
+            //folderPath = "C:\\RessourceFile";
+            folderPath = "/home/idStore/idcity/RessourceFile";
             logger = _logger;
             context = _context;
             //var listDataFile = _context.Files.ToList();
