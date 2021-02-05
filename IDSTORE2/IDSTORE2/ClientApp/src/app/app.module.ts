@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './services/auth.guard';
 import { NgxFileSaverModule } from '@clemox/ngx-file-saver';
 import { ClasseComponent } from './classe/classe.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -28,12 +29,15 @@ import { ClasseComponent } from './classe/classe.component';
     HttpClientModule,
     FormsModule,
     NgxFileSaverModule,
+    Ng2SearchPipeModule,
+    BrowserModule,
     RouterModule.forRoot([
       { path: '', pathMatch: 'full', redirectTo: 'login' },
       { path: 'login', component: LoginComponent },
       { path: 'home', component: HomeComponent /*,canActivate: [AuthGuard] */},
-      { path: 'liste', component: ListeComponent /*,canActivate: [AuthGuard]*/ },
+      { path: 'liste', component: ClasseComponent /*,canActivate: [AuthGuard]*/ },
       { path: 'classe/:classe', component: ClasseComponent }
+    //  { path: 'classe/:classe/:matiere', ListeComponent }
     ]),
     MaterialModule,
     BrowserAnimationsModule

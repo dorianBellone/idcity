@@ -14,7 +14,7 @@ namespace IDSTORE2.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.11");
+                .HasAnnotation("ProductVersion", "5.0.2");
 
             modelBuilder.Entity("IDSTORE2.Models.File", b =>
                 {
@@ -27,6 +27,12 @@ namespace IDSTORE2.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Type")
                         .HasColumnType("TEXT");
 
                     b.HasKey("FileId");
@@ -58,6 +64,11 @@ namespace IDSTORE2.Migrations
                     b.HasOne("IDSTORE2.Models.File", null)
                         .WithMany("Tags")
                         .HasForeignKey("FileId");
+                });
+
+            modelBuilder.Entity("IDSTORE2.Models.File", b =>
+                {
+                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }

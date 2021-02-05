@@ -16,7 +16,7 @@ export class ListeComponent extends BaseDestroyableComponent {
   da: any;
   blob: Blob;
   classe: string;
-
+  details: Boolean;
 
 
   constructor(private matiereService: MatiereService, private apiService: ApiService) {
@@ -26,6 +26,7 @@ export class ListeComponent extends BaseDestroyableComponent {
   }
 
   ngOnInit(): void {
+    this.details = false;
     this.classe = "";
     this.mySubjectVal = "";
     this.matiereService.title.subscribe(
@@ -63,6 +64,10 @@ export class ListeComponent extends BaseDestroyableComponent {
     console.log("inside child component ngOnDestroy");
     if (this.matiereService.title.isStopped)
       this.matiereService.title.unsubscribe();
+  }
+
+  displayDetails() {
+    this.details = !this.details;
   }
 }
 
