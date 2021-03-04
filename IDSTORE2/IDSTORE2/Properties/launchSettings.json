@@ -18,7 +18,7 @@
     "IDSTORE2": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "idboard.net:45002",
+      "applicationUrl": "idboard.net:666",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
       }
