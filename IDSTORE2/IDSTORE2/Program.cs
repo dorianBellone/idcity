@@ -15,6 +15,12 @@ namespace IDSTORE2
         public static void Main(string[] args)
         {
             //CreateHostBuilder(args).Build().Run();
+            Console.WriteLine("COUCOU DODO L'ASTICOT. !!!!!!!!!");
+            Console.WriteLine("COUCOU DODO L'ASTICOT. !!!!!!!!!");
+            Console.WriteLine("COUCOU DODO L'ASTICOT. !!!!!!!!!");
+            Console.WriteLine("COUCOU DODO L'ASTICOT. !!!!!!!!!");
+            Console.WriteLine("COUCOU DODO L'ASTICOT. !!!!!!!!!");
+            Console.WriteLine("COUCOU DODO L'ASTICOT. !!!!!!!!!");
 
             var host = CreateHostBuilder(args).Build();
 
