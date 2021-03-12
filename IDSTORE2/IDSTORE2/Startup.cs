@@ -23,23 +23,22 @@ namespace IDSTORE2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
             services.AddDbContext<APIContext>(options =>
-                    options.UseSqlite(Configuration.GetConnectionString("SQL_LiteConnection")));
+            options.UseSqlite(Configuration.GetConnectionString("SQL_LiteConnection")));
             services.AddScoped<APIContext>();
 
             services.AddControllers();
             // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
-
+            
             if (_env.IsDevelopment())
             {
                 Console.WriteLine("----------");
                 Console.WriteLine(_env.EnvironmentName);
                 Console.WriteLine("----------");
+                services.AddSpaStaticFiles(configuration =>
+                {
+                    configuration.RootPath = "ClientApp/dist";
+                });
             }
             else if (_env.IsStaging())
             {
@@ -51,6 +50,15 @@ namespace IDSTORE2
             {
                 Console.WriteLine("----------");
                 Console.WriteLine(_env.EnvironmentName);
+                Console.WriteLine("----------");
+
+                services.AddSpaStaticFiles(configuration =>
+                {
+                    configuration.RootPath = "wwwroot";
+                });
+
+                Console.WriteLine("----------");
+                Console.WriteLine("c.RootPath = \"wwwroot\"    c'est fait !!!! ");
                 Console.WriteLine("----------");
 
             }
@@ -94,12 +102,19 @@ namespace IDSTORE2
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "ClientApp";
+                
                 if (_env.IsDevelopment())
                 {
-                     //spa.UseAngularCliServer(npmScript: "start");
+                    //spa.UseAngularCliServer(npmScript: "start");
+                    spa.Options.SourcePath = "ClientApp";
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
+
+                if (_env.IsProduction())
+                {
+                    spa.Options.SourcePath = "wwwroot";                 
+                }
+
             });
         }
     }
