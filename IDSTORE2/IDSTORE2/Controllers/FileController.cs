@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Http;
 using System.Net;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Hosting;
 
 namespace IDSTORE2.Controllers
 {
@@ -24,15 +26,26 @@ namespace IDSTORE2.Controllers
 
         private readonly APIContext context;
         private readonly ILogger<FileController> logger;
-
-        public FileController(ILogger<FileController> _logger, APIContext _context)
+        private readonly IConfiguration config;
+        public FileController(ILogger<FileController> _logger, APIContext _context,IConfiguration _config, IWebHostEnvironment env)
         {
-            //folderPath = "E:\\Bureau\\M2\\IDCity_IDStore\\RessourceFile";
             //folderPath = "C:\\RessourceFile";
-            folderPath = "/home/idStore/idcity/RessourceFile";
+            //folderPath = "/home/idStore/idcity/RessourceFile";
             logger = _logger;
             context = _context;
             //var listDataFile = _context.Files.ToList();
+
+            config = _config;
+            if (env.IsProduction())
+            {
+                string PathProd = config.GetSection("PathFile").GetSection("PathFileProd").Value;
+                folderPath = PathProd;
+            }else if (env.IsDevelopment())
+            {
+                string PathDev = config.GetSection("PathFile").GetSection("PathFileDev").Value;
+                folderPath = PathDev;
+            }
+
         }
 
         [HttpGet]

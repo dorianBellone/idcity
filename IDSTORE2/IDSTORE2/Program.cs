@@ -4,6 +4,7 @@ using System.Linq;
 using IDSTORE2.Controllers;
 using IDSTORE2.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -15,17 +16,19 @@ namespace IDSTORE2
         public static void Main(string[] args)
         {
             //CreateHostBuilder(args).Build().Run();
-            Console.WriteLine("COUCOU DODO L'ASTICOT. !!!!!!!!!");
-            Console.WriteLine("COUCOU DODO L'ASTICOT. !!!!!!!!!");
-            Console.WriteLine("COUCOU DODO L'ASTICOT. !!!!!!!!!");
-            Console.WriteLine("COUCOU DODO L'ASTICOT. !!!!!!!!!");
-            Console.WriteLine("COUCOU DODO L'ASTICOT. !!!!!!!!!");
-            Console.WriteLine("COUCOU DODO L'ASTICOT. !!!!!!!!!");
-
+            Console.WriteLine("---- START IDSTORE ----");
+            Console.WriteLine("---- By Ben&Dodo ----");
+            Console.WriteLine("---- IDCity ----");
+            Console.WriteLine("---- avec la participation de Romen ----");
             var host = CreateHostBuilder(args).Build();
+            CreateDbIfNotExists(host);
+            // Write in Console all environment variables
+            var config = host.Services.GetRequiredService<IConfiguration>();
 
-            //CreateDbIfNotExists(host);
-
+            foreach (var c in config.AsEnumerable())
+            {
+                Console.WriteLine(c.Key + " = " + c.Value);
+            }
             host.Run();
         }
         private static void CreateDbIfNotExists(IHost host)
@@ -37,8 +40,9 @@ namespace IDSTORE2
                 {
                     var context = services.GetRequiredService<APIContext>();
                     var logger = services.GetRequiredService<ILogger<FileController>>();
-
-                    DbInitializer.Initialize(logger, context);
+                    var config = services.GetRequiredService<IConfiguration>();
+                    var env = services.GetRequiredService<IWebHostEnvironment>();
+                    DbInitializer.Initialize(logger, context, config, env);
                 }
                 catch (Exception ex)
                 {
@@ -57,7 +61,7 @@ namespace IDSTORE2
 
     public static class DbInitializer
     {
-        public static void Initialize(ILogger<FileController> logger, APIContext context)
+        public static void Initialize(ILogger<FileController> logger, APIContext context, IConfiguration config, IWebHostEnvironment env)
         {
             context.Database.EnsureCreated();
             // Look for any students.
@@ -67,7 +71,7 @@ namespace IDSTORE2
                 context.Files.RemoveRange(context.Files);
                 //return;   // DB has been seeded
             }
-            FileController fc = new FileController(logger,context);
+            FileController fc = new FileController(logger,context, config, env);
             var Files = fc.GetAll();
          
             foreach (FileOverride f in Files)

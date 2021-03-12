@@ -5,21 +5,25 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace IDSTORE2
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         public IConfiguration Configuration { get; }
+        private readonly IWebHostEnvironment _env;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddDbContext<APIContext>(options =>
                     options.UseSqlite(Configuration.GetConnectionString("SQL_LiteConnection")));
             services.AddScoped<APIContext>();
@@ -30,12 +34,40 @@ namespace IDSTORE2
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            if (_env.IsDevelopment())
+            {
+                Console.WriteLine("----------");
+                Console.WriteLine(_env.EnvironmentName);
+                Console.WriteLine("----------");
+            }
+            else if (_env.IsStaging())
+            {
+                Console.WriteLine("----------");
+                Console.WriteLine(_env.EnvironmentName);
+                Console.WriteLine("----------");
+            }
+            if (_env.IsProduction())
+            {
+                Console.WriteLine("----------");
+                Console.WriteLine(_env.EnvironmentName);
+                Console.WriteLine("----------");
+
+            }
+            else
+            {
+                Console.WriteLine("----------");
+                Console.WriteLine("Not dev or staging or prod");
+                Console.WriteLine("----------");
+            }
+            //services.Configure<FileController>(_configuration.GetSection("AppSettings"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (_env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -49,13 +81,7 @@ namespace IDSTORE2
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-            if (!env.IsDevelopment())
-            {
-                app.UseSpaStaticFiles();
-            }
-
             app.UseRouting();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -69,10 +95,8 @@ namespace IDSTORE2
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
+                if (_env.IsDevelopment())
                 {
-
                      //spa.UseAngularCliServer(npmScript: "start");
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
