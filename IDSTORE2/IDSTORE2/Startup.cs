@@ -29,10 +29,6 @@ namespace IDSTORE2
             options.UseSqlite(Configuration.GetConnectionString("SQL_LiteConnection")));
             services.AddScoped<APIContext>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddHttpsRedirection(options =>
-            {
-                options.HttpsPort = 45001;
-            });
             services.AddControllers();
             // In production, the Angular files will be served from this directory
             
