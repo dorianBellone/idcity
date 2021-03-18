@@ -74,7 +74,7 @@ namespace IDSTORE2
                 context.Files.RemoveRange(context.Files);
                 //return;   // DB has been seeded
             }
-            FileController fc = new FileController(logger,context, config, env);
+            //FileController fc = new FileController(logger,context, config, env);
             var Files = fc.GetAll();
          
             foreach (FileOverride f in Files)
@@ -85,7 +85,7 @@ namespace IDSTORE2
             context.SaveChanges();
 
             var FilesDB = context.Files;
-            Dictionary<Guid, String> dico = new Dictionary<Guid, string>(Files.Count);
+            //Dictionary<Guid, String> dico = new Dictionary<Guid, string>(Files.Count);
             foreach (File _file in Files)
             {
 
