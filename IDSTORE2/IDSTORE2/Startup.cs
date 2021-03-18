@@ -86,7 +86,7 @@ namespace IDSTORE2
                 app.UseHsts();
             }
             app.UseCors(options => { options.AllowAnyOrigin();  });
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseRouting();

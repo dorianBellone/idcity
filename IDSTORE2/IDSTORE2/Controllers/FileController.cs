@@ -63,6 +63,7 @@ namespace IDSTORE2.Controllers
             return File(memory, GetContentType(filePath), filePath);
         }
 
+        
         private string GetContentType(string path)
         {
             var provider = new FileExtensionContentTypeProvider();
@@ -128,7 +129,8 @@ namespace IDSTORE2.Controllers
             return response;
         }
 
-        
+        [HttpGet]
+        [Route("rename/{path}")]
         public Boolean RenameFile(Dictionary<Guid,String> _dicoFile_IDName)
         {
 

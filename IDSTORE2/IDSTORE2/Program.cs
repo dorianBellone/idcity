@@ -42,7 +42,9 @@ namespace IDSTORE2
                     var logger = services.GetRequiredService<ILogger<FileController>>();
                     var config = services.GetRequiredService<IConfiguration>();
                     var env = services.GetRequiredService<IWebHostEnvironment>();
+                    Console.WriteLine("Création de la DB : début !");
                     DbInitializer.Initialize(logger, context, config, env);
+                    Console.WriteLine("Création de la DB : fin !");
                 }
                 catch (Exception ex)
                 {
