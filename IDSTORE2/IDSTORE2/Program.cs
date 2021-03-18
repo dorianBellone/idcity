@@ -4,6 +4,7 @@ using System.Linq;
 using IDSTORE2.Controllers;
 using IDSTORE2.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -43,8 +44,10 @@ namespace IDSTORE2
                     var logger = services.GetRequiredService<ILogger<FileController>>();
                     var config = services.GetRequiredService<IConfiguration>();
                     var env = services.GetRequiredService<IWebHostEnvironment>();
+                    var httpContextAccessor = services.GetRequiredService<IHttpContextAccessor>();
+
                     Console.WriteLine("Création de la DB : début !");
-                    DbInitializer.Initialize(logger, context, config, env);
+                    DbInitializer.Initialize(logger, context, config, env, httpContextAccessor);
                     Console.WriteLine("Création de la DB : fin !");
                 }
                 catch (Exception ex)
@@ -64,7 +67,7 @@ namespace IDSTORE2
 
     public static class DbInitializer
     {
-        public static void Initialize(ILogger<FileController> logger, APIContext context, IConfiguration config, IWebHostEnvironment env)
+        public static void Initialize(ILogger<FileController> logger, APIContext context, IConfiguration config, IWebHostEnvironment env, IHttpContextAccessor httpContextAccessor)
         {
             context.Database.EnsureCreated();
             // Look for any students.
@@ -74,7 +77,7 @@ namespace IDSTORE2
                 context.Files.RemoveRange(context.Files);
                 //return;   // DB has been seeded
             }
-            FileController fc = new FileController(logger,context, config, env);
+            FileController fc = new FileController(logger,context, config, env, httpContextAccessor);
             var Files = fc.GetAll();
          
             foreach (FileOverride f in Files)
