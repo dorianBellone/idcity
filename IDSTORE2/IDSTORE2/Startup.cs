@@ -2,6 +2,7 @@ using IDSTORE2.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -100,6 +101,9 @@ namespace IDSTORE2
             }
             //app.UseCors(options => { options.AllowAnyOrigin();  });
             app.UseHttpsRedirection();
+
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto }); app.UseAuthentication();
             //app.UseCors("CorsPolicy");
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
