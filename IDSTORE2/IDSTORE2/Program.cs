@@ -21,7 +21,7 @@ namespace IDSTORE2
             Console.WriteLine("---- IDCity ----");
             Console.WriteLine("---- avec la participation de Romen ----");
             var host = CreateHostBuilder(args).Build();
-            CreateDbIfNotExists(host);
+            //CreateDbIfNotExists(host);
             // Write in Console all environment variables
             var config = host.Services.GetRequiredService<IConfiguration>();
 
