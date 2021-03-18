@@ -54,13 +54,13 @@ namespace IDSTORE2.Controllers
 
         }
 
-        public FileController(ILogger<FileController> logger, APIContext context, IConfiguration config, IWebHostEnvironment env)
-        {
-            this.logger = logger;
-            this.context = context;
-            this.config = config;
-            this.env = env;
-        }
+        //public FileController(ILogger<FileController> logger, APIContext context, IConfiguration config, IWebHostEnvironment env)
+        //{
+        //    this.logger = logger;
+        //    this.context = context;
+        //    this.config = config;
+        //    this.env = env;
+        //}
 
         [HttpGet]
         [Route("dl/{path}")]
