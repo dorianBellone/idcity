@@ -25,21 +25,21 @@ export class ApiService {
   }
 
   public getFile(): Observable<Fichier[]> {
-    return this.http.get<Fichier[]>('http://localhost:500/file/')
+    return this.http.get<Fichier[]>('http://localhost:5000/file/')
   }
 
   public getFileByClasse(classe : string): Observable<Fichier[]> {
     this.title.subscribe(data => this.test = data);
     classe = this.test;
 
-    return this.http.get<Fichier[]>('http://localhost:500/file/getByClasse/' + classe);
+    return this.http.get<Fichier[]>('http://localhost:5000/file/getByClasse/' + classe);
 
   }
 
 
   public downloadFile(name: string): Observable<Blob>  {
-    console.log('http://localhost:5001/file/dl/' + name);
-    return this.http.get('http://localhost:5001/file/dl/' + name, { responseType: 'blob' });
+    console.log('http://localhost:5000/file/dl/' + name);
+    return this.http.get('http://localhost:5000/file/dl/' + name, { responseType: 'blob' });
   }
 
 
