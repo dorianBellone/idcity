@@ -79,20 +79,20 @@ namespace IDSTORE2
             }
             FileController fc = new FileController(logger,context, config, env, httpContextAccessor);
             var Files = fc.GetAll();
+            //FileController fc = new FileController(logger,context, config, env);
+            //var Files = fc.GetAll();
          
-            foreach (FileOverride f in Files)
+            /*foreach (FileOverride f in Files)
             {
                 var file = new File { Name = f.Name, Description = f.Description, Type = f.Type, Path = f.Path };
                 context.Files.Add(file);
             }
-            context.SaveChanges();
+            context.SaveChanges();*/
 
-            var FilesDB = context.Files;
-            Dictionary<Guid, String> dico = new Dictionary<Guid, string>(Files.Count);
-            foreach (File _file in Files)
-            {
-
-            }
+            //var FilesDB = context.Files;
+            //Dictionary<Guid, String> dico = new Dictionary<Guid, string>(Files.Count);
+            //foreach (File _file in Files)
+            
             
         }
     }

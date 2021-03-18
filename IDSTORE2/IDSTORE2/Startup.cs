@@ -76,13 +76,13 @@ namespace IDSTORE2
                 Console.WriteLine("----------");
             }
             //services.Configure<FileController>(_configuration.GetSection("AppSettings"));
-            //services.AddCors(options => {
-            //    options.AddPolicy("CorsPolicy",
-            //        builder => builder.AllowAnyOrigin()
-            //        .AllowAnyMethod()
-            //        .AllowAnyHeader()
+            services.AddCors(options => {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
             //        .AllowCredentials());
-            //});
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -104,7 +104,7 @@ namespace IDSTORE2
 
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto }); app.UseAuthentication();
-            //app.UseCors("CorsPolicy");
+            app.UseCors("CorsPolicy");
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseRouting();
