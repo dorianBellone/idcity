@@ -52,10 +52,9 @@ namespace IDSTORE2.Controllers
         [Route("dl/{path}")]
         public async Task<IActionResult> Dl(string path)
         {
-            //var filePath = "C:\\\\" + path;
-            var filePath = "/home/idStore/idcity/RessourceFile" + path;
+            var filePath = folderPath + path;
             var memory = new MemoryStream();
-            using (var stream = new FileStream(filePath, FileMode.Open))
+            using (var stream = new FileStream(filePath + path, FileMode.Open))
             {
                 await stream.CopyToAsync(memory);
             }
@@ -116,7 +115,7 @@ namespace IDSTORE2.Controllers
         {
             List<FileOverride> response = new List<FileOverride>();
             byte[] content;
-            folderPath = folderPath + "\\" + classe;
+            folderPath = folderPath + classe;
             string[] filePaths = Directory.GetFiles(folderPath);
             string fileDefaultName;
             foreach (string path in filePaths.ToList())
