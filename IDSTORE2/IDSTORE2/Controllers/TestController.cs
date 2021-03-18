@@ -20,9 +20,9 @@ namespace IDSTORE2.Controllers
     [Route("[controller]")]
     public class TestController : ControllerBase
     {
-      public String Get()
+      public IActionResult Get()
         {
-            return "ok";
+            return Ok();
         }
 
       

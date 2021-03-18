@@ -1,6 +1,7 @@
 using IDSTORE2.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,7 +27,8 @@ namespace IDSTORE2
             services.AddDbContext<APIContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("SQL_LiteConnection")));
             services.AddScoped<APIContext>();
-
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
             services.AddControllers();
             // In production, the Angular files will be served from this directory
             
@@ -34,6 +36,9 @@ namespace IDSTORE2
             {
                 Console.WriteLine("----------");
                 Console.WriteLine(_env.EnvironmentName);
+                Console.WriteLine("----------");
+                Console.WriteLine(_env.WebRootPath);
+
                 Console.WriteLine("----------");
                 services.AddSpaStaticFiles(configuration =>
                 {
@@ -50,6 +55,7 @@ namespace IDSTORE2
             {
                 Console.WriteLine("----------");
                 Console.WriteLine(_env.EnvironmentName);
+                
                 Console.WriteLine("----------");
 
                 services.AddSpaStaticFiles(configuration =>
@@ -69,12 +75,19 @@ namespace IDSTORE2
                 Console.WriteLine("----------");
             }
             //services.Configure<FileController>(_configuration.GetSection("AppSettings"));
-
+            //services.AddCors(options => {
+            //    options.AddPolicy("CorsPolicy",
+            //        builder => builder.AllowAnyOrigin()
+            //        .AllowAnyMethod()
+            //        .AllowAnyHeader()
+            //        .AllowCredentials());
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+           
             if (_env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -85,8 +98,9 @@ namespace IDSTORE2
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseCors(options => { options.AllowAnyOrigin();  });
-            //app.UseHttpsRedirection();
+            //app.UseCors(options => { options.AllowAnyOrigin();  });
+            app.UseHttpsRedirection();
+            //app.UseCors("CorsPolicy");
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseRouting();
@@ -116,6 +130,8 @@ namespace IDSTORE2
                 }
 
             });
+
+            Console.WriteLine();
         }
     }
 }

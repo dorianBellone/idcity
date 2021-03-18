@@ -20,6 +20,7 @@ namespace IDSTORE2
             Console.WriteLine("---- By Ben&Dodo ----");
             Console.WriteLine("---- IDCity ----");
             Console.WriteLine("---- avec la participation de Romen ----");
+
             var host = CreateHostBuilder(args).Build();
             //CreateDbIfNotExists(host);
             // Write in Console all environment variables

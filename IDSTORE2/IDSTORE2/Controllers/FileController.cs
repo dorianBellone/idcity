@@ -26,8 +26,9 @@ namespace IDSTORE2.Controllers
 
         private readonly APIContext context;
         private readonly ILogger<FileController> logger;
+        private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IConfiguration config;
-        public FileController(ILogger<FileController> _logger, APIContext _context,IConfiguration _config, IWebHostEnvironment env)
+        public FileController(ILogger<FileController> _logger, APIContext _context,IConfiguration _config, IWebHostEnvironment env, IHttpContextAccessor _httpContextAccessor)
         {
             //folderPath = "C:\\RessourceFile";
             //folderPath = "/home/idStore/idcity/RessourceFile";
@@ -36,6 +37,9 @@ namespace IDSTORE2.Controllers
             //var listDataFile = _context.Files.ToList();
 
             config = _config;
+            httpContextAccessor = _httpContextAccessor;
+            string host = httpContextAccessor.HttpContext.Request.Host.Value;
+            Console.WriteLine("HttpContextAccessor Host.value : " + host);
             if (env.IsProduction())
             {
                 string PathProd = config.GetSection("PathFile").GetSection("PathFileProd").Value;
@@ -43,7 +47,7 @@ namespace IDSTORE2.Controllers
             }else if (env.IsDevelopment())
             {
                 string PathDev = config.GetSection("PathFile").GetSection("PathFileDev").Value;
-                folderPath = PathDev;
+                folderPath = PathDev + "\\";
             }
 
         }

@@ -21,6 +21,8 @@ export class ApiService {
     this.title.next(data);
     this.title.subscribe(data => this.test = data);
     console.log(this.test);
+    //return this.http.get<Fichier[]>('https://localhost:44373/file/getByClasse/' + this.test);
+
     return this.http.get<Fichier[]>('http://localhost:5000/file/getByClasse/' + this.test);
   }
 
@@ -32,6 +34,7 @@ export class ApiService {
     this.title.subscribe(data => this.test = data);
     classe = this.test;
 
+    //return this.http.get<Fichier[]>('https://localhost:44373/file/getByClasse/' + classe);
     return this.http.get<Fichier[]>('http://localhost:5000/file/getByClasse/' + classe);
 
   }
@@ -42,6 +45,9 @@ export class ApiService {
     return this.http.get('http://localhost:5000/file/dl/' + name, { responseType: 'blob' });
   }
 
+  //public TEST_get(): String {
+  //  return this.http.get<String>('http://localhost:5000/test/').subscribe;
+  //}
 
 }
 
