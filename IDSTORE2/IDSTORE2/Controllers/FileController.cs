@@ -28,6 +28,8 @@ namespace IDSTORE2.Controllers
         private readonly ILogger<FileController> logger;
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IConfiguration config;
+        private IWebHostEnvironment env;
+
         public FileController(ILogger<FileController> _logger, APIContext _context,IConfiguration _config, IWebHostEnvironment env, IHttpContextAccessor _httpContextAccessor)
         {
             //folderPath = "C:\\RessourceFile";
@@ -50,6 +52,14 @@ namespace IDSTORE2.Controllers
                 folderPath = PathDev + "\\";
             }
 
+        }
+
+        public FileController(ILogger<FileController> logger, APIContext context, IConfiguration config, IWebHostEnvironment env)
+        {
+            this.logger = logger;
+            this.context = context;
+            this.config = config;
+            this.env = env;
         }
 
         [HttpGet]
