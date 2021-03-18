@@ -31,7 +31,7 @@ namespace IDSTORE2
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddHttpsRedirection(options =>
             {
-                options.HttpsPort = 5001;
+                options.HttpsPort = 45001;
             });
             services.AddControllers();
             // In production, the Angular files will be served from this directory
