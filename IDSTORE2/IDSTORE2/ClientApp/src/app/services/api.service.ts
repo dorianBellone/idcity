@@ -23,11 +23,11 @@ export class ApiService {
     console.log(this.test);
     //return this.http.get<Fichier[]>('https://localhost:44373/file/getByClasse/' + this.test);
 
-    return this.http.get<Fichier[]>('http://localhost:5000/file/getByClasse/' + this.test);
+    return this.http.get<Fichier[]>('http://127.0.0.1:5000/file/getByClasse/' + this.test);
   }
 
   public getFile(): Observable<Fichier[]> {
-    return this.http.get<Fichier[]>('http://localhost:5000/file/')
+    return this.http.get<Fichier[]>('http://127.0.0.1:5000/file/')
   }
 
   public getFileByClasse(classe : string): Observable<Fichier[]> {
@@ -35,7 +35,7 @@ export class ApiService {
     classe = this.test;
 
     //return this.http.get<Fichier[]>('https://localhost:44373/file/getByClasse/' + classe);
-    return this.http.get<Fichier[]>('http://localhost:5000/file/getByClasse/' + classe);
+    return this.http.get<Fichier[]>('http://127.0.0.1:5000/file/getByClasse/' + classe);
 
   }
 
