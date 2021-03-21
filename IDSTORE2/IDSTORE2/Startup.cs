@@ -74,14 +74,6 @@ namespace IDSTORE2
                 Console.WriteLine("Not dev or staging or prod");
                 Console.WriteLine("----------");
             }
-            //services.Configure<FileController>(_configuration.GetSection("AppSettings"));
-            services.AddCors(options => {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
-            //        .AllowCredentials());
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -96,14 +88,7 @@ namespace IDSTORE2
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
             }
-            app.UseCors(options => { options.AllowAnyOrigin();  });
-            //app.UseHttpsRedirection();
-
-
-            app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto }); app.UseAuthentication();
-            app.UseCors("CorsPolicy");
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseRouting();

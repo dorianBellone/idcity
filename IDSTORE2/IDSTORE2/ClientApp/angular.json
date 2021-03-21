@@ -54,13 +54,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "IDSTORE2:build",
-            "proxyConfig": "src/proxy.conf.json"
+            "browserTarget": "IDSTORE2:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "IDSTORE2:build:production",
-              "proxyConfig": "src/proxy.conf.json"
+              "browserTarget": "IDSTORE2:build:production"
             }
           }
         },

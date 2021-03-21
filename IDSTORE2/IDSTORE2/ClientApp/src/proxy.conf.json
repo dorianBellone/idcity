@@ -1,7 +1,0 @@
-{
-  "/file/": {
-    "target": "http://192.168.0.188:5000",
-    "secure": false,
-    "logLevel": "debug"
-  }
-}
