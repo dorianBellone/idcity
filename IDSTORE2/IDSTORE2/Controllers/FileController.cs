@@ -105,6 +105,7 @@ namespace IDSTORE2.Controllers
             Console.WriteLine(response);
             return response;
         }
+
         [HttpGet]
         [Route("getAll")]
         public List<FileOverride> GetAll()
@@ -124,6 +125,7 @@ namespace IDSTORE2.Controllers
             Console.WriteLine(response);
             return response;
         }
+
         [HttpGet]
         [Route("getByClasse/{classe}")]
         public List<FileOverride> GetByClasse(string classe)

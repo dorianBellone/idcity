@@ -21,32 +21,32 @@ export class ApiService {
     this.title.next(data);
     this.title.subscribe(data => this.test = data);
     console.log(this.test);
-    //return this.http.get<Fichier[]>('https://localhost:44373/file/getByClasse/' + this.test);
+    //return this.http.get<Fichier[]>('http://localhost:3030/file/getByClasse/' + this.test);
 
-    return this.http.get<Fichier[]>('http://192.168.0.188:5000/file/getByClasse/' + this.test);
+    return this.http.get<Fichier[]>('http://localhost:3030/file/getByClasse/' + this.test);
   }
 
   public getFile(): Observable<Fichier[]> {
-    return this.http.get<Fichier[]>('http://192.168.0.188:5000/file/')
+    return this.http.get<Fichier[]>('http://localhost:3030/file/')
   }
 
   public getFileByClasse(classe : string): Observable<Fichier[]> {
     this.title.subscribe(data => this.test = data);
     classe = this.test;
 
-    //return this.http.get<Fichier[]>('https://localhost:44373/file/getByClasse/' + classe);
-    return this.http.get<Fichier[]>('http://192.168.0.188:5000/file/getByClasse/' + classe);
+    //return this.http.get<Fichier[]>('https://localhost:3030/file/getByClasse/' + classe);
+    return this.http.get<Fichier[]>('http://localhost:3030/file/getByClasse/' + classe);
 
   }
 
 
   public downloadFile(name: string): Observable<Blob>  {
-    console.log('http://localhost:5000/file/dl/' + name);
-    return this.http.get('http://192.168.0.188:5000/file/dl/' + name, { responseType: 'blob' });
+    console.log('http://localhost:3030/file/dl/' + name);
+    return this.http.get('http://localhost:3030/file/dl/' + name, { responseType: 'blob' });
   }
 
   //public TEST_get(): String {
-  //  return this.http.get<String>('http://localhost:5000/test/').subscribe;
+  //  return this.http.get<String>('http://localhost:3030/test/').subscribe;
   //}
 
 }

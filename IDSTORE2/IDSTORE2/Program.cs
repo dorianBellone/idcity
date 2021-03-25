@@ -62,7 +62,7 @@ namespace IDSTORE2
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
-                    .UseUrls("http://192.168.0.188:5000");
+                    .UseUrls("http://localhost:3030");
                 });
     }
 
