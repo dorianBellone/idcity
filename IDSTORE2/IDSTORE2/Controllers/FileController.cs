@@ -24,24 +24,24 @@ namespace IDSTORE2.Controllers
     {
         private string folderPath { get; set; }
 
-        private readonly APIContext context;
-        private readonly ILogger<FileController> logger;
-        private readonly IHttpContextAccessor httpContextAccessor;
+        //private readonly APIContext context;
+        //private readonly ILogger<FileController> logger;
+        //private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IConfiguration config;
         private IWebHostEnvironment env;
 
-        public FileController(ILogger<FileController> _logger, APIContext _context,IConfiguration _config, IWebHostEnvironment env, IHttpContextAccessor _httpContextAccessor)
+        public FileController(/*ILogger<FileController> _logger, APIContext _context,*/ IConfiguration _config, IWebHostEnvironment env/*, IHttpContextAccessor _httpContextAccessor*/)
         {
             //folderPath = "C:\\RessourceFile";
             //folderPath = "/home/idStore/idcity/RessourceFile";
-            logger = _logger;
-            context = _context;
+            //logger = _logger;
+            //context = _context;
             //var listDataFile = _context.Files.ToList();
 
             config = _config;
-            httpContextAccessor = _httpContextAccessor;
-            string host = httpContextAccessor.HttpContext.Request.Host.Value;
-            Console.WriteLine("HttpContextAccessor Host.value : " + host);
+            //httpContextAccessor = _httpContextAccessor;
+            //string host = httpContextAccessor.HttpContext.Request.Host.Value;
+            //Console.WriteLine("HttpContextAccessor Host.value : " + host);
             if (env.IsProduction())
             {
                 string PathProd = config.GetSection("PathFile").GetSection("PathFileProd").Value;
@@ -100,7 +100,7 @@ namespace IDSTORE2.Controllers
                 fileDefaultName = path;
                 FileInfo fi = new FileInfo(path);
                 content = System.IO.File.ReadAllBytes(path);
-                response.Add(new FileOverride(context,content, fi.Name, fi.Extension, null,fi.FullName));
+                response.Add(new FileOverride(/*context,*/content, fi.Name, fi.Extension, null,fi.FullName));
             }
             Console.WriteLine(response);
             return response;
@@ -120,7 +120,7 @@ namespace IDSTORE2.Controllers
                 
                 FileInfo fi = new FileInfo(path);
                 content = System.IO.File.ReadAllBytes(path);
-                response.Add(new FileOverride(context, content, fi.Name, fi.Extension,null,fi.FullName));
+                response.Add(new FileOverride(/*context, */content, fi.Name, fi.Extension,null,fi.FullName));
             }
             Console.WriteLine(response);
             return response;
@@ -139,7 +139,7 @@ namespace IDSTORE2.Controllers
             {
                 FileInfo fi = new FileInfo(path);
                 content = System.IO.File.ReadAllBytes(path);
-                response.Add(new FileOverride(context, content, fi.Name, fi.Extension,null,fi.FullName));
+                response.Add(new FileOverride(/*context,*/ content, fi.Name, fi.Extension,null,fi.FullName));
             }
             Console.WriteLine(response);
             return response;

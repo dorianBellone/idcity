@@ -40,14 +40,14 @@ namespace IDSTORE2
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<APIContext>();
+                    //var context = services.GetRequiredService<APIContext>();
                     var logger = services.GetRequiredService<ILogger<FileController>>();
                     var config = services.GetRequiredService<IConfiguration>();
                     var env = services.GetRequiredService<IWebHostEnvironment>();
                     var httpContextAccessor = services.GetRequiredService<IHttpContextAccessor>();
 
                     Console.WriteLine("Création de la DB : début !");
-                    DbInitializer.Initialize(logger, context, config, env, httpContextAccessor);
+                    DbInitializer.Initialize(logger/*, context*/, config, env, httpContextAccessor);
                     Console.WriteLine("Création de la DB : fin !");
                 }
                 catch (Exception ex)
@@ -68,17 +68,17 @@ namespace IDSTORE2
 
     public static class DbInitializer
     {
-        public static void Initialize(ILogger<FileController> logger, APIContext context, IConfiguration config, IWebHostEnvironment env, IHttpContextAccessor httpContextAccessor)
+        public static void Initialize(ILogger<FileController> logger,/* APIContext context,*/ IConfiguration config, IWebHostEnvironment env, IHttpContextAccessor httpContextAccessor)
         {
-            context.Database.EnsureCreated();
-            // Look for any students.
-            var count = context.Files.Count();
-            if (count  != 0)
-            {
-                context.Files.RemoveRange(context.Files);
-                //return;   // DB has been seeded
-            }
-            FileController fc = new FileController(logger,context, config, env, httpContextAccessor);
+            //context.Database.EnsureCreated();
+            //// Look for any students.
+            //var count = context.Files.Count();
+            //if (count  != 0)
+            //{
+            //    context.Files.RemoveRange(context.Files);
+            //    //return;   // DB has been seeded
+            //}
+            FileController fc = new FileController(/*logger,context, */config, env /*httpContextAccessor*/);
             var Files = fc.GetAll();
             //FileController fc = new FileController(logger,context, config, env);
             //var Files = fc.GetAll();
