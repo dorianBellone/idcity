@@ -25,6 +25,11 @@ namespace IDSTORE2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigin",
+                    builder => builder.AllowAnyOrigin());
+            });
             //services.AddDbContext<APIContext>(options =>
             //options.UseSqlite(Configuration.GetConnectionString("SQL_LiteConnection")));
             //services.AddScoped<APIContext>();
@@ -79,7 +84,9 @@ namespace IDSTORE2
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
-           
+            app.UseCors(builder =>
+            builder.WithOrigins("http://localhost:3030"));
+
             if (_env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
