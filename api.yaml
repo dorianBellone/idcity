@@ -1,0 +1,160 @@
+swagger: "2.0"
+info:
+  description: "CampusID file service API description"
+  version: "1.0.0"
+  title: "CampusID Fileservice"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "contact@campusid.eu"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "idboard.net"
+basePath: "/v1"
+tags:
+- name: "File Data"
+  description: "Retrieving file data"
+- name: "File Querying"
+  description: "Retrieving file lists"
+- name: "Tags"
+  description: "Interacting with tags"
+schemes:
+- "https"
+- "http"
+paths:
+  /file/{classId}:
+    parameters:
+    - name: "classId"
+      in: "path"
+      type: "string"
+      required: true
+    - name: "path"
+      in: "query"
+      description: "Path to the file in question"
+      required: true
+      type: "string"
+    get:
+      tags:
+      - "File Data"
+      summary: "Retrieve a single file by class and path"
+      description: ""
+      produces:
+      - "application/file"
+      responses:
+        "200":
+          description: "file retrieved"
+        "400":
+          description: "invalid path"
+        "403":
+          description: "forbidden"
+    post:
+      tags:
+      - "File Data"
+      summary: "Upsert a single file by class and path"
+      description: ""
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        "200":
+          description: "file upserted"
+        "201":
+          description: "file created"
+        "400":
+          description: "invalid class or path"
+        "403":
+          description: "forbidden"
+    delete:
+      tags:
+      - "File Data"
+      summary: "Delete a single file by class and path"
+      description: ""
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        "200":
+          description: "file deleted"
+        "400":
+          description: "invalid class or path"
+        "403":
+          description: "forbidden"
+  /files/{classId}:
+    parameters:
+    - name: "classId"
+      in: "path"
+      type: "string"
+      required: true
+    - name: "tags"
+      in: "query"
+      type: "string"
+      required: false
+    get:
+      tags:
+      - "File Querying"
+      summary: "Retrieve a list of files by class"
+      description: ""
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "file list retrieved"
+        "403":
+          description: "forbidden"
+  /classes:
+    get:
+      tags:
+      - "File Querying"
+      summary: "Retrieve a list of classes"
+      description: ""
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "classes retrieved"
+        "403":
+          description: "forbidden"
+  /tags:
+    parameters:
+    - name: "path"
+      in: "query"
+      description: "Path to the file in question"
+      required: true
+      type: "string"
+    get:
+      tags:
+      - "Tags"
+      summary: "Retrieve a list of tags associated with a file"
+      description: ""
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "tags retrieved"
+        "403":
+          description: "forbidden"
+    post:
+      tags:
+      - "Tags"
+      summary: "Append a list of tags to a file"
+      description: ""
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "tags added"
+        "403":
+          description: "forbidden"
+    delete:
+      tags:
+      - "Tags"
+      summary: "Remove a list of tags from a file"
+      description: ""
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "tags removed"
+        "403":
+          description: "forbidden"
+    
