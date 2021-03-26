@@ -127,6 +127,13 @@ namespace IDSTORE2.Controllers
         }
 
         [HttpGet]
+        [Route("hello")]
+        public string Hello()
+        {
+          return "Hello World";
+        }
+
+        [HttpGet]
         [Route("getByClasse/{classe}")]
         public List<FileOverride> GetByClasse(string classe)
         {
