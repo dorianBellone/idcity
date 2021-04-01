@@ -21,9 +21,9 @@ export class ApiService {
     this.title.next(data);
     this.title.subscribe(data => this.test = data);
     console.log(this.test);
-    //return this.http.get<Fichier[]>('http://idboard.net:45005/file/getByClasse/' + this.test);
+    //return this.http.get<Fichier[]>('http://idboard.net:45001/file/getByClasse/' + this.test);
 
-    return this.http.get<Fichier[]>('http://idboard.net:45005/file/getByClasse/' + this.test);
+    return this.http.get<Fichier[]>('http://idboard.net:45001/file/getByClasse/' + this.test);
   }
 
   public getFile(): Observable<Fichier[]> {
@@ -34,15 +34,15 @@ export class ApiService {
     this.title.subscribe(data => this.test = data);
     classe = this.test;
 
-    //return this.http.get<Fichier[]>('http://idboard.net:45005/file/getByClasse/' + classe);
-    return this.http.get<Fichier[]>('http://idboard.net:45005/file/getByClasse/' + classe);
+    //return this.http.get<Fichier[]>('http://idboard.net:45001/file/getByClasse/' + classe);
+    return this.http.get<Fichier[]>('http://idboard.net:45001/file/getByClasse/' + classe);
 
   }
 
 
   public downloadFile(name: string): Observable<Blob>  {
     console.log('http://localhost:3030/file/dl/' + name);
-    return this.http.get('http://idboard.net:45005/file/dl/' + name, { responseType: 'blob' });
+    return this.http.get('http://idboard.net:45001/file/dl/' + name, { responseType: 'blob' });
   }
 
   //public TEST_get(): String {
