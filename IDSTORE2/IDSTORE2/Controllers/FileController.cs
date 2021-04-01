@@ -106,25 +106,25 @@ namespace IDSTORE2.Controllers
             return response;
         }
 
-        [HttpGet]
-        [Route("getAll")]
-        public List<FileOverride> GetAll()
-        {
-            List<FileOverride> response = new List<FileOverride>();
-            byte[] content;
-            string[] filePaths = Directory.GetFiles(folderPath, "*.*",
-            SearchOption.AllDirectories);
-            string fileDefaultName;
-            foreach (string path in filePaths.ToList())
-            {
+        //[HttpGet]
+        //[Route("getAll")]
+        //public List<FileOverride> GetAll()
+        //{
+        //    List<FileOverride> response = new List<FileOverride>();
+        //    byte[] content;
+        //    string[] filePaths = Directory.GetFiles(folderPath, "*.*",
+        //    SearchOption.AllDirectories);
+        //    string fileDefaultName;
+        //    foreach (string path in filePaths.ToList())
+        //    {
                 
-                FileInfo fi = new FileInfo(path);
-                content = System.IO.File.ReadAllBytes(path);
-                response.Add(new FileOverride(/*context, */content, fi.Name, fi.Extension,null,fi.FullName));
-            }
-            Console.WriteLine(response);
-            return response;
-        }
+        //        FileInfo fi = new FileInfo(path);
+        //        content = System.IO.File.ReadAllBytes(path);
+        //        response.Add(new FileOverride(/*context, */content, fi.Name, fi.Extension,null,fi.FullName));
+        //    }
+        //    Console.WriteLine(response);
+        //    return response;
+        //}
 
         [HttpGet]
         [Route("hello")]
@@ -138,15 +138,14 @@ namespace IDSTORE2.Controllers
         public List<FileOverride> GetByClasse(string classe)
         {
             List<FileOverride> response = new List<FileOverride>();
-            byte[] content;
+            //byte[] content;
             folderPath = folderPath + classe;
             string[] filePaths = Directory.GetFiles(folderPath);
-            string fileDefaultName;
             foreach (string path in filePaths.ToList())
             {
                 FileInfo fi = new FileInfo(path);
-                content = System.IO.File.ReadAllBytes(path);
-                response.Add(new FileOverride(/*context,*/ content, fi.Name, fi.Extension,null,fi.FullName));
+                //content = System.IO.File.ReadAllBytes(path);
+                response.Add(new FileOverride(/*context,*//* content,*/ fi.Name, fi.Extension,null,fi.FullName));
             }
             Console.WriteLine(response);
             return response;

@@ -37,12 +37,12 @@ export class ListeComponent extends BaseDestroyableComponent {
       data => {
         this.classe = data;
       });
-   this.apiService.getFile()
-      .subscribe(
-        data => {
-          this.data = data;
-        }
-    );
+   //this.apiService.getFile()
+   //   .subscribe(
+   //     data => {
+   //       this.data = data;
+   //     }
+   // );
    
   }
 

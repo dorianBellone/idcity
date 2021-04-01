@@ -78,8 +78,8 @@ namespace IDSTORE2
             //    context.Files.RemoveRange(context.Files);
             //    //return;   // DB has been seeded
             //}
-            FileController fc = new FileController(/*logger,context, */config, env /*httpContextAccessor*/);
-            var Files = fc.GetAll();
+            //FileController fc = new FileController(/*logger,context, */config, env /*httpContextAccessor*/);
+            //var Files = fc.GetAll();
             //FileController fc = new FileController(logger,context, config, env);
             //var Files = fc.GetAll();
          

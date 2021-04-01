@@ -26,9 +26,9 @@ export class ApiService {
     return this.http.get<Fichier[]>('http://idboard.net:45001/file/getByClasse/' + this.test);
   }
 
-  public getFile(): Observable<Fichier[]> {
-    return this.http.get<Fichier[]>('http://idboard.net:45005/file/')
-  }
+  //public getFile(): Observable<Fichier[]> {
+  //  return this.http.get<Fichier[]>('http://idboard.net:45005/file/')
+  //}
 
   public getFileByClasse(classe : string): Observable<Fichier[]> {
     this.title.subscribe(data => this.test = data);
