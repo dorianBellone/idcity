@@ -35,7 +35,7 @@ export class ApiService {
     classe = this.test;
 
     //return this.http.get<Fichier[]>('https://localhost:3030/file/getByClasse/' + classe);
-    return this.http.get<Fichier[]>('http://localhost:3030/file/getByClasse/' + classe);
+    return this.http.get<Fichier[]>('http://idboard.net:45005/file/getByClasse/' + classe);
 
   }
 

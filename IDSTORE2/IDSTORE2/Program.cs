@@ -62,7 +62,7 @@ namespace IDSTORE2
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
-                    .UseUrls("http://localhost:3030");
+                    .UseUrls("http://idboard.net:45005/");
                 });
     }
 
