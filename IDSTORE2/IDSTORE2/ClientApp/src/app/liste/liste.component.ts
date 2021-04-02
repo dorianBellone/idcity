@@ -46,9 +46,9 @@ export class ListeComponent extends BaseDestroyableComponent {
    
   }
 
-  download(name: string) {
+  download(name: string, classe: string) {
     console.log(name);
-     this.apiService.downloadFile(name).subscribe((data) => {
+    this.apiService.downloadFile(name, classe).subscribe((data) => {
 
        this.blob = new Blob([data], { type: 'application/pdf' });
 
