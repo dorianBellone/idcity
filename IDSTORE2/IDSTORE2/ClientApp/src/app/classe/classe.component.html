@@ -2,7 +2,7 @@
 
 <div>
   <div>
-    <div style="">
+    <div>
       <h1>Cours pour la classe {{classe }} </h1>
     </div>
     
@@ -16,7 +16,7 @@
 
 
 
-  <div style="margin-top:50px;">
+  <div style="margin-top:100px;">
     <div *ngFor="let item of data | filter:mySubjectVal">
       <div class="card">
         <div class="card-body">
@@ -24,24 +24,25 @@
             <mat-list>
               <h2>{{item.name}}</h2>
               <mat-list-item>
-                <div *ngIf="details">
-                  description du cours affichée.
-                </div>
-
-                <button mat-button (click)="displayDetails()">
-                  <mat-icon>add_circle_outline</mat-icon>
-                  Afficher details
-                </button>
                 <button mat-button (click)="download(this.item.name)">
                   <mat-icon>south</mat-icon>
                   Télécharger
                 </button>
-
                 <div *ngIf="admin">
-                  admin
-                </div>
 
-              </mat-list-item>
+                  <button mat-button style="background-color: black; color:white;">
+                    Supprimer
+                  </button>
+                  </div>
+                  <div *ngIf="admin" style="margin-left: 15px;">
+                    <button mat-button style="background-color: black; color:white;">
+                      Modifier
+                    </button>
+
+                  </div>
+
+
+</mat-list-item>
             </mat-list>
         </div>
       </div>

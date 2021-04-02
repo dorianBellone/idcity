@@ -8,7 +8,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 
 export class LoginService {
 
-  public connectedUser = new Subject<string>();;
+  public connectedUser = new Subject<string>();
   isLoggedin = false;
   user: string;
   private loggedIn = new BehaviorSubject<boolean>(false);
