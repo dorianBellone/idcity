@@ -32,6 +32,11 @@ export class ClasseComponent implements OnInit {
             this.data = data;
           });
     });
+
+
+
+
+
   }
 
   ngOnInit() {
@@ -53,9 +58,8 @@ export class ClasseComponent implements OnInit {
     }
   }
 
-  download(name: string) {
-    console.log(name);
-    this.apiService.downloadFile(name).subscribe((data) => {
+  download(classe: string, name: string) {
+    this.apiService.downloadFile(classe, name).subscribe((data) => {
 
       this.blob = new Blob([data], { type: 'application/pdf' });
 

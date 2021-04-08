@@ -61,8 +61,7 @@ namespace IDSTORE2
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>()
-                    .UseUrls("http://idboard.net:45005/");
+                    webBuilder.UseStartup<Startup>().UseUrls("http://idboard.net:45005/");
                 });
     }
 

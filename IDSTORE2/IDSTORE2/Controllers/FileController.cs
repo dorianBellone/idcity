@@ -30,7 +30,7 @@ namespace IDSTORE2.Controllers
         private readonly IConfiguration config;
         private IWebHostEnvironment env;
 
-        public FileController(/*ILogger<FileController> _logger, APIContext _context,*/ IConfiguration _config, IWebHostEnvironment env/*, IHttpContextAccessor _httpContextAccessor*/)
+        public FileController(/*ILogger<FileController> _logger, APIContext _context,*/ IConfiguration _config, IWebHostEnvironment _env/*, IHttpContextAccessor _httpContextAccessor*/)
         {
             //folderPath = "C:\\RessourceFile";
             //folderPath = "/home/idStore/idcity/RessourceFile";
@@ -42,6 +42,7 @@ namespace IDSTORE2.Controllers
             //httpContextAccessor = _httpContextAccessor;
             //string host = httpContextAccessor.HttpContext.Request.Host.Value;
             //Console.WriteLine("HttpContextAccessor Host.value : " + host);
+            env = _env;
             if (env.IsProduction())
             {
                 string PathProd = config.GetSection("PathFile").GetSection("PathFileProd").Value;
@@ -63,12 +64,20 @@ namespace IDSTORE2.Controllers
         //}
 
         [HttpGet]
-        [Route("dl/{path}")]
-        public async Task<IActionResult> Dl(string path)
+        [Route("dl/{classe}/{name}")]
+        public async Task<IActionResult> Dl(string classe, string name)
         {
-            var filePath = folderPath + path;
+            var filePath = "";
+            if (env.IsProduction())
+            {
+                filePath = folderPath + classe + '/'+ name;
+            }
+            else if (env.IsDevelopment())
+            {
+                filePath = folderPath + classe + '\\' + name;
+            }
             var memory = new MemoryStream();
-            using (var stream = new FileStream(filePath + path, FileMode.Open))
+            using (var stream = new FileStream(filePath, FileMode.Open))
             {
                 await stream.CopyToAsync(memory);
             }
