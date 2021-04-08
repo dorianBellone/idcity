@@ -44,8 +44,8 @@ export class ApiService {
     //console.log('https://localhost:44373/file/dl/' + classe + '/' + name );
     //return this.http.get('https://localhost:44373/file/dl/' + classe + '/' + name, { responseType: 'blob' });
 
-    console.log('https://idboard.net:45001/file/dl/' + classe + '/' + name);
-    return this.http.get('https://idboard.net:45001/file/dl/' + classe + '/' + name, { responseType: 'blob' });
+    console.log('http://idboard.net:45001/file/dl/' + classe + '/' + name);
+    return this.http.get('http://idboard.net:45001/file/dl/' + classe + '/' + name, { responseType: 'blob' });
   }
 
   //public TEST_get(): String {
