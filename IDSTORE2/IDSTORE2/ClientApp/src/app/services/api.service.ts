@@ -33,12 +33,9 @@ export class ApiService {
   public getFileByClasse(classe : string): Observable<Fichier[]> {
     this.title.subscribe(data => this.test = data);
     classe = this.test;
-
     return this.http.get<Fichier[]>('http://idboard.net:45001/file/getByClasse/' + classe);
     //return this.http.get<Fichier[]>('https://localhost:44373/file/getByClasse/' + classe);
-
   }
-
 
   public downloadFile(classe: string, name: string): Observable<Blob>  {
     //console.log('https://localhost:44373/file/dl/' + classe + '/' + name );

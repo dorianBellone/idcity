@@ -21,15 +21,15 @@ export class LoginComponent implements OnInit {
   }
 
   handleLogin(data) {
-    /*if (this.password === "admin") {
+    if (this.password === "admin") {
+      this.sendTextValue(data);
       this.loginservice.login();
     }
     else {
       this.erreur = false
     }
-  }*/
-    this.sendTextValue(data);
-    this.loginservice.login();
+  
+    //this.loginservice.login();
   }
 
   sendTextValue(data) {
