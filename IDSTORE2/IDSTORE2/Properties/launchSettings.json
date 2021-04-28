@@ -19,7 +19,6 @@
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
       "applicationUrl": "http://idboard.net:45005",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
