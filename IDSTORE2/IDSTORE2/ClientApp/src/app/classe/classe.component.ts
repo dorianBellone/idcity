@@ -47,7 +47,59 @@ export class ClasseComponent implements OnInit {
     }
     this.matiereService.title.subscribe(
       data => {
+        
         this.mySubjectVal = data;
+ /*       if (this.mySubjectVal = 'Sciences appliquées') {
+          this.mySubjectVal = 'SC';
+        }
+        if (this.mySubjectVal = 'Algorithmique') {
+          this.mySubjectVal = 'ALGO';
+        }
+        if (data = 'Electronique') {
+          data = 'ELEC';
+        }
+        if (data = 'Méthodologie') {
+          data = 'METH';
+        }
+        if (data = 'Architecture des systèmes d\'informations') {
+          data = 'ARCHI';
+        }
+        if (data = 'Réseaux') {
+          data = 'RES';
+        }
+        if (data = 'Système d\'exploitation') {
+          data = 'SYS';
+        }
+        if (data = 'Outils Bureautiques') {
+          data = 'SOFT';
+        }
+        if (data = 'Langages C') {
+          data = 'CCPP';
+        }
+        if (data = 'Javascript') {
+          data = 'JSCRIPT';
+        }
+        if (data = 'Langage pour le web') {
+          data = 'W3C';
+        }
+        if (data = 'Anglais') {
+          data = 'ANG';
+        }
+        if (data = 'Expresion orale') {
+          data = 'ORAL';
+        }
+        if (data = 'Expresion écrite') {
+          data = 'EXPR';
+        }
+        if (data = 'Economie') {
+          data = 'ECO';
+        }
+        if (data = 'Droit') {
+          data = 'DRT';
+        }
+        if (data = 'Culture informatique') {
+          data = 'CULT';
+        }*/
       });
     this.route.paramMap.subscribe(params => {
       this.classe = params.get('classe');
