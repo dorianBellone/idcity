@@ -141,7 +141,13 @@ namespace IDSTORE2.Controllers
         {
           return "Hello World";
         }
-
+        [HttpGet]
+        [Route("getURL")]
+        public string[] getURL_folderPath()
+        {
+            Console.WriteLine(Directory.GetFiles(folderPath));
+            return Directory.GetFiles(folderPath);
+        }
         [HttpGet]
         [Route("getByClasse/{classe}")]
         public List<FileOverride> GetByClasse(string classe)
