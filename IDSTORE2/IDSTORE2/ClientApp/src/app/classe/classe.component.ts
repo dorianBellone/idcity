@@ -49,57 +49,88 @@ export class ClasseComponent implements OnInit {
       data => {
         
         this.mySubjectVal = data;
- /*       if (this.mySubjectVal = 'Sciences appliquées') {
-          this.mySubjectVal = 'SC';
-        }
-        if (this.mySubjectVal = 'Algorithmique') {
-          this.mySubjectVal = 'ALGO';
-        }
-        if (data = 'Electronique') {
-          data = 'ELEC';
-        }
-        if (data = 'Méthodologie') {
-          data = 'METH';
-        }
-        if (data = 'Architecture des systèmes d\'informations') {
-          data = 'ARCHI';
-        }
-        if (data = 'Réseaux') {
-          data = 'RES';
-        }
-        if (data = 'Système d\'exploitation') {
-          data = 'SYS';
-        }
-        if (data = 'Outils Bureautiques') {
-          data = 'SOFT';
-        }
-        if (data = 'Langages C') {
-          data = 'CCPP';
-        }
-        if (data = 'Javascript') {
-          data = 'JSCRIPT';
-        }
-        if (data = 'Langage pour le web') {
-          data = 'W3C';
-        }
-        if (data = 'Anglais') {
-          data = 'ANG';
-        }
-        if (data = 'Expresion orale') {
-          data = 'ORAL';
-        }
-        if (data = 'Expresion écrite') {
-          data = 'EXPR';
-        }
-        if (data = 'Economie') {
-          data = 'ECO';
-        }
-        if (data = 'Droit') {
-          data = 'DRT';
-        }
-        if (data = 'Culture informatique') {
-          data = 'CULT';
-        }*/
+        switch (this.mySubjectVal) {
+          case 'Sciences Appliquées': {
+            this.mySubjectVal = 'SC'
+            break;
+          }
+          case 'Algorithmique': {
+            this.mySubjectVal = 'ALGO';
+            break;
+          }
+          case 'Electronique': {
+            this.mySubjectVal = 'ELEC';
+            break;
+          }
+          case 'Méthodologie': {
+            this.mySubjectVal = 'METH';
+            break;
+          }
+          case 'Architecture des systèmes d\'informations': {
+            this.mySubjectVal = 'ARCHI';
+            break;
+          }
+          case 'Réseaux': {
+            this.mySubjectVal = 'RES';
+            break;
+          }
+          case 'Système d\'exploitation': {
+            this.mySubjectVal = 'SYS';
+            break;
+          }
+          case 'Outils Bureautiques': {
+            this.mySubjectVal = 'SOFT';
+            break;
+          }
+          case 'Langages C': {
+            this.mySubjectVal = 'CCPP';
+            break;
+          }
+          case 'Javascript': {
+            this.mySubjectVal = 'JSCRIPT';
+            break;
+          }
+          case 'Langage pour le web': {
+            this.mySubjectVal = 'W3C';
+            break;
+          }
+          case 'Anglais': {
+            this.mySubjectVal = 'ANG';
+            break;
+          }
+          case 'Expresion orale': {
+            this.mySubjectVal = 'ORAL';
+            break;
+          }
+          case 'Expresion écrite': {
+            this.mySubjectVal = 'EXPR';
+            break;
+          }
+          case 'Economie': {
+            this.mySubjectVal = 'ECO';
+            break;
+          }
+          case 'Droit': {
+            this.mySubjectVal = 'DRT';
+            break;
+          }
+          case 'Culture informatique': {
+            this.mySubjectVal = 'CULT';
+            break;
+          }
+    
+      
+
+
+
+
+
+          default: {
+            //statements; 
+            break;
+          }
+        } 
+       
       });
     this.route.paramMap.subscribe(params => {
       this.classe = params.get('classe');
