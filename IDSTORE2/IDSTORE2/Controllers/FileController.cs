@@ -50,7 +50,7 @@ namespace IDSTORE2.Controllers
             }else if (env.IsDevelopment())
             {
                 string PathDev = config.GetSection("PathFile").GetSection("PathFileDev").Value;
-                folderPath = PathDev + "\\";
+                folderPath = PathDev;
             }
 
         }
@@ -76,6 +76,8 @@ namespace IDSTORE2.Controllers
             {
                 filePath = folderPath + classe + '\\' + name;
             }
+            if (!System.IO.File.Exists(filePath))
+                return NotFound();
             var memory = new MemoryStream();
             using (var stream = new FileStream(filePath, FileMode.Open))
             {
@@ -83,7 +85,7 @@ namespace IDSTORE2.Controllers
             }
             memory.Position = 0;
 
-            return File(memory, GetContentType(filePath), filePath);
+            return File(memory, /*GetContentType(filePath)*/"application/pdf", filePath);
         }
 
         
