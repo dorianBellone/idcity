@@ -62,6 +62,28 @@ namespace IDSTORE2.Controllers
         //    this.config = config;
         //    this.env = env;
         //}
+        [HttpGet]
+        [Route("test")]
+        public async Task<IActionResult> testDL()
+        {
+            if (env.IsProduction())
+            {
+                var filePath = folderPath + "B1/pdf-test.pdf";
+
+                if (!System.IO.File.Exists(filePath))
+                    return NotFound();
+                var memory = new MemoryStream();
+
+                using (var stream = new FileStream(filePath, FileMode.Open))
+                {
+                    await stream.CopyToAsync(memory);
+                }
+                memory.Position = 0;
+
+                return File(memory, /*GetContentType(filePath)*/ "application/pdf", filePath);
+            }
+            return BadRequest();
+        }
 
         [HttpGet]
         [Route("dl/{classe}/{name}")]
