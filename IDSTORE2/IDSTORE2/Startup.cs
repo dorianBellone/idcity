@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
 
 namespace IDSTORE2
 {
@@ -67,7 +69,6 @@ namespace IDSTORE2
                 Console.WriteLine("----------");
                 Console.WriteLine("c.RootPath = \"wwwroot\"    c'est fait !!!! ");
                 Console.WriteLine("----------");
-
             }
             else
             {
@@ -110,17 +111,28 @@ namespace IDSTORE2
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                
                 if (_env.IsDevelopment())
                 {
                     //spa.UseAngularCliServer(npmScript: "start");
                     spa.Options.SourcePath = "ClientApp";
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                    //// ADD By B.R 29/04 https://code-maze.com/upload-files-dot-net-core-angular/
+                    //app.UseStaticFiles(new StaticFileOptions()
+                    //{
+                    //    FileProvider = new PhysicalFileProvider("C:\\RessourceFile"),
+                    //    RequestPath = new PathString("\\ResourcesFile")
+                    //});
                 }
 
                 if (_env.IsProduction())
                 {
-                    spa.Options.SourcePath = "wwwroot";                 
+                    spa.Options.SourcePath = "wwwroot";
+                    //// ADD By B.R 29/04 https://code-maze.com/upload-files-dot-net-core-angular/
+                    //app.UseStaticFiles(new StaticFileOptions()
+                    //{
+                    //    FileProvider = new PhysicalFileProvider("/home/RessourceFile/"),
+                    //    RequestPath = new PathString("/RessourceFile")
+                    //});
                 }
 
             });

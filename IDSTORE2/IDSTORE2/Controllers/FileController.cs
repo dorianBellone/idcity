@@ -55,6 +55,14 @@ namespace IDSTORE2.Controllers
 
         }
 
+        [HttpGet]
+        [Route("dl2")]
+        public void Dl2()
+        {
+            WebClient myWebClient = new WebClient();
+            myWebClient.DownloadFileAsync(new Uri(folderPath + "B2/ticket.pdf"), "ticket.pdf");
+        }
+       
         //public FileController(ILogger<FileController> logger, APIContext context, IConfiguration config, IWebHostEnvironment env)
         //{
         //    this.logger = logger;
@@ -84,8 +92,10 @@ namespace IDSTORE2.Controllers
                 await stream.CopyToAsync(memory);
             }
             memory.Position = 0;
+            //Response.ContentType = "application/pdf";
+            //Response.Body = File(memory, GetContentType(filePath), name).FileStream;
 
-            return File(memory, /*GetContentType(filePath)*/"application/pdf", filePath);
+            return File(memory, /*GetContentType(filePath)*/"application/pdf", name);
         }
 
         
@@ -156,6 +166,7 @@ namespace IDSTORE2.Controllers
         {
             List<FileOverride> response = new List<FileOverride>();
             //byte[] content;
+
             folderPath = folderPath + classe;
             string[] filePaths = Directory.GetFiles(folderPath);
             foreach (string path in filePaths.ToList())
