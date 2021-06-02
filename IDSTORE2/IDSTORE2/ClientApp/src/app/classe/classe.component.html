@@ -30,12 +30,12 @@
                 </button>
                 <div *ngIf="admin">
 
-                  <button mat-button style="background-color: black; color:white;">
+                  <button mat-button (click)="openDialog(this.item.name)" style="background-color: black; color:white;">
                     Supprimer
                   </button>
                   </div>
                   <div *ngIf="admin" style="margin-left: 15px;">
-                    <button mat-button style="background-color: black; color:white;">
+                    <button mat-button  (click)="openDialog(this.item.name)" style="background-color: black; color:white;">
                       Modifier
                     </button>
 

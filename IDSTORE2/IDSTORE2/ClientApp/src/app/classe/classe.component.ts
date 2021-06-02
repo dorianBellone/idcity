@@ -1,9 +1,11 @@
 import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Fichier } from '../models/fichier';
 import { ApiService } from '../services/api.service';
 import { LoginService } from '../services/login.service';
 import { MatiereService } from '../services/matiere.service';
+import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
   selector: 'app-classe',
@@ -21,7 +23,7 @@ export class ClasseComponent implements OnInit {
   admin: boolean;
 
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router, private matiereService: MatiereService, private loginService: LoginService) {
+  constructor(public dialog: MatDialog, private route: ActivatedRoute, private apiService: ApiService, private router: Router, private matiereService: MatiereService, private loginService: LoginService) {
      
     this.route.url.subscribe(url => {
       this.data = [];
@@ -32,12 +34,22 @@ export class ClasseComponent implements OnInit {
             this.data = data;
           });
     });
-
-
-
-
-
   }
+
+  openDialog(name: string) {
+    let dialogRef = this.dialog.open(DialogComponent, { data: { name: name } });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'true') {
+        console.log(name);
+        //this.apiService.deleteCours(name);
+      }
+      if (result == 'false') {
+        console.log('false');
+      }
+    })
+  }
+
 
   ngOnInit() {
     this.admin = false;

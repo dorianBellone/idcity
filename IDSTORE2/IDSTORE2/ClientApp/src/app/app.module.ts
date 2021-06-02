@@ -14,6 +14,8 @@ import { AuthGuard } from './services/auth.guard';
 import { NgxFileSaverModule } from '@clemox/ngx-file-saver';
 import { ClasseComponent } from './classe/classe.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from './classe/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +24,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     ListeComponent,
     LoginComponent,
     NavComponent,
-    ClasseComponent
+    ClasseComponent,
+    DialogComponent
   ],
+  entryComponents: [DialogComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
@@ -31,6 +35,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     NgxFileSaverModule,
     Ng2SearchPipeModule,
     BrowserModule,
+    MatDialogModule,
+
     RouterModule.forRoot([
       { path: '', pathMatch: 'full', redirectTo: 'login' },
       { path: 'login', component: LoginComponent },
