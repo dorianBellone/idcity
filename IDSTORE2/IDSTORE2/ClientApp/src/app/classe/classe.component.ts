@@ -6,6 +6,8 @@ import { ApiService } from '../services/api.service';
 import { LoginService } from '../services/login.service';
 import { MatiereService } from '../services/matiere.service';
 import { DialogComponent } from './dialog/dialog.component';
+import { Dialog2Component } from './dialog2/dialog2.component';
+
 
 @Component({
   selector: 'app-classe',
@@ -50,8 +52,21 @@ export class ClasseComponent implements OnInit {
     })
   }
 
+  openDialog2(name: string) {
+    let dialogRef = this.dialog.open(Dialog2Component, { data: { name: name } });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'false') {
+        console.log('false');
+      } else {
+        this.ngOnInit();
+      }
+    })
+  }
+
 
   ngOnInit() {
+    console.log("refresh");
     this.admin = false;
     this.details = false;
     if (this.classe == null) {

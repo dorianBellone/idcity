@@ -16,6 +16,7 @@ import { ClasseComponent } from './classe/classe.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './classe/dialog/dialog.component';
+import { Dialog2Component } from './classe/dialog2/dialog2.component';
 
 @NgModule({
   declarations: [
@@ -25,9 +26,10 @@ import { DialogComponent } from './classe/dialog/dialog.component';
     LoginComponent,
     NavComponent,
     ClasseComponent,
-    DialogComponent
+    DialogComponent,
+    Dialog2Component
   ],
-  entryComponents: [DialogComponent],
+  entryComponents: [DialogComponent, Dialog2Component],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
