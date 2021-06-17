@@ -17,6 +17,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './classe/dialog/dialog.component';
 import { Dialog2Component } from './classe/dialog2/dialog2.component';
+import { FileUploadService } from './services/file-upload-service';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { Dialog2Component } from './classe/dialog2/dialog2.component';
     MaterialModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [FileUploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
