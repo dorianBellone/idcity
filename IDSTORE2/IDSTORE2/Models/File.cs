@@ -6,14 +6,16 @@ namespace IDSTORE2.Models
 {
     public class File
     {
+        [Key]
         public Guid FileId { get; set; }
         [Required]
         public string Name { get; set; }
+        [Required]
         public string Path { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
 
-        public List<Tag> Tags { get; } = new List<Tag>();
+        public ICollection<Tag> Tags { get; set; }
    
     }
 }

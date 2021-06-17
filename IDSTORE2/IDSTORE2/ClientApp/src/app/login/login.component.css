@@ -27,3 +27,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.upload {
+  font-weight: bold;
+  color: #28a745;
+  margin-left: 15px;
+  line-height: 36px;
+}

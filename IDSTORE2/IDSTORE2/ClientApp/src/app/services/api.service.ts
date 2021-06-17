@@ -38,9 +38,9 @@ export class ApiService {
   }
 
   public downloadFile(classe: string, name: string): Observable<Blob>  {
-    //console.log('https://localhost:44373/file/dl/' + classe + '/' + name );
-    //return this.http.get('https://localhost:44373/file/dl/' + classe + '/' + name, { responseType: 'blob' });
-    return this.http.get('http://idboard.net:45001/file/dl/' + classe + '/' + name, { responseType: 'blob' });
+    //console.log('https://localhost:44373/file/download/' + classe + '/' + name );
+    //return this.http.get('https://localhost:44373/file/download/' + classe + '/' + name, { responseType: 'blob' });
+    return this.http.get('http://idboard.net:45001/file/download/' + classe + '/' + name, { responseType: 'blob' });
   }
 
   //public TEST_get(): String {
