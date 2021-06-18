@@ -5,6 +5,7 @@ import { MatiereService } from '../services/matiere.service';
 import { LoginService } from '../services/login.service';
 import { ApiService } from '../services/api.service';
 import { MatDialog } from '@angular/material';
+import { DialogCoursComponent } from '../classe/dialog-cours/dialog-cours.component';
 
 interface Classe {
   nom: string;
@@ -150,7 +151,7 @@ export class NavComponent implements OnInit {
   }
 
   openDialogAddCours(name: string) {
-    let dialogRef = this.dialog.open(dialog-cours, { data: { name: name } });
+    let dialogRef = this.dialog.open(DialogCoursComponent, { data: { name: name } });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'false') {
