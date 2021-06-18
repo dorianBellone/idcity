@@ -56,18 +56,44 @@ namespace IDSTORE2.Services
             if (!System.IO.File.Exists(_filePath))
                 return false;
 
+            String nameFile = string.Empty; 
+            String type = string.Empty;
             String newPath = ArchivesPath;
+            
             if (env.IsDevelopment())
             {
-                newPath += _classe + "\\" + _filePath.Split('\\').Last();
+                nameFile = _filePath.Split('\\').Last();
+                type = nameFile.Split('.').Last();
+                nameFile = nameFile.Split('.').First();
+                newPath += _classe + "\\" + nameFile;
             }
             else if (env.IsProduction())
             {
-                newPath += _classe + "/" + _filePath.Split('/').Last();
+                nameFile = _filePath.Split('/').Last();
+                type = nameFile.Split('.').Last();
+                nameFile = nameFile.Split('.').First();
+                newPath += _classe + "/" + nameFile;
             }
 
+            if(type == nameFile) type = "";
 
-            File.Move(_filePath, ArchivesPath + "");
+            String[] nameFiles = Directory.GetFiles(ArchivesPath + _classe, "*" + nameFile + "*");
+            if(nameFiles == null || nameFiles.Count() == 0)
+            {
+                    File.Move(_filePath, newPath + "_01" + type);
+            }
+            else
+            {
+                //foreach(nameFile)
+
+
+
+
+
+
+                File.Move(_filePath, ArchivesPath + "");
+            }
+
 
 
 

@@ -33,7 +33,7 @@ export class Dialog2Component {
     formData.append('file', fileToUpload, fileToUpload.name);
 
     //update / { classe } / { name } / { newname }
-    this.http.post('https://localhost:44373/file/update/' + name, formData, { reportProgress: true, observe: 'events' })
+    this.http.post('https://localhost:44373/file/upload/' + name, formData, { reportProgress: true, observe: 'events' })
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
           this.progress = Math.round(100 * event.loaded / event.total);

@@ -2,7 +2,6 @@ import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpEventType, HttpClient } from '@angular/common/http';
 import { MAT_DIALOG_DATA } from '@angular/material';
-
 interface Classe {
   nom: string;
 }
@@ -30,8 +29,8 @@ export class DialogCoursComponent implements OnInit {
   ngOnInit() {
   }
 
-  matieresAll: Matiere[] = [{ matiere: 'Sciences Appliquées' }, { matiere: 'Algorithmique' }, { matiere: 'Méthodologie' }, { matiere: 'Electronique' }, { matiere: 'Architecture des systèmes d’informations' }, { matiere: 'Système d’exploitation' }, { matiere: 'Réseaux' }, { matiere: 'Outils Bureautiques' },
-  { matiere: 'Langages C' }, { matiere: 'PHP' }, { matiere: 'Javascript' }, { matiere: 'Langage pour le web' }, { matiere: 'Manipulation des données' }, { matiere: 'Anglais' }, { matiere: 'Expresion orale' }, { matiere: 'Expresion écrite' }, { matiere: 'Economie' }, { matiere: 'Droit' }, { matiere: 'Culture informatique' },
+  matieresAll: Matiere[] = [{ matiere: 'Sciences Appliquï¿½es' }, { matiere: 'Algorithmique' }, { matiere: 'Mï¿½thodologie' }, { matiere: 'Electronique' }, { matiere: 'Architecture des systï¿½mes dï¿½informations' }, { matiere: 'Systï¿½me dï¿½exploitation' }, { matiere: 'Rï¿½seaux' }, { matiere: 'Outils Bureautiques' },
+  { matiere: 'Langages C' }, { matiere: 'PHP' }, { matiere: 'Javascript' }, { matiere: 'Langage pour le web' }, { matiere: 'Manipulation des donnï¿½es' }, { matiere: 'Anglais' }, { matiere: 'Expresion orale' }, { matiere: 'Expresion ï¿½crite' }, { matiere: 'Economie' }, { matiere: 'Droit' }, { matiere: 'Culture informatique' },
   { matiere: 'IDlabs' }, { matiere: 'Projet individuel' }, { matiere: 'Stage' }];
 
 
@@ -45,14 +44,14 @@ export class DialogCoursComponent implements OnInit {
 
   
 
-  public AddCours = (name, files) => {
+  public AddCours = (name,classe, files) => {
     if (files.length === 0) {
       return;
     }
     let fileToUpload = <File>files[0];
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
-    this.http.post('https://localhost:44373/file/upload/' + name, formData, { reportProgress: true, observe: 'events' })
+    this.http.post('https://localhost:44373/file/upload/' + classe +"/"+ name, formData, { reportProgress: true, observe: 'events' })
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
           this.progress = Math.round(100 * event.loaded / event.total);
@@ -65,7 +64,7 @@ export class DialogCoursComponent implements OnInit {
 
   public check(value) :String {
     switch (this.selectedValueM) {
-      case 'Sciences Appliquées': {
+      case 'Sciences Appliquï¿½es': {
         value = 'SC'
         break;
       }
@@ -77,19 +76,19 @@ export class DialogCoursComponent implements OnInit {
         value = 'ELEC';
         break;
       }
-      case 'Méthodologie': {
+      case 'Mï¿½thodologie': {
         value = 'METH';
         break;
       }
-      case 'Architecture des systèmes d\'informations': {
+      case 'Architecture des systï¿½mes d\'informations': {
         value = 'ARCHI';
         break;
       }
-      case 'Réseaux': {
+      case 'Rï¿½seaux': {
         value = 'RES';
         break;
       }
-      case 'Système d\'exploitation': {
+      case 'Systï¿½me d\'exploitation': {
         value = 'SYS';
         break;
       }
@@ -117,7 +116,7 @@ export class DialogCoursComponent implements OnInit {
         value = 'ORAL';
         break;
       }
-      case 'Expresion écrite': {
+      case 'Expresion ï¿½crite': {
         value = 'EXPR';
         break;
       }
@@ -143,8 +142,11 @@ export class DialogCoursComponent implements OnInit {
     return value;
   }
   
-  test(cours, zz) {
-    console.log(cours, zz);
+
+
+  test(name,classe) {
+    console.log(name);
+    console.log(classe);
   }
 
 }
