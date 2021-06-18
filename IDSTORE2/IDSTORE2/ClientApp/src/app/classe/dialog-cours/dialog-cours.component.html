@@ -1,6 +1,6 @@
 <form>
   <mat-form-field appearance="fill">
-    <mat-label style="color: white;">Choix de la classe</mat-label>
+    <mat-label style="color: black;">Choix de la classe</mat-label>
     <mat-select [(ngModel)]="selectedValue" (ngModelChange)="sendClasseValue($event)" name="classe">
       <mat-option *ngFor="let classe of classes" [value]="classe.nom">
         >
@@ -10,13 +10,25 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill">
-    <mat-label style="color: white;">Choix de la Matiere</mat-label>
-    <mat-select [(ngModel)]="selectedValue" (ngModelChange)="sendClasseValue($event)" name="classe">
-      <mat-option *ngFor="let classe of classes" [value]="classe.nom">
+    <mat-label style="color: black;">Choix de la Matiere</mat-label>
+    <mat-select [(ngModel)]="selectedValueM" (ngModelChange)="check($event)" name="classe">
+      <mat-option *ngFor="let matiere of matieresAll" [value]="matiere.matiere">
         >
-        {{classe.nom}}
+        {{matiere.matiere}}
       </mat-option>
     </mat-select>
   </mat-form-field>
 </form>
 
+<div class="form-group">
+  <label>Entrer un nouveau nom pour le cours</label>
+  <input type="text" class="form-control" id="name"
+         required
+         [(ngModel)]="this.ok" name="name">
+</div>
+
+
+<button mat-button (click)="test(this.ok)">
+  <mat-icon>south</mat-icon>
+  Envoyer requete
+</button>
