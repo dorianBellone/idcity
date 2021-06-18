@@ -143,8 +143,8 @@ export class DialogCoursComponent implements OnInit {
     return value;
   }
   
-  test(cours) {
-    console.log(cours);
+  test(cours, zz) {
+    console.log(cours, zz);
   }
 
 }
