@@ -28,7 +28,6 @@ namespace IDSTORE2.Controllers
         private readonly IConfiguration config;
         private IWebHostEnvironment env;
 
-
         public FileController(ILogger<FileController> _logger, APIContext _context, IConfiguration _config, IWebHostEnvironment _env)
         {
             logger = _logger;

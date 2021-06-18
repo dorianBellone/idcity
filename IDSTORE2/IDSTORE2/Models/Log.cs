@@ -14,7 +14,7 @@ namespace IDSTORE2.Models
         public int TypeLogID { get; set; }
         public TypeLog TypeLog { get; set; }
         [Required]
-        public string DateTime { get; set; }
+        public DateTime DateTime { get; set; }
         [Required]
         public String User { get; set; }
         [Required]

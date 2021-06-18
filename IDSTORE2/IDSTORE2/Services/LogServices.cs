@@ -1,43 +1,61 @@
-﻿using System;
+﻿using IDSTORE2.Data;
+using IDSTORE2.Models;
+using System;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace IDSTORE2.Services
 {
-    public enum TypeLog
+    public class LogServices
     {
-        Add = 0,
-        Get = 1,
-        Update = 2,
-        Delete = 3,
-        Rename = 4,
-        ArchivesFileDelete = 5,
-        ArchivesFileUpdate = 6,
-    };
+        private readonly APIContext context;
 
-    public static class LogServices
-    {
-        private static string LogPath = string.Empty;
-        private static bool DebugMode = true;
-
-        public static void WriteLog(TypeLog _typeLog, String _user, String _msg)
+        public LogServices(APIContext _context)
         {
-            LogPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            context = _context;
+
+        }
+
+        public async Task<Boolean> AddLog(TypeLog _typeLog, String _user, String _msg)
+        {
             try
             {
-                using (StreamWriter writer = File.AppendText(Path.Combine(LogPath, "Log_IDStore.txt")))
-                {
-                    writer.WriteLine("-----------------------");
-                    writer.Write(Environment.NewLine);
-                    writer.Write("[{0} {1}]", DateTime.Now.ToLongTimeString(), DateTime.Now.ToLongDateString());
-                    writer.Write("\t");
-                    writer.WriteLine(" {0} : {1} by {2}", _typeLog, _msg, _user);
-                    writer.WriteLine("-----------------------");
-                }
-                if (DebugMode)
-                    Console.WriteLine(" {0} : {1} by {2}", _typeLog, _msg, _user);
+                Log _log = new Log();
+                _log.TypeLogID = _typeLog.TypeLogId;
+                _log.DateTime = DateTime.Now;
+                _log.User = _user;
+                _log.Information = _msg;
+
+                await context.Log.AddAsync(_log);
+                await context.SaveChangesAsync();
+                return true;
             }
-            catch (Exception e)
+            catch
             {
+                return false; ;
+            }
+        }
+        public int NumberLog()
+        {
+            return context.Log.Count();
+        }
+        public async Task<Boolean> RefineLog(DateTime? _dateTime)
+        {
+            try
+            {
+                if (!_dateTime.HasValue || _dateTime.Value == new DateTime())
+                {
+                    _dateTime = DateTime.Now.AddMonths(-3);
+                }
+                var result = context.Log.Where(lg => lg.DateTime < _dateTime).ToList();
+                context.Log.RemoveRange(result);
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
     }
