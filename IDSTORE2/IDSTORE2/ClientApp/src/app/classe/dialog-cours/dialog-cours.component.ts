@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpEventType, HttpClient } from '@angular/common/http';
+import { MAT_DIALOG_DATA } from '@angular/material';
+
+interface Classe {
+  nom: string;
+}
 
 @Component({
   selector: 'app-dialog-cours',
@@ -8,11 +13,9 @@ import { HttpEventType, HttpClient } from '@angular/common/http';
   styleUrls: ['./dialog-cours.component.css']
 })
 
-interface Classe {
-  nom: string;
-}
 
 export class DialogCoursComponent implements OnInit {
+  @Output() public onUploadFinished = new EventEmitter();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient) { }
 
@@ -30,7 +33,7 @@ export class DialogCoursComponent implements OnInit {
     { nom: 'M2' }
   ];
 
-  @Output() public onUploadFinished = new EventEmitter();
+  
 
   public AddCours = (name, files) => {
     if (files.length === 0) {
