@@ -150,7 +150,7 @@ export class NavComponent implements OnInit {
   }
 
   openDialogAddCours(name: string) {
-    let dialogRef = this.dialog.open(Dialog2, { data: { name: name } });
+    let dialogRef = this.dialog.open(dialog-cours, { data: { name: name } });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'false') {

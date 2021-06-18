@@ -20,22 +20,20 @@ export class Dialog2Component {
     this.fileToUpload = files.item(0);
   }
 
-
-
-
   public progress: number;
   public message: string;
   @Output() public onUploadFinished = new EventEmitter();
 
-
-  public uploadFile = (name,files) => {
+  public UpdateFile = (name,files) => {
     if (files.length === 0) {
       return;
     }
     let fileToUpload = <File>files[0];
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
-    this.http.post('https://localhost:44373/file/upload/' + name, formData, { reportProgress: true, observe: 'events' })
+
+    //update / { classe } / { name } / { newname }
+    this.http.post('https://localhost:44373/file/update/' + name, formData, { reportProgress: true, observe: 'events' })
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
           this.progress = Math.round(100 * event.loaded / event.total);
@@ -45,9 +43,7 @@ export class Dialog2Component {
         }
       });
   }
-    //public message: string;
-  //@Output() public onUploadFinished = new EventEmitter();
-
+   
   public testUpload(name, files)
   {
     if (files.length === 0) {
