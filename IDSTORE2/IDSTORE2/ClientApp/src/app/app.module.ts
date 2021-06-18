@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './classe/dialog/dialog.component';
 import { Dialog2Component } from './classe/dialog2/dialog2.component';
 import { FileUploadService } from './services/file-upload-service';
+import { DialogCoursComponent } from './classe/dialog-cours/dialog-cours.component';
 
 @NgModule({
   declarations: [
@@ -28,9 +29,10 @@ import { FileUploadService } from './services/file-upload-service';
     NavComponent,
     ClasseComponent,
     DialogComponent,
-    Dialog2Component
+    Dialog2Component,
+    DialogCoursComponent
   ],
-  entryComponents: [DialogComponent, Dialog2Component],
+  entryComponents: [DialogComponent, Dialog2Component, DialogCoursComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
