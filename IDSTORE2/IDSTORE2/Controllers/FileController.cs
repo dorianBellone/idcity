@@ -93,6 +93,7 @@ namespace IDSTORE2.Controllers
             {
                 filePath = folderPath + classe + '\\' + name;
             }
+
             if (!System.IO.File.Exists(filePath))
                 return NotFound();
 
@@ -105,7 +106,9 @@ namespace IDSTORE2.Controllers
             //Response.ContentType = "application/pdf";
             //Response.Body = File(memory, GetContentType(filePath), name).FileStream;
 
+
             return File(memory, /*GetContentType(filePath)*/"application/pdf", name);
+            // return File(memory, /*GetContentType(filePath)*/ "application/pdf", filePath);
         }
 
         /// <summary>

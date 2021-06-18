@@ -59,6 +59,7 @@
     <Compile Include="Migrations\20210611111435_Update04.cs" />
     <Compile Include="Migrations\20210611111435_Update04.Designer.cs" />
     <Compile Include="Migrations\APIContextModelSnapshot.cs" />
+    <TypeScriptCompile Remove="ClientApp\src\app\services\file-upload-service.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

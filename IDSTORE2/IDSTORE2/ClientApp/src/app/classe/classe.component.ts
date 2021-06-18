@@ -1,9 +1,13 @@
 import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Fichier } from '../models/fichier';
 import { ApiService } from '../services/api.service';
 import { LoginService } from '../services/login.service';
 import { MatiereService } from '../services/matiere.service';
+import { DialogComponent } from './dialog/dialog.component';
+import { Dialog2Component } from './dialog2/dialog2.component';
+
 
 @Component({
   selector: 'app-classe',
@@ -21,7 +25,7 @@ export class ClasseComponent implements OnInit {
   admin: boolean;
 
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router, private matiereService: MatiereService, private loginService: LoginService) {
+  constructor(public dialog: MatDialog, private route: ActivatedRoute, private apiService: ApiService, private router: Router, private matiereService: MatiereService, private loginService: LoginService) {
      
     this.route.url.subscribe(url => {
       this.data = [];
@@ -32,14 +36,37 @@ export class ClasseComponent implements OnInit {
             this.data = data;
           });
     });
-
-
-
-
-
   }
 
+  openDialog(name: string) {
+    let dialogRef = this.dialog.open(DialogComponent, { data: { name: name } });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'true') {
+        console.log(name);
+        //this.apiService.deleteCours(name);
+      }
+      if (result == 'false') {
+        console.log('false');
+      }
+    })
+  }
+
+  openDialog2(name: string) {
+    let dialogRef = this.dialog.open(Dialog2Component, { data: { name: name } });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'false') {
+        console.log('false');
+      } else {
+        this.ngOnInit();
+      }
+    })
+  }
+
+
   ngOnInit() {
+    console.log("refresh");
     this.admin = false;
     this.details = false;
     if (this.classe == null) {
@@ -47,7 +74,90 @@ export class ClasseComponent implements OnInit {
     }
     this.matiereService.title.subscribe(
       data => {
+        
         this.mySubjectVal = data;
+        switch (this.mySubjectVal) {
+          case 'Sciences Appliquées': {
+            this.mySubjectVal = 'SC'
+            break;
+          }
+          case 'Algorithmique': {
+            this.mySubjectVal = 'ALGO';
+            break;
+          }
+          case 'Electronique': {
+            this.mySubjectVal = 'ELEC';
+            break;
+          }
+          case 'Méthodologie': {
+            this.mySubjectVal = 'METH';
+            break;
+          }
+          case 'Architecture des systèmes d\'informations': {
+            this.mySubjectVal = 'ARCHI';
+            break;
+          }
+          case 'Réseaux': {
+            this.mySubjectVal = 'RES';
+            break;
+          }
+          case 'Système d\'exploitation': {
+            this.mySubjectVal = 'SYS';
+            break;
+          }
+          case 'Outils Bureautiques': {
+            this.mySubjectVal = 'SOFT';
+            break;
+          }
+          case 'Langages C': {
+            this.mySubjectVal = 'CCPP';
+            break;
+          }
+          case 'Javascript': {
+            this.mySubjectVal = 'JSCRIPT';
+            break;
+          }
+          case 'Langage pour le web': {
+            this.mySubjectVal = 'W3C';
+            break;
+          }
+          case 'Anglais': {
+            this.mySubjectVal = 'ANG';
+            break;
+          }
+          case 'Expresion orale': {
+            this.mySubjectVal = 'ORAL';
+            break;
+          }
+          case 'Expresion écrite': {
+            this.mySubjectVal = 'EXPR';
+            break;
+          }
+          case 'Economie': {
+            this.mySubjectVal = 'ECO';
+            break;
+          }
+          case 'Droit': {
+            this.mySubjectVal = 'DRT';
+            break;
+          }
+          case 'Culture informatique': {
+            this.mySubjectVal = 'CULT';
+            break;
+          }
+    
+      
+
+
+
+
+
+          default: {
+            //statements; 
+            break;
+          }
+        } 
+       
       });
     this.route.paramMap.subscribe(params => {
       this.classe = params.get('classe');
