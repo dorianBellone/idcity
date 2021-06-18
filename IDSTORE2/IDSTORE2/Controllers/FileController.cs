@@ -151,7 +151,9 @@ namespace IDSTORE2.Controllers
 
         [HttpPost, DisableRequestSizeLimit]
         [Route("upload/{classe}/{name}")]
-        public async Task<IActionResult> Upload(string classe, string name)
+        [Route("upload/{name}")]
+        [Route("upload")]
+        public async Task<IActionResult> Upload(string classe, string name )
         {
             try
             {
@@ -196,7 +198,7 @@ namespace IDSTORE2.Controllers
 
         /// Rename file or/and update content by this class and name
         [HttpGet]
-        [Route("update/{classe}/{name}/{newname:string?}")]
+        [Route("update/{classe}/{name}/{newname}")]
         public async Task<IActionResult> Update(string classe, string name, string newName)
         {
             try

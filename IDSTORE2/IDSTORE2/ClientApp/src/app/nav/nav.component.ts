@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { MatiereService } from '../services/matiere.service';
 import { LoginService } from '../services/login.service';
 import { ApiService } from '../services/api.service';
+import { MatDialog } from '@angular/material';
 
 interface Classe {
   nom: string;
@@ -80,7 +81,7 @@ export class NavComponent implements OnInit {
 
   Matieres2 = [{ matiere: 'Java' }, { matiere: 'CSharp' }, { matiere: 'C' }, { matiere: 'C' }, { matiere: 'C' }, { matiere: 'C' }];
 
-  constructor(private router: Router, private matiereService: MatiereService, private loginService: LoginService, private apiService: ApiService) { }
+  constructor(public dialog: MatDialog,private router: Router, private matiereService: MatiereService, private loginService: LoginService, private apiService: ApiService) { }
 
   ngOnInit() {
     
@@ -147,5 +148,20 @@ export class NavComponent implements OnInit {
   displayPratique() {
     this.pratique = !this.pratique;
   }
+
+  openDialogAddCours(name: string) {
+    let dialogRef = this.dialog.open(Dialog2, { data: { name: name } });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'false') {
+        console.log('false');
+      } else {
+        this.ngOnInit();
+      }
+    })
+  }
+  
+
+
 }
 

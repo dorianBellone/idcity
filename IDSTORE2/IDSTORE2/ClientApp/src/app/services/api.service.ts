@@ -33,14 +33,14 @@ export class ApiService {
   public getFileByClasse(classe : string): Observable<Fichier[]> {
     this.title.subscribe(data => this.test = data);
     classe = this.test;
-    return this.http.get<Fichier[]>('http://idboard.net:45001/file/getByClasse/' + classe);
-    //return this.http.get<Fichier[]>('https://localhost:44373/file/getByClasse/' + classe);
+    //return this.http.get<Fichier[]>('http://idboard.net:45001/file/getByClasse/' + classe);
+    return this.http.get<Fichier[]>('https://localhost:44373/file/getByClasse/' + classe);
   }
 
   public downloadFile(classe: string, name: string): Observable<Blob>  {
     //console.log('https://localhost:44373/file/download/' + classe + '/' + name );
-    //return this.http.get('https://localhost:44373/file/download/' + classe + '/' + name, { responseType: 'blob' });
-    return this.http.get('http://idboard.net:45001/file/download/' + classe + '/' + name, { responseType: 'blob' });
+    return this.http.get('https://localhost:44373/file/download/' + classe + '/' + name, { responseType: 'blob' });
+    //return this.http.get('http://idboard.net:45001/file/download/' + classe + '/' + name, { responseType: 'blob' });
   }
 
   //public TEST_get(): String {

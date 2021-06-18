@@ -43,6 +43,8 @@ export class LoginComponent implements OnInit {
   public progress: number;
   public message: string;
   @Output() public onUploadFinished = new EventEmitter();
+
+
   public uploadFile = (files) => {
     if (files.length === 0) {
       return;

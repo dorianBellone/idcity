@@ -39,7 +39,7 @@ export class FileQueueObject {
 @Injectable()
 export class FileUploadService {
 
-  private endpoint = 'https://chs-dev.getsandbox.com/file-upload';
+  private endpoint = 'https://localhost:44373/file/upload';
   private _queue: BehaviorSubject<FileQueueObject[]>;
   private _files: FileQueueObject[] = [];
 
