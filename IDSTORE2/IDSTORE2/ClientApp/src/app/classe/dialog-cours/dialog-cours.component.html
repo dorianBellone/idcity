@@ -20,6 +20,7 @@
   </mat-form-field>
 </form>
 
+
 <div class="form-group">
   <label>Entrer un nouveau nom pour le cours</label>
   <input type="text" class="form-control" id="name"
@@ -32,3 +33,19 @@
   <mat-icon>south</mat-icon>
   Envoyer requete
 </button>
+
+
+<div style="margin-bottom:15px;">
+  <div>
+    <input type="file" #file placeholder="Choose file" (change)="UpdateFile(data.name,file.files)" style="display:none;">
+    <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+  </div>
+  <div>
+    <span class="upload" *ngIf="progress > 0">
+      {{progress}}%
+    </span>
+    <span class="upload" *ngIf="message">
+      {{message}}
+    </span>
+  </div>
+</div>
