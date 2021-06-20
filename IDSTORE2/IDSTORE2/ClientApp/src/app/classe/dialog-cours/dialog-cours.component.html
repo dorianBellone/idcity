@@ -1,53 +1,57 @@
-<form>
-  <h2>Ajout d'un cours :' </h2>
-  <mat-form-field appearance="fill">
-    <mat-label style="color: black;">Choix de la classe</mat-label>
-    <mat-select [(ngModel)]="selectedValue"  name="classe">
-      <mat-option *ngFor="let classe of classes" [value]="classe.nom">
-        >
-        {{classe.nom}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+<mat-dialog-content>
+  <form>
+    <h2>Ajout d'un cours  <mat-icon color="red">note_add</mat-icon> </h2>
+    <mat-form-field appearance="fill">
+      <mat-label style="color: black;">Choix de la classe</mat-label>
+      <mat-select [(ngModel)]="selectedValue" name="classe">
+        <mat-option *ngFor="let classe of classes" [value]="classe.nom">
+          >
+          {{classe.nom}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label style="color: black;">Choix de la Matiere</mat-label>
-    <mat-select [(ngModel)]="selectedValueM" (ngModelChange)="check($event)" name="classe">
-      <mat-option *ngFor="let matiere of matieresAll" [value]="matiere.matiere">
-        >
-        {{matiere.matiere}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</form>
-
-
-<div class="form-group">
-  <label>Entrer un nouveau nom pour le cours</label>
-  <input type="text" class="form-control" id="name"
-         required
-         [(ngModel)]="this.ok" name="name">
-</div>
+    <mat-form-field appearance="fill">
+      <mat-label style="color: black;">Choix de la Matiere</mat-label>
+      <mat-select [(ngModel)]="selectedValueM" (ngModelChange)="check($event)" name="classe">
+        <mat-option *ngFor="let matiere of matieresAll" [value]="matiere.matiere">
+          >
+          {{matiere.matiere}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
 
 
-
-
-<div *ngIf="this.ok != null" style="margin-bottom:15px;">
-  <div>
-    <input type="file" #file placeholder="Choose file" (change)="AddCours(this.ok,this.selectedValue,file.files)" style="display:none;" >
-    <button type="button" class="btn btn-success"  (click)="file.click()">Upload File</button>
+  <div class="form-group">
+    <label>Entrer un nouveau nom pour le cours</label>
+    <input type="text" class="form-control" id="name"
+           required
+           [(ngModel)]="this.ok" name="name">
   </div>
-  <div>
-    <span class="upload" *ngIf="progress > 0">
-      {{progress}}%
-    </span>
-    <span class="upload" *ngIf="message">
-      {{message}}
-    </span>
-  </div>
-</div>
 
-<button mat-button (click)="test(this.ok, this.selectedValue)" mat-dialog-close>
-  <mat-icon>south</mat-icon>
-  Valider et Fermer
-</button>
+
+
+
+  <div *ngIf="this.ok != null" style="margin-bottom:15px;">
+    <div>
+      <input type="file" #file placeholder="Choose file" (change)="AddCours(this.ok,this.selectedValue,file.files)" style="display:none;">
+      <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+    </div>
+    <div>
+      <span class="upload" *ngIf="progress > 0">
+        {{progress}}%
+      </span>
+      <span class="upload" *ngIf="message">
+        {{message}}
+      </span>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="test(this.ok, this.selectedValue)" mat-dialog-close>
+    <mat-icon>south</mat-icon>
+    Valider et Fermer
+  </button>
+ </mat-dialog-actions>

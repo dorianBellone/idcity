@@ -1,51 +1,56 @@
 
 
 <div>
-  <div>
-    <div>
-      <h1>Cours pour la classe {{classe }} </h1>
-    </div>
-    
-    <div class="search">
-      <input class="form-control icon" [(ngModel)]="mySubjectVal"
-             type="text" name="search" autocomplete="off"
-             placeholder="&#61442;  Rechercher un cours">
-    </div>
+  
+   
+
+  <div class="centrer">
+    <input class="form-control icon" [(ngModel)]="mySubjectVal"
+           type="text" name="search" autocomplete="off"
+           placeholder="&#61442;  Rechercher un cours">
+
+     <div class="top taille" style="color:black">
+    Cours pour la classe {{classe }} 
   </div>
 
+  </div>
+  
 
 
 
-  <div style="margin-top:100px;">
-    <div *ngFor="let item of data | filter:mySubjectVal">
-      <div class="card">
-        <div class="card-body">
-          <p class="card-text">
-            <mat-list>
-              <h2>{{item.name}}</h2>
-              <mat-list-item>
-                <button mat-button (click)="download(this.classe,this.item.name)">
-                  <mat-icon>south</mat-icon>
-                  Télécharger
-                </button>
-                <div *ngIf="admin">
-
-                  <button mat-button (click)="openDialog(this.item.name)" style="background-color: black; color:white;">
-                    Supprimer
+  <div  style="margin-top:80px;">
+    <div  style="margin-top:50px;" *ngFor="let item of data | filter:mySubjectVal">
+        <div class="card rcorner3" style="margin: 0 auto;">
+          <div class="card-body">
+            <p class="card-text">
+              <mat-list>
+                <h2 style="text-align:center">{{item.name}}</h2>
+                <mat-list-item>
+                  
+                  <button mat-button (click)="download(this.classe,this.item.name)"  style="background-color: black; color:white;">
+                    <mat-icon>south</mat-icon>
+                    Télécharger
                   </button>
+                  <div *ngIf="admin"  style="margin-left: 15px;">
+
+                    <button mat-button (click)="openDialog(this.item.name)" style="background-color: black; color:white;">
+                      Supprimer
+                    </button>
                   </div>
                   <div *ngIf="admin" style="margin-left: 15px;">
-                    <button mat-button  (click)="UpdateFile(this.item.name)" style="background-color: black; color:white;">
+                    <button mat-button (click)="UpdateFile(this.item.name)" style="background-color: black; color:white;">
                       Modifier
                     </button>
 
                   </div>
 
 
-</mat-list-item>
-            </mat-list>
+                </mat-list-item>
+              </mat-list>
+          </div>
         </div>
-      </div>
     </div>
   </div>
+
+
 </div>
