@@ -1,5 +1,6 @@
 using IDSTORE2.Data;
 using IDSTORE2.Models;
+using IDSTORE2.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -38,6 +39,10 @@ namespace IDSTORE2
             //options.UseSqlite(Configuration.GetConnectionString("SQL_LiteConnection")));
 
             services.AddScoped<APIContext>();
+            services.AddScoped<LogServices>();
+            services.AddScoped<ArchivesServices>();
+
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllers();
 

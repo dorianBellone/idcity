@@ -55,9 +55,9 @@ namespace IDSTORE2
                     var config = services.GetRequiredService<IConfiguration>();
                     var env = services.GetRequiredService<IWebHostEnvironment>();
                     var httpContextAccessor = services.GetRequiredService<IHttpContextAccessor>();
-
+                    var logServices = services.GetRequiredService<LogServices>();
                     Console.WriteLine("Création de la DB : début !");
-                    DbInitializer.Initialize(logger, context, config, env, httpContextAccessor);
+                    DbInitializer.Initialize(logger, context, config, env, httpContextAccessor, logServices);
                     Console.WriteLine("Création de la DB : fin !");
                 }
                 catch (Exception ex)
@@ -73,7 +73,7 @@ namespace IDSTORE2
 
     public static class DbInitializer
     {
-        public static void Initialize(ILogger<FileController> logger, APIContext context, IConfiguration config, IWebHostEnvironment env, IHttpContextAccessor httpContextAccessor)
+        public static void Initialize(ILogger<FileController> logger, APIContext context, IConfiguration config, IWebHostEnvironment env, IHttpContextAccessor httpContextAccessor,LogServices logServices)
         {
             context.Database.EnsureCreated();
             // Insert TypeLog if don't exist. 
@@ -127,7 +127,7 @@ namespace IDSTORE2
                 context.File.RemoveRange(context.File);
                 //return;   // DB has been seeded
             }
-            FileController fileController = new FileController(logger, context, config, env);
+            FileController fileController = new FileController(logger, context, config, env, logServices);
             String path = String.Empty;
             if (env.IsProduction())
             {

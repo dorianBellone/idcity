@@ -16,7 +16,7 @@ import { ClasseComponent } from './classe/classe.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './classe/dialog/dialog.component';
-import { Dialog2Component } from './classe/dialog2/dialog2.component';
+import { DialogUpdateCoursComponent } from './classe/dialog-update-cours/dialog-update-cours.component';
 import { FileUploadService } from './services/file-upload-service';
 import { DialogCoursComponent } from './classe/dialog-cours/dialog-cours.component';
 
@@ -29,10 +29,10 @@ import { DialogCoursComponent } from './classe/dialog-cours/dialog-cours.compone
     NavComponent,
     ClasseComponent,
     DialogComponent,
-    Dialog2Component,
+    DialogUpdateCoursComponent,
     DialogCoursComponent
   ],
-  entryComponents: [DialogComponent, Dialog2Component, DialogCoursComponent],
+  entryComponents: [DialogComponent, DialogUpdateCoursComponent, DialogCoursComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,

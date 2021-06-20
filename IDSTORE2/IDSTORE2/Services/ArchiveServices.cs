@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using IDSTORE2.Data;
+using IDSTORE2.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace IDSTORE2.Services
 {
@@ -15,12 +19,16 @@ namespace IDSTORE2.Services
 
     public class ArchivesServices
     {
+        private readonly LogServices logService;
+        private readonly APIContext context;
+
         private string ArchivesPath { get; set; }
         private static bool DebugMode = true;
 
         private readonly IConfiguration config;
         private IWebHostEnvironment env;
-
+        private Boolean testMode = false;
+        
         public ArchivesServices(String _archivesPath)
         {
             ArchivesPath = _archivesPath;
@@ -28,6 +36,9 @@ namespace IDSTORE2.Services
             {
                 System.IO.Directory.CreateDirectory(_archivesPath);
             }
+            testMode = true;
+            logService = new LogServices();
+            
         }
 
         public ArchivesServices(IConfiguration _config, IWebHostEnvironment _env)
@@ -44,27 +55,28 @@ namespace IDSTORE2.Services
             {
                 string PathDev = config.GetSection("PathFile").GetSection("PathArchivesDev").Value;
                 ArchivesPath = PathDev;
-            }     
+            }
             if (!System.IO.Directory.Exists(ArchivesPath))
             {
                 System.IO.Directory.CreateDirectory(ArchivesPath);
             }
+            logService = new LogServices(context);
         }
 
-        public bool ArchiveFile(TypeArchives _typeArchives,String _filePath, String _classe)
+        public async Task<Boolean> ArchiveFile(TypeArchives _typeArchives, String _filePath, String _classe, String _user)
         {
-            if (!System.IO.File.Exists(_filePath))
-                return false;
 
-            String nameFile = string.Empty; 
+            if (!System.IO.File.Exists(_filePath) || String.IsNullOrWhiteSpace(_classe)) return false;
+            if (String.IsNullOrWhiteSpace(_user) && DebugMode) _user = "adminModeDev";
+
+            String nameFile = string.Empty;
             String type = string.Empty;
             String newPath = ArchivesPath;
-            
-            if (env.IsDevelopment())
+
+            if (testMode || env.IsDevelopment())
             {
-                nameFile = _filePath.Split('\\').Last();
-                type = nameFile.Split('.').Last();
-                nameFile = nameFile.Split('.').First();
+                nameFile = _filePath.Split('\\').Last().Split('.').First();
+                type = Path.GetExtension(_filePath);
                 newPath += _classe + "\\" + nameFile;
             }
             else if (env.IsProduction())
@@ -74,55 +86,66 @@ namespace IDSTORE2.Services
                 nameFile = nameFile.Split('.').First();
                 newPath += _classe + "/" + nameFile;
             }
+            else return false;
 
-            if(type == nameFile) type = "";
+            DirectoryInfo directoryToSearch = new DirectoryInfo(ArchivesPath + _classe);
+            FileInfo[] filesInDir = directoryToSearch.GetFiles("*" + nameFile + "*.*");
 
-            String[] nameFiles = Directory.GetFiles(ArchivesPath + _classe, "*" + nameFile + "*");
-            if(nameFiles == null || nameFiles.Count() == 0)
+            //foreach (FileInfo foundFile in filesInDir)
+            //{
+            //    string fullName = foundFile.FullName;
+            //}
+            if (filesInDir.Count() == 0)
             {
-                    File.Move(_filePath, newPath + "_01" + type);
+                if (String.IsNullOrWhiteSpace(type))
+                    newPath += "_01";
+                else
+                    newPath += "_01" + "." + type;
             }
             else
             {
-                //foreach(nameFile)
-
-
-
-
-
-
-                File.Move(_filePath, ArchivesPath + "");
+                if (filesInDir.Count() >= 9)
+                {
+                    if (String.IsNullOrWhiteSpace(type))
+                        newPath += "_" + (filesInDir.Count() + 1).ToString();
+                    else
+                        newPath += "_" + (filesInDir.Count() + 1).ToString() + "." + type;
+                }
+                else
+                {
+                    if (String.IsNullOrWhiteSpace(type))
+                        newPath += "_" + (filesInDir.Count() + 1).ToString();
+                    else
+                        newPath += "_" + (filesInDir.Count() + 1).ToString() + "." + type;
+                }
             }
 
+            System.IO.File.Move(_filePath, newPath);
 
+            //if (!testMode)
+            //{
+            var typeslog = logService.GetTypeLog();
+            var typeLog = typeslog.FirstOrDefault(tl => tl.Name.Contains("ArchivesFile" + _typeArchives));
+            //}
 
-
-
+            // si typelog == update => Move le file dans les archive 
+            if (typeLog.Name == "ArchivesFileUpdate")
+            {
+                String message = "ArchivesFileUpdate Fichier : " + _filePath + " To " + newPath + " By : " + _user;
+                return await logService.AddLog(typeLog, _user, message);
+            }
+            else if (typeLog.Name == "ArchivesFileDelete")
+            {
+                String message = "ArchivesFileDelete Fichier : " + _filePath + " To " + newPath + " By : " + _user;
+                return await logService.AddLog(typeLog, _user, message);
+            }
+            // si typelog == delete ==> Move le file dans les archive + log deletfileArhcive
 
             return false;
 
 
         }
-        //public  void WriteLog(TypeLog _typeLog, String _user, String _msg)
-        //{
-        //    LogPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-        //    try
-        //    {
-        //        using (StreamWriter writer = File.AppendText(Path.Combine(LogPath, "Log_IDStore.txt")))
-        //        {
-        //            writer.WriteLine("-----------------------");
-        //            writer.Write(Environment.NewLine);
-        //            writer.Write("[{0} {1}]", DateTime.Now.ToLongTimeString(), DateTime.Now.ToLongDateString());
-        //            writer.Write("\t");
-        //            writer.WriteLine(" {0} : {1} by {2}", _typeLog, _msg, _user);
-        //            writer.WriteLine("-----------------------");
-        //        }
-        //        if (DebugMode)
-        //            Console.WriteLine(" {0} : {1} by {2}", _typeLog, _msg, _user);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //    }
-        //}
+
+       
     }
 }

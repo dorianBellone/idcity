@@ -20,32 +20,38 @@ namespace IDSTORE2.Controllers
     [Route("[controller]")]
     public class FileController : ControllerBase
     {
-        private string folderPath { get; set; }
+        private string FolderPath { get; set; }
 
-        private readonly APIContext context;
+        private readonly APIContext Context;
+        private readonly LogServices LogServices;
+        private readonly ArchivesServices ArchiveServices;
+
         private readonly ILogger<FileController> logger;
         //private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IConfiguration config;
         private IWebHostEnvironment env;
-
-        public FileController(ILogger<FileController> _logger, APIContext _context, IConfiguration _config, IWebHostEnvironment _env)
+        private String user;
+        public FileController(ILogger<FileController> _logger, APIContext _context, IConfiguration _config, IWebHostEnvironment _env, LogServices _logservice)
         {
             logger = _logger;
-            context = _context;
+            Context = _context;
             var listDataFile = _context.File.ToList();
-
+            LogServices = _logservice;
             config = _config;
-
+            if (User == null) user = "null";
+            else if (User.Identity.Name == null) user = "null";
+            else user = User.Identity.Name;
+            if (String.IsNullOrWhiteSpace(user)) user = "null";
             env = _env;
             if (env.IsProduction())
             {
                 string PathProd = config.GetSection("PathFile").GetSection("PathFileProd").Value;
-                folderPath = PathProd;
+                FolderPath = PathProd;
             }
             else if (env.IsDevelopment())
             {
                 string PathDev = config.GetSection("PathFile").GetSection("PathFileDev").Value;
-                folderPath = PathDev;
+                FolderPath = PathDev;
             }
         }
 
@@ -56,13 +62,16 @@ namespace IDSTORE2.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("getByClasse/{classe}")]
-        public List<FileOverride> GetByClasse(string classe)
+        public async Task<List<FileOverride>> GetByClasse(string classe)
         {
             List<FileOverride> response = new List<FileOverride>();
             //byte[] content;
 
-            folderPath = folderPath + classe;
-            string[] filePaths = Directory.GetFiles(folderPath);
+            FolderPath = FolderPath + classe;
+           
+            // Log 
+            await LogServices.AddLog(LogServices.GetTypeLog("Get"), user, "GetByClasse : " + FolderPath + " By : " + user);
+            string[] filePaths = Directory.GetFiles(FolderPath);
             foreach (string path in filePaths.ToList())
             {
                 FileInfo fi = new FileInfo(path);
@@ -87,15 +96,18 @@ namespace IDSTORE2.Controllers
             var filePath = "";
             if (env.IsProduction())
             {
-                filePath = folderPath + classe + '/' + name;
+                filePath = FolderPath + classe + '/' + name;
             }
             else if (env.IsDevelopment())
             {
-                filePath = folderPath + classe + '\\' + name;
+                filePath = FolderPath + classe + '\\' + name;
             }
 
             if (!System.IO.File.Exists(filePath))
                 return NotFound();
+
+            // Log 
+            await LogServices.AddLog(LogServices.GetTypeLog("Get"), user, "Download : " + filePath + " By : " + user);
 
             var memory = new MemoryStream();
             using (var stream = new FileStream(filePath, FileMode.Open))
@@ -125,54 +137,49 @@ namespace IDSTORE2.Controllers
             var filePath = "";
             if (env.IsProduction())
             {
-                filePath = folderPath + classe + '/' + name;
+                filePath = FolderPath + classe + '/' + name;
             }
             else if (env.IsDevelopment())
             {
-                filePath = folderPath + classe + '\\' + name;
+                filePath = FolderPath + classe + '\\' + name;
             }
             if (!System.IO.File.Exists(filePath))
                 return NotFound();
-            else
-            {
-                // LOG 
-                //LogServices.WriteLog(Services.TypeLog.Delete,User.Identity.Name,filePath);
 
-                // ARCHIVE
-                // Déplacement vers le dossier Archive
+            // Log 
+            await LogServices.AddLog(LogServices.GetTypeLog("Delete"), user, "Delete : " + filePath + " By : " + user);
+            // Archive
+            await ArchiveServices.ArchiveFile(TypeArchives.Delete, filePath, classe, user);
+            // Delete on disk
+            System.IO.File.Delete(filePath);
+            
+            // Delete on DataBase
 
-                // Delete on disk
-                System.IO.File.Delete(filePath);
-                // Delete on DataBase
-
-                return Ok("Document Supprimer.");
-            }
+            return Ok("Document Supprimer.");
+            
         }
 
         [HttpPost, DisableRequestSizeLimit]
         [Route("upload/{classe}/{name}")]
-        [Route("upload/{name}")]
-        [Route("upload")]
         public async Task<IActionResult> Upload(string classe, string name )
         {
+            if (string.IsNullOrWhiteSpace(classe) | String.IsNullOrWhiteSpace(name)) return BadRequest();
             try
             {
-                // LOG Create
-                //LogServices.WriteLog(Services.TypeLog.Delete,User.Identity.Name,filePath);
-
                 // Check if directory exist
                 var ressourcePath = "";
                 if (env.IsProduction())
                 {
-                    ressourcePath = folderPath + classe;
+                    ressourcePath = FolderPath + classe;
                 }
                 else if (env.IsDevelopment())
                 {
-                    ressourcePath = folderPath + classe;
+                    ressourcePath = FolderPath + classe;
                 }
                 if (!System.IO.Directory.Exists(ressourcePath))
                     return NotFound();
 
+              
                 var formCollection = await Request.ReadFormAsync();
                 var file = formCollection.Files.First();
                 if (file.Length > 0)
@@ -183,7 +190,9 @@ namespace IDSTORE2.Controllers
                     {
                         file.CopyTo(stream);
                     }
-                    return Ok(new { ressourcePath });
+                    // Log 
+                    await LogServices.AddLog(LogServices.GetTypeLog("Add"), user, "Upload : " + fullPath + " By : " + user);
+                    return Ok(new { fullPath });
                 }
                 else
                 {
@@ -212,22 +221,23 @@ namespace IDSTORE2.Controllers
                 var ressourcePath = "";
                 if (env.IsProduction())
                 {
-                    filePath = folderPath + classe + '/' + name;
-                    ressourcePath = folderPath + classe;
+                    filePath = FolderPath + classe + '/' + name;
+                    ressourcePath = FolderPath + classe;
                 }
                 else if (env.IsDevelopment())
                 {
-                    filePath = folderPath + classe + '\\' + name;
-                    ressourcePath = folderPath + classe;
+                    filePath = FolderPath + classe + '\\' + name;
+                    ressourcePath = FolderPath + classe;
                 }
                 if (!System.IO.File.Exists(filePath))
                     return NotFound();
+                if (String.IsNullOrWhiteSpace(newName)) newName = name;
 
-                // LOG Update
-                //LogServices.WriteLog(Services.TypeLog.Delete,User.Identity.Name,filePath);
+                // Log 
+                await LogServices.AddLog(LogServices.GetTypeLog("Update"), user, "Update : " + filePath + "To" + newName + " By : " + user);
+                // Archive
+                //await ArchiveServices.ArchiveFile(TypeArchives.Update, filePath, classe, user);
 
-                // ARCHIVE Update
-              
                 var formCollection = await Request.ReadFormAsync();
                 var file = formCollection.Files.First();
                 // Check if there is new content to update
@@ -287,7 +297,7 @@ namespace IDSTORE2.Controllers
         public void Dl2()
         {
             WebClient myWebClient = new WebClient();
-            myWebClient.DownloadFileAsync(new Uri(folderPath + "B2/ticket.pdf"), "ticket.pdf");
+            myWebClient.DownloadFileAsync(new Uri(FolderPath + "B2/ticket.pdf"), "ticket.pdf");
         }
         /// <summary>
         /// For Test 
@@ -296,8 +306,8 @@ namespace IDSTORE2.Controllers
         [Route("getURL")]
         public string[] getURL_folderPath()
         {
-            Console.WriteLine(Directory.GetFiles(folderPath));
-            return Directory.GetFiles(folderPath);
+            Console.WriteLine(Directory.GetFiles(FolderPath));
+            return Directory.GetFiles(FolderPath);
         }
 
         //public List<FileOverride> Get()

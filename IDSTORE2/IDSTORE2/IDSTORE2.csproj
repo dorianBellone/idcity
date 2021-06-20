@@ -33,15 +33,20 @@
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\app\classe\dialog2\**" />
     <Content Remove="Migrations\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\app\classe\dialog2\**" />
     <None Remove="Migrations\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="ClientApp\src\app\classe\dialog2\**" />
     <Compile Remove="Migrations\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\classe\dialog2\**" />
     <EmbeddedResource Remove="Migrations\**" />
+    <TypeScriptCompile Remove="ClientApp\src\app\classe\dialog2\**" />
     <TypeScriptCompile Remove="Migrations\**" />
   </ItemGroup>
 
@@ -51,6 +56,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\classe\dialog2\dialog2.component.css" />
+    <None Remove="ClientApp\src\app\classe\dialog2\dialog2.component.html" />
+    <None Remove="ClientApp\src\app\classe\dialog2\dialog2.component.spec.js" />
+    <None Remove="ClientApp\src\app\classe\dialog2\dialog2.component.spec.js.map" />
+    <None Remove="ClientApp\src\app\classe\dialog2\dialog2.component.spec.ts" />
+    <None Remove="ClientApp\src\app\classe\dialog2\dialog2.component.ts" />
     <None Remove="ClientApp\src\app\common\baseOnInit.component.ts" />
     <None Remove="ClientApp\src\app\models\fichier.ts" />
   </ItemGroup>
@@ -59,6 +70,8 @@
     <Compile Include="Migrations\20210611111435_Update04.cs" />
     <Compile Include="Migrations\20210611111435_Update04.Designer.cs" />
     <Compile Include="Migrations\APIContextModelSnapshot.cs" />
+    <TypeScriptCompile Remove="ClientApp\src\app\classe\dialog-update-cours\dialog-update-cours.component.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\classe\dialog-update-cours\dialog-update-cours.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\services\file-upload-service.ts" />
   </ItemGroup>
 

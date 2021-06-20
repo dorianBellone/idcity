@@ -6,7 +6,7 @@ import { ApiService } from '../services/api.service';
 import { LoginService } from '../services/login.service';
 import { MatiereService } from '../services/matiere.service';
 import { DialogComponent } from './dialog/dialog.component';
-import { Dialog2Component } from './dialog2/dialog2.component';
+import { DialogUpdateCoursComponent } from './dialog-update-cours/dialog-update-cours.component';
 
 
 @Component({
@@ -52,8 +52,8 @@ export class ClasseComponent implements OnInit {
     })
   }
 
-  openDialog2(name: string) {
-    let dialogRef = this.dialog.open(Dialog2Component, { data: { name: name } });
+  UpdateFile(name: string) {
+    let dialogRef = this.dialog.open(DialogUpdateCoursComponent, { data: { name: name } });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'false') {
@@ -63,7 +63,6 @@ export class ClasseComponent implements OnInit {
       }
     })
   }
-
 
   ngOnInit() {
     console.log("refresh");
