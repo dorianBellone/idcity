@@ -24,32 +24,14 @@ export class AdminPanelComponent implements OnInit {
   }
 
 
-
   public AddTag(newTagName) {
 
     if (newTagName == null) return;
 
     var tt = this.http.get<Boolean>('https://localhost:44373/tag/add/' + newTagName + '/' + "");
-
-
-    //this.http.post('https://localhost:44373/tag/add/' + newTagName)
-    //  .subscribe(event => {
-    //    if (event.type === HttpEventType.UploadProgress)
-    //      this.progress = Math.round(100 * event.loaded / event.total);
-    //    else if (event.type === HttpEventType.Response) {
-    //      this.message = 'Upload success.';
-    //      this.onUploadFinished.emit(event.body);
-    //    }
-    //  });
+    this.GetTag();
   }
 
-
-
-  powers = ['Really Smart', 'Super Flexible',
-    'Super Hot', 'Weather Changer'];
-
-
-  //model = new Hero(18, 'Dr IQ', this.powers[0], 'Chuck Overstreet');
 
   submitted = false;
 
