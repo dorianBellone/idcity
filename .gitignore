@@ -2,3 +2,11 @@
 IDSTORE2/.vs/IDSTORE2/v16/.suo
 IDSTORE2/.vs/IDSTORE2/config/applicationhost.config
 *.config
+*.cache
+*.cache
+IDSTORE2/TestIDStore/bin/Debug/net5.0/CoverletSourceRootsMapping
+IDSTORE2/TestIDStore/obj/Debug/net5.0/TestIDStore.AssemblyInfo.cs
+IDSTORE2/TestIDStore/obj/Debug/net5.0/TestIDStore.assets.cache
+IDSTORE2/TestIDStore/obj/Debug/net5.0/TestIDStore.assets.cache
+IDSTORE2/TestIDStore/obj/Debug/net5.0/TestIDStore.assets.cache
+IDSTORE2/TestIDStore/obj/Debug/net5.0/TestIDStore.GeneratedMSBuildEditorConfig.editorconfig
