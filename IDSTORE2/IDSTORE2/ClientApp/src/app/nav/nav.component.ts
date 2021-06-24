@@ -121,6 +121,9 @@ export class NavComponent implements OnInit {
     this.apiService.loadClasse(classe);
     this.router.navigate(['/classe', classe]);
   }
+  navigatToAdmin() {
+    this.router.navigate(['/admin-panel']);
+  }
 
   redirection() {
     this.router.navigate(['/home']);

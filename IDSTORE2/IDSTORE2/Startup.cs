@@ -41,6 +41,8 @@ namespace IDSTORE2
             services.AddScoped<APIContext>();
             services.AddScoped<LogServices>();
             services.AddScoped<ArchivesServices>();
+            services.AddScoped<TagServices>();
+
 
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

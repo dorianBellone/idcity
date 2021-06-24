@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "tharL9JI7KMCKNNAXY3VFQROy1pf/kZx5bWb/glz8SD4LJApqVhVpUK2yl1228i7QPUj56jZHxm0LnQg5OitNA==",
+  "dgSpecHash": "U+SM5pf0h3LdV7UjXFSnBp8F/A+5iV1C/b3tbv6oPeUevg5bHWiJ97z/ufe2VDw1UDKXFbuoTV5O6BD5dycfVQ==",
   "success": true,
   "projectFilePath": "D:\\File\\Bureau\\M2\\IDCity_IDStore\\idcity\\IDSTORE2\\TestIDStore\\TestIDStore.csproj",
   "expectedPackageFiles": [
@@ -110,7 +110,7 @@
     "C:\\Users\\benji\\.nuget\\packages\\system.reflection.primitives\\4.3.0\\system.reflection.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\benji\\.nuget\\packages\\system.reflection.typeextensions\\4.3.0\\system.reflection.typeextensions.4.3.0.nupkg.sha512",
     "C:\\Users\\benji\\.nuget\\packages\\system.resources.resourcemanager\\4.3.0\\system.resources.resourcemanager.4.3.0.nupkg.sha512",
-    "C:\\Users\\benji\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Users\\benji\\.nuget\\packages\\system.runtime\\4.3.1\\system.runtime.4.3.1.nupkg.sha512",
     "C:\\Users\\benji\\.nuget\\packages\\system.runtime.caching\\4.7.0\\system.runtime.caching.4.7.0.nupkg.sha512",
     "C:\\Users\\benji\\.nuget\\packages\\system.runtime.extensions\\4.3.0\\system.runtime.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\benji\\.nuget\\packages\\system.runtime.handles\\4.3.0\\system.runtime.handles.4.3.0.nupkg.sha512",

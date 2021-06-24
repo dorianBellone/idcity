@@ -144,13 +144,6 @@ export class ClasseComponent implements OnInit {
             this.mySubjectVal = 'CULT';
             break;
           }
-    
-      
-
-
-
-
-
           default: {
             //statements; 
             break;

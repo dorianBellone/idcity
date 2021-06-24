@@ -28,6 +28,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -69,7 +70,13 @@
   <ItemGroup>
     <Compile Include="Migrations\20210611111435_Update04.cs" />
     <Compile Include="Migrations\20210611111435_Update04.Designer.cs" />
+    <Compile Include="Migrations\20210624104606_UpdateDB_5.cs" />
+    <Compile Include="Migrations\20210624104606_UpdateDB_5.Designer.cs" />
+    <Compile Include="Migrations\20210624104725_UpdateDB_6.cs" />
+    <Compile Include="Migrations\20210624104725_UpdateDB_6.Designer.cs" />
     <Compile Include="Migrations\APIContextModelSnapshot.cs" />
+    <TypeScriptCompile Remove="ClientApp\src\app\admin\admin-panel.component.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\admin\admin-panel.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\classe\dialog-update-cours\dialog-update-cours.component.spec.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\classe\dialog-update-cours\dialog-update-cours.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\services\file-upload-service.ts" />

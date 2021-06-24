@@ -1,7 +1,8 @@
 <h2 style="width: 600px"> Modification du contenu <mat-icon color="red">edit</mat-icon> </h2>
 <div style="margin-bottom:15px;">
+  <label>Modifier le contenu : :</label>
   <div>
-    <input type="file" #file placeholder="Choose file" (change)="UpdateFile(data.name,file.files)" style="display:none;">
+    <input type="file" placeholder="Choisir un fichier" #file (change)="OnChangeFile(file.files)">
   </div>
   <div>
     <span class="upload" *ngIf="progress > 0">
@@ -19,4 +20,4 @@
          [(ngModel)]="data.name" name="name">
 </div>
 
-<button type="button" class="btn btn-success" (click)="file.click()">Sauvegarder les modification</button>
+<button type="button" class="btn btn-success" (click)="UpdateFileTwo(data.name)">Sauvegarder les modification</button>

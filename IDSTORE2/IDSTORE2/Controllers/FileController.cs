@@ -156,7 +156,6 @@ namespace IDSTORE2.Controllers
             // Delete on DataBase
 
             return Ok("Document Supprimer.");
-            
         }
 
         [HttpPost, DisableRequestSizeLimit]

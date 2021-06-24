@@ -19,6 +19,8 @@ import { DialogComponent } from './classe/dialog/dialog.component';
 import { DialogUpdateCoursComponent } from './classe/dialog-update-cours/dialog-update-cours.component';
 import { FileUploadService } from './services/file-upload-service';
 import { DialogCoursComponent } from './classe/dialog-cours/dialog-cours.component';
+import { AdminPanelComponent } from './admin/admin-panel.component';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { DialogCoursComponent } from './classe/dialog-cours/dialog-cours.compone
     ClasseComponent,
     DialogComponent,
     DialogUpdateCoursComponent,
-    DialogCoursComponent
+    DialogCoursComponent,
+    AdminPanelComponent,
   ],
   entryComponents: [DialogComponent, DialogUpdateCoursComponent, DialogCoursComponent],
   imports: [
@@ -40,18 +43,19 @@ import { DialogCoursComponent } from './classe/dialog-cours/dialog-cours.compone
     NgxFileSaverModule,
     Ng2SearchPipeModule,
     BrowserModule,
-    MatDialogModule,
-
     RouterModule.forRoot([
       { path: '', pathMatch: 'full', redirectTo: 'login' },
       { path: 'login', component: LoginComponent },
       { path: 'home', component: HomeComponent /*,canActivate: [AuthGuard] */},
       { path: 'liste', component: ClasseComponent /*,canActivate: [AuthGuard]*/ },
-      { path: 'classe/:classe', component: ClasseComponent }
+      { path: 'classe/:classe', component: ClasseComponent },
+      { path: 'admin-panel', component: AdminPanelComponent }
     //  { path: 'classe/:classe/:matiere', ListeComponent }
     ]),
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
+
   ],
   providers: [FileUploadService],
   bootstrap: [AppComponent]

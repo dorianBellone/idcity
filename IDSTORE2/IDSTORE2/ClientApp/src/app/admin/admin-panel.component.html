@@ -1,0 +1,57 @@
+
+
+<div *ngFor="let item of Tags">
+  <div class="card">
+    <div class="card-body">
+      <p class="card-text">
+        <mat-list>
+          <h2>{{item}}</h2>
+          <!--<mat-list-item>
+            <button mat-button (click)="download(this.classe,this.item.name)">
+              <mat-icon>south</mat-icon>
+              Télécharger
+            </button>
+            <div *ngIf="admin">
+              <button mat-button (click)="openDialog(this.item.name)" style="background-color: black; color:white;">
+                Supprimer
+              </button>
+            </div>
+            <div *ngIf="admin" style="margin-left: 15px;">
+              <button mat-button (click)="UpdateFile(this.item.name)" style="background-color: black; color:white;">
+                Modifier
+              </button>
+            </div>
+          </mat-list-item>-->
+        </mat-list>
+    </div>
+  </div>
+</div>
+
+<mat-accordion>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Ajouter un Tag :
+      </mat-panel-title>
+      <mat-panel-description>
+      This is a summary of the content
+    </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-card>
+      <form>
+        <div class="form-group">
+          <label>Nom </label>
+          <input type="text" class="form-control" id="tagName"
+                 required
+                 [(ngModel)]="this.newTagName" name="tagName">
+
+          <button mat-button (click)="AddTag(this.newTagName)" color="#b40b0b">
+            Valider
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </mat-expansion-panel>
+  
+</mat-accordion>
+
