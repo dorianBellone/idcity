@@ -23,7 +23,8 @@ export class DialogUpdateCoursComponent {
 
   public UpdateFileTwo = (name) => {
     //update / { classe } / { name } / { newname }
-    this.http.post('https://localhost:44373/file/update/B1/' + name + "/aa", this.formData, { reportProgress: true, observe: 'events' })
+    console.log('https://localhost:44373/file/update/B1/' + name + '/aa');
+    this.http.post('https://localhost:44373/file/update/B1/' + name + '/aa', this.formData, { reportProgress: true, observe: 'events' })
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
           this.progress = Math.round(100 * event.loaded / event.total);

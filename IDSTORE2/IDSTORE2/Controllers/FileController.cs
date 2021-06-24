@@ -205,7 +205,7 @@ namespace IDSTORE2.Controllers
         }
 
         /// Rename file or/and update content by this class and name
-        [HttpGet]
+        [HttpPost]
         [Route("update/{classe}/{name}/{newname}")]
         public async Task<IActionResult> Update(string classe, string name, string newName)
         {

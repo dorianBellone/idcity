@@ -6,22 +6,27 @@
       <p class="card-text">
         <mat-list>
           <h2>{{item}}</h2>
+          <button mat-raised-button
+                  matTooltip="Info about the action"
+                  aria-label="Button that displays a tooltip when focused or hovered over">
+            Action
+          </button>
           <!--<mat-list-item>
-            <button mat-button (click)="download(this.classe,this.item.name)">
-              <mat-icon>south</mat-icon>
-              Télécharger
-            </button>
-            <div *ngIf="admin">
-              <button mat-button (click)="openDialog(this.item.name)" style="background-color: black; color:white;">
-                Supprimer
-              </button>
-            </div>
-            <div *ngIf="admin" style="margin-left: 15px;">
-              <button mat-button (click)="UpdateFile(this.item.name)" style="background-color: black; color:white;">
-                Modifier
-              </button>
-            </div>
-          </mat-list-item>-->
+    <button mat-button (click)="download(this.classe,this.item.name)">
+      <mat-icon>south</mat-icon>
+      Télécharger
+    </button>
+    <div *ngIf="admin">
+      <button mat-button (click)="openDialog(this.item.name)" style="background-color: black; color:white;">
+        Supprimer
+      </button>
+    </div>
+    <div *ngIf="admin" style="margin-left: 15px;">
+      <button mat-button (click)="UpdateFile(this.item.name)" style="background-color: black; color:white;">
+        Modifier
+      </button>
+    </div>
+  </mat-list-item>-->
         </mat-list>
     </div>
   </div>

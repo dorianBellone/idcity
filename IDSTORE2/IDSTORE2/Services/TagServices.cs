@@ -82,6 +82,23 @@ namespace IDSTORE2.Services
                 return false;
             }
         }
+        public async Task<Boolean> AddTag(Tag _tag)
+        {
+            try
+            {
+                if (_tag == null || String.IsNullOrEmpty(_tag.Name)) return false;
+
+                _tag.TagId = 0;
+
+                await context.Tag.AddAsync(_tag);
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public async Task<Boolean> UpdateTag(Tag _tag)
         {
             try
