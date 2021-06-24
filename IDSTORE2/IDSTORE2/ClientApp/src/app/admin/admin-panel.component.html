@@ -1,46 +1,8 @@
-
-
-<div *ngFor="let item of Tags">
-  <div class="card">
-    <div class="card-body">
-      <p class="card-text">
-        <mat-list>
-          <h2>{{item}}</h2>
-          <button mat-raised-button
-                  matTooltip="Info about the action"
-                  aria-label="Button that displays a tooltip when focused or hovered over">
-            Action
-          </button>
-          <!--<mat-list-item>
-    <button mat-button (click)="download(this.classe,this.item.name)">
-      <mat-icon>south</mat-icon>
-      Télécharger
-    </button>
-    <div *ngIf="admin">
-      <button mat-button (click)="openDialog(this.item.name)" style="background-color: black; color:white;">
-        Supprimer
-      </button>
-    </div>
-    <div *ngIf="admin" style="margin-left: 15px;">
-      <button mat-button (click)="UpdateFile(this.item.name)" style="background-color: black; color:white;">
-        Modifier
-      </button>
-    </div>
-  </mat-list-item>-->
-        </mat-list>
-    </div>
-  </div>
-</div>
-
-<mat-accordion>
-  <mat-expansion-panel hideToggle>
+<mat-accordion style="    margin: 0 auto;    width: 300px;">
+  <mat-expansion-panel style="width:600px;" hideToggle>
     <mat-expansion-panel-header>
-      <mat-panel-title>
-        Ajouter un Tag :
-      </mat-panel-title>
-      <mat-panel-description>
-      This is a summary of the content
-    </mat-panel-description>
+      <h2>  Ajouter un Tag   <mat-icon color="red">add</mat-icon></h2> 
+            
     </mat-expansion-panel-header>
     <mat-card>
       <form>
@@ -57,6 +19,39 @@
       </form>
     </mat-card>
   </mat-expansion-panel>
-  
+
 </mat-accordion>
+
+<div style="margin-top:50px;" *ngFor="let item of Tags">
+  <div class="card  rcorner3" style="margin: 0 auto;">
+    <div class="card-body">
+      <p class="card-text">
+        <mat-list>
+
+          <span mat-raised-button class="centrer"
+                matTooltip="voila une description"
+                aria-label="Button that displays a tooltip when focused or hovered over">
+            <h1 style="text-align:center"> {{item}}</h1>
+          </span>
+          <!--<mat-list-item>
+            <button mat-button (click)="download(this.classe,this.item.name)">
+              <mat-icon>south</mat-icon>
+              Télécharger
+            </button>
+            <div *ngIf="admin">
+              <button mat-button (click)="openDialog(this.item.name)" style="background-color: black; color:white;">
+                Supprimer
+              </button>
+            </div>
+            <div *ngIf="admin" style="margin-left: 15px;">
+              <button mat-button (click)="UpdateFile(this.item.name)" style="background-color: black; color:white;">
+                Modifier
+              </button>
+            </div>
+          </mat-list-item>-->
+        </mat-list>
+    </div>
+  </div>
+</div>
+
 
