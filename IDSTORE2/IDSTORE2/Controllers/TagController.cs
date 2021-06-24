@@ -69,11 +69,21 @@ namespace IDSTORE2.Controllers
         {
             return await TagServices.GetAllTagName();
         }
+
         [HttpGet]
         [Route("add/{newtag}/{description}")]
+        [Route("add/{newtag}")]
         public async Task<Boolean> Get(string newtag, string description)
         {
             return await TagServices.AddTag(newtag, description);
+        }
+
+
+        [HttpPost]
+        [Route("addtwo")]
+        public async Task<Boolean> Get(Tag _tag)
+        {
+            return await TagServices.AddTag(_tag);
         }
     }
 }
