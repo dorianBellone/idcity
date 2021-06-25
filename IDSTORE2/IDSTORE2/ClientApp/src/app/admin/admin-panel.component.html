@@ -27,30 +27,16 @@
 <div style="margin-top:50px;" *ngFor="let item of Tags">
   <div class="card  rcorner3" style="margin: 0 auto;">
     <div class="card-body">
-      <p class="card-text">
-        <mat-list>
+      <p class="card-text" >
+        <mat-list style="margin-bottom:40px;">
 
-          <span mat-raised-button class="centrer"
-                matTooltip="{{item.description}}"
-                aria-label="Button that displays a tooltip when focused or hovered over">
-            <h1 style="text-align:center"> {{item.name}}</h1>
-          </span>
-          <!--<mat-list-item>
-            <button mat-button (click)="download(this.classe,this.item.name)">
-              <mat-icon>south</mat-icon>
-              Télécharger
-            </button>
-            <div *ngIf="admin">
-              <button mat-button (click)="openDialog(this.item.name)" style="background-color: black; color:white;">
-                Supprimer
-              </button>
-            </div>
-            <div *ngIf="admin" style="margin-left: 15px;">
-              <button mat-button (click)="UpdateFile(this.item.name)" style="background-color: black; color:white;">
-                Modifier
-              </button>
-            </div>
-          </mat-list-item>-->
+
+          <h1 mat-raised-button class="centrer"
+              matTooltip="{{item.description}}"
+              aria-label="Button that displays a tooltip when focused or hovered over"
+            style="text-align:center"> {{item}}
+          </h1>
+         
         </mat-list>
     </div>
   </div>
