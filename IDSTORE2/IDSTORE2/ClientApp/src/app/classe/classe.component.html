@@ -27,13 +27,13 @@
                 <h2 style="text-align:center">{{item.name}}</h2>
                 <mat-list-item>
                   
-                  <button mat-button (click)="download(this.classe,this.item.name)"  style="background-color: black; color:white;">
+                  <button mat-button (click)="DownloadFile(this.classe,this.item.name)"  style="background-color: black; color:white;">
                     <mat-icon>south</mat-icon>
                     Télécharger
                   </button>
                   <div *ngIf="admin"  style="margin-left: 15px;">
 
-                    <button mat-button (click)="openDialog(this.item.name)" style="background-color: black; color:white;">
+                    <button mat-button (click)="DeleteFile(this.classe,this.item.name)" style="background-color: black; color:white;">
                       Supprimer
                     </button>
                   </div>

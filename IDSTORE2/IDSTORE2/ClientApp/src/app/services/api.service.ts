@@ -36,6 +36,13 @@ export class ApiService {
     //return this.http.get<Fichier[]>('http://idboard.net:45001/file/getByClasse/' + classe);
     return this.http.get<Fichier[]>('https://localhost:44373/file/getByClasse/' + classe);
   }
+  public deleteFile(_classes: string, _name: string): Observable<Boolean> {
+
+    var resultDelete;
+    this.http.get<Boolean>('https://localhost:44373/file/delete/' + _classes + '/' + _name).subscribe(res => { resultDelete = res; });;
+
+    return resultDelete;
+  }
 
   public downloadFile(classe: string, name: string): Observable<Blob>  {
     //console.log('https://localhost:44373/file/download/' + classe + '/' + name );

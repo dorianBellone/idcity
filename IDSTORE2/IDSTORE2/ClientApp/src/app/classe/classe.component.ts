@@ -38,16 +38,14 @@ export class ClasseComponent implements OnInit {
     });
   }
 
-  openDialog(name: string) {
-    let dialogRef = this.dialog.open(DialogComponent, { data: { name: name } });
+  DeleteFile(_classe : string, name: string) {
+    èlet dialogRef = this.dialog.open(DialogComponent, { data: { name: name } });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true') {
-        console.log(name);
-        //this.apiService.deleteCours(name);
+        this.apiService.deleteFile(_classe,name);
       }
       if (result == 'false') {
-        console.log('false');
       }
     })
   }
@@ -57,7 +55,6 @@ export class ClasseComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'false') {
-        console.log('false');
       } else {
         this.ngOnInit();
       }
@@ -160,7 +157,7 @@ export class ClasseComponent implements OnInit {
     }
   }
 
-  download(classe: string, name: string) {
+  DownloadFile(classe: string, name: string) {
     this.apiService.downloadFile(classe, name).subscribe((data) => {
 
       this.blob = new Blob([data], { type: 'application/pdf' });

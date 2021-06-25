@@ -27,18 +27,19 @@ namespace IDSTORE2.Controllers
         private readonly ArchivesServices ArchiveServices;
 
         private readonly ILogger<FileController> logger;
-        //private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IConfiguration config;
         private IWebHostEnvironment env;
         private String user;
         private String modeLog;
 
-        public FileController(ILogger<FileController> _logger, APIContext _context, IConfiguration _config, IWebHostEnvironment _env, LogServices _logservice)
+        public FileController(ILogger<FileController> _logger, APIContext _context, IConfiguration _config, IWebHostEnvironment _env, LogServices _logservice, ArchivesServices _archiveServices)
         {
             logger = _logger;
             Context = _context;
-            var listDataFile = _context.File.ToList();
+            ArchiveServices = _archiveServices;
             LogServices = _logservice;
+
+            var listDataFile = _context.File.ToList();
             config = _config;
             if (User == null) user = "admin";
             else if (User.Identity.Name == null) user = "admin";
@@ -315,23 +316,6 @@ namespace IDSTORE2.Controllers
             Console.WriteLine(Directory.GetFiles(FolderPath));
             return Directory.GetFiles(FolderPath);
         }
-
-        //public List<FileOverride> Get()
-        //{
-        //    List<FileOverride> response = new List<FileOverride>();
-        //    byte[] content;
-        //    string[] filePaths = Directory.GetFiles(folderPath);
-        //    string fileDefaultName;
-        //    foreach (string path in filePaths.ToList())
-        //    {
-        //        fileDefaultName = path;
-        //        FileInfo fi = new FileInfo(path);
-        //        content = System.IO.File.ReadAllBytes(path);
-        //        response.Add(new FileOverride(/*context,*/content, fi.Name, fi.Extension, null,fi.FullName));
-        //    }
-        //    Console.WriteLine(response);
-        //    return response;
-        //}
     }
 }
 

@@ -20,7 +20,7 @@ namespace IDSTORE2.Services
     public class ArchivesServices
     {
         private readonly LogServices logService;
-        private readonly APIContext context;
+        //private readonly APIContext context;
 
         private string ArchivesPath { get; set; }
         private static bool DebugMode = true;
@@ -41,11 +41,11 @@ namespace IDSTORE2.Services
             
         }
 
-        public ArchivesServices(IConfiguration _config, IWebHostEnvironment _env)
+        public ArchivesServices(IConfiguration _config, IWebHostEnvironment _env, LogServices _logServices)
         {
             config = _config;
             env = _env;
-
+            logService = _logServices;
             if (env.IsProduction())
             {
                 string PathProd = config.GetSection("PathFile").GetSection("PathArchivesProd").Value;
@@ -60,7 +60,7 @@ namespace IDSTORE2.Services
             {
                 System.IO.Directory.CreateDirectory(ArchivesPath);
             }
-            logService = new LogServices(context);
+            //logService = new LogServices(context);
         }
 
         public async Task<Boolean> ArchiveFile(TypeArchives _typeArchives, String _filePath, String _classe, String _user)
@@ -99,7 +99,7 @@ namespace IDSTORE2.Services
                 if (String.IsNullOrWhiteSpace(type))
                     newPath += "_01";
                 else
-                    newPath += "_01" + "." + type;
+                    newPath += "_01" + type;
             }
             else
             {

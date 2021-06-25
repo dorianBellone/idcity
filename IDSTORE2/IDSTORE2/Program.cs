@@ -54,8 +54,10 @@ namespace IDSTORE2
                     var env = services.GetRequiredService<IWebHostEnvironment>();
                     var httpContextAccessor = services.GetRequiredService<IHttpContextAccessor>();
                     var logServices = services.GetRequiredService<LogServices>();
+                    var archivesServices = services.GetRequiredService<ArchivesServices>();
+
                     Console.WriteLine("Création/Initilisation de la DB : début !");
-                    DbInitializer.Initialize(logger, context, config, env, httpContextAccessor, logServices);
+                    DbInitializer.Initialize(logger, context, config, env, httpContextAccessor, logServices, archivesServices);
                     Console.WriteLine("Création/Initilisation de la DB : fin !");
                 }
                 catch (Exception ex)
@@ -65,13 +67,11 @@ namespace IDSTORE2
                 }
             }
         }
-
-
     }
 
     public static class DbInitializer
     {
-        public static void Initialize(ILogger<FileController> logger, APIContext context, IConfiguration config, IWebHostEnvironment env, IHttpContextAccessor httpContextAccessor,LogServices logServices)
+        public static void Initialize(ILogger<FileController> logger, APIContext context, IConfiguration config, IWebHostEnvironment env, IHttpContextAccessor httpContextAccessor,LogServices logServices, ArchivesServices archivesServices)
         {
             context.Database.EnsureCreated();
             // Insert TypeLog if don't exist. 
@@ -124,7 +124,7 @@ namespace IDSTORE2
                 context.SaveChanges();
                 //return;
             }
-            FileController fileController = new FileController(logger, context, config, env, logServices);
+            FileController fileController = new FileController(logger, context, config, env, logServices, archivesServices);
             String path = String.Empty;
             if (env.IsProduction())
             {
@@ -148,7 +148,6 @@ namespace IDSTORE2
             context.SaveChanges();
 
             var FilesDB = context.File.ToList();
-
         }
     }
 }
