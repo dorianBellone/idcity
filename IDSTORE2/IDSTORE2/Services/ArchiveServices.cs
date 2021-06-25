@@ -20,8 +20,6 @@ namespace IDSTORE2.Services
     public class ArchivesServices
     {
         private readonly LogServices logService;
-        //private readonly APIContext context;
-
         private string ArchivesPath { get; set; }
         private static bool DebugMode = true;
 

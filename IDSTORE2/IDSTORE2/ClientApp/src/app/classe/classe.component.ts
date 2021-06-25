@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Fichier } from '../models/fichier';
@@ -25,16 +25,10 @@ export class ClasseComponent implements OnInit {
   admin: boolean;
 
 
-  constructor(public dialog: MatDialog, private route: ActivatedRoute, private apiService: ApiService, private router: Router, private matiereService: MatiereService, private loginService: LoginService) {
+  constructor(public dialog: MatDialog, private route: ActivatedRoute, private apiService: ApiService, private router: Router, private matiereService: MatiereService, private loginService: LoginService, private ref: ChangeDetectorRef) {
      
     this.route.url.subscribe(url => {
-      this.data = [];
-      console.log(this.classe);
-      this.apiService.getFileByClasse(this.classe)
-        .subscribe(
-          data => {
-            this.data = data;
-          });
+      
     });
   }
 
@@ -43,7 +37,13 @@ export class ClasseComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true') {
-        this.apiService.deleteFile(_classe,name);
+        this.apiService.deleteFile(_classe, name);
+        this.apiService.getFileByClasse(this.classe)
+          .subscribe(
+            data => {
+              this.data = [];
+              this.data = data;
+            });
       }
       if (result == 'false') {
       }
@@ -62,6 +62,14 @@ export class ClasseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.data = [];
+    console.log(this.classe);
+    this.apiService.getFileByClasse(this.classe)
+      .subscribe(
+        data => {
+          this.data = data;
+        });
+
     console.log("refresh");
     this.admin = false;
     this.details = false;
@@ -155,6 +163,9 @@ export class ClasseComponent implements OnInit {
     if (this.loginService.user === "admin") {
       this.admin = true;
     }
+
+      this.ref.detectChanges();
+    
   }
 
   DownloadFile(classe: string, name: string) {

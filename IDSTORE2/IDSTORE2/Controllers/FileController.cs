@@ -124,12 +124,8 @@ namespace IDSTORE2.Controllers
                 await stream.CopyToAsync(memory);
             }
             memory.Position = 0;
-            //Response.ContentType = "application/pdf";
-            //Response.Body = File(memory, GetContentType(filePath), name).FileStream;
-
 
             return File(memory, /*GetContentType(filePath)*/"application/pdf", name);
-            // return File(memory, /*GetContentType(filePath)*/ "application/pdf", filePath);
         }
 
         /// <summary>
