@@ -39,7 +39,7 @@ export class ClasseComponent implements OnInit {
   }
 
   DeleteFile(_classe : string, name: string) {
-    èlet dialogRef = this.dialog.open(DialogComponent, { data: { name: name } });
+    let dialogRef = this.dialog.open(DialogComponent, { data: { name: name } });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true') {
