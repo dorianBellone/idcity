@@ -31,6 +31,8 @@ namespace IDSTORE2.Controllers
         private readonly IConfiguration config;
         private IWebHostEnvironment env;
         private String user;
+        private String modeLog;
+
         public FileController(ILogger<FileController> _logger, APIContext _context, IConfiguration _config, IWebHostEnvironment _env, LogServices _logservice)
         {
             logger = _logger;
@@ -38,10 +40,10 @@ namespace IDSTORE2.Controllers
             var listDataFile = _context.File.ToList();
             LogServices = _logservice;
             config = _config;
-            if (User == null) user = "null";
-            else if (User.Identity.Name == null) user = "null";
+            if (User == null) user = "admin";
+            else if (User.Identity.Name == null) user = "admin";
             else user = User.Identity.Name;
-            if (String.IsNullOrWhiteSpace(user)) user = "null";
+            if (String.IsNullOrWhiteSpace(user)) user = "admin";
             env = _env;
             if (env.IsProduction())
             {
@@ -53,6 +55,8 @@ namespace IDSTORE2.Controllers
                 string PathDev = config.GetSection("PathFile").GetSection("PathFileDev").Value;
                 FolderPath = PathDev;
             }
+            modeLog = config.GetSection("ModeLog").Value;
+
         }
 
         /// <summary>
@@ -65,12 +69,14 @@ namespace IDSTORE2.Controllers
         public async Task<List<FileOverride>> GetByClasse(string classe)
         {
             List<FileOverride> response = new List<FileOverride>();
-            //byte[] content;
 
             FolderPath = FolderPath + classe;
-           
+
             // Log 
-            await LogServices.AddLog(LogServices.GetTypeLog("Get"), user, "GetByClasse : " + FolderPath + " By : " + user);
+            if (modeLog == "complete")
+            {
+                await LogServices.AddLog(LogServices.GetTypeLog("Get"), user, "GetByClasse : " + FolderPath + " By : " + user);
+            }
             string[] filePaths = Directory.GetFiles(FolderPath);
             foreach (string path in filePaths.ToList())
             {
@@ -107,8 +113,10 @@ namespace IDSTORE2.Controllers
                 return NotFound();
 
             // Log 
-            await LogServices.AddLog(LogServices.GetTypeLog("Get"), user, "Download : " + filePath + " By : " + user);
-
+            if (modeLog == "complete")
+            {
+                await LogServices.AddLog(LogServices.GetTypeLog("Get"), user, "Download : " + filePath + " By : " + user);
+            }
             var memory = new MemoryStream();
             using (var stream = new FileStream(filePath, FileMode.Open))
             {
@@ -154,7 +162,6 @@ namespace IDSTORE2.Controllers
             System.IO.File.Delete(filePath);
             
             // Delete on DataBase
-
             return Ok("Document Supprimer.");
         }
 

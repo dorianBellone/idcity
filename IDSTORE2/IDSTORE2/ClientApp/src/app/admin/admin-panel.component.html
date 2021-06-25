@@ -7,12 +7,14 @@
     <mat-card>
       <form>
         <div class="form-group">
-          <label>Nom </label>
+          <label>Nom :</label>
           <input type="text" class="form-control" id="tagName"
                  required
                  [(ngModel)]="this.newTagName" name="tagName">
-
-          <button mat-button (click)="AddTag(this.newTagName)" color="#b40b0b">
+          <label>Description :</label>
+          <input type="text" class="form-control" id="tagDesc"
+                 [(ngModel)]="this.desc" name="tagDesc">
+          <button mat-button (click)="AddTag(this.newTagName, this.desc)" color="#b40b0b">
             Valider
           </button>
         </div>
@@ -29,9 +31,9 @@
         <mat-list>
 
           <span mat-raised-button class="centrer"
-                matTooltip="voila une description"
+                matTooltip="{{item.description}}"
                 aria-label="Button that displays a tooltip when focused or hovered over">
-            <h1 style="text-align:center"> {{item}}</h1>
+            <h1 style="text-align:center"> {{item.name}}</h1>
           </span>
           <!--<mat-list-item>
             <button mat-button (click)="download(this.classe,this.item.name)">

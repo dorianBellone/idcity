@@ -18,38 +18,24 @@ export class AdminPanelComponent implements OnInit {
   }
   public panelOpenState = false;
   public newTagName: string;
-  public Tags: String[];
+  public desc : string;
+
+  public Tags: Tag[];
   public tag: Tag = null;
   public resultAddTag: Boolean;
   constructor(private router: Router, private http: HttpClient) { }
 
   public GetTag() {
-    this.http.get<String[]>('https://localhost:44373/tag/').subscribe(res => { this.Tags = res; });
+    this.http.get<Tag[]>('https://localhost:44373/tag/').subscribe(res => { this.Tags = res; });
   }
 
-
-
-  // ADD Description
-  public AddTag(newTagName : string) {
+  public AddTag(newTagName: string, _description: string) {
 
     if (newTagName == null) return;
-
     this.tag.name = newTagName;
-    
-    //this.http.get<Boolean>('https://localhost:44373/tag/add/' + newTagName + '/' + "un").subscribe(res => { this.resultAddTag = res; });
+    this.tag.description = _description;
 
-    this.http.post<Boolean>('https://localhost:44373/tag/addtwo/', this.tag).subscribe(res => { this.resultAddTag = res; });
-    console.log(this.resultAddTag);
-
+    this.http.post<Boolean>('https://localhost:44373/tag/add/', this.tag).subscribe(res => { this.resultAddTag = res; });
     this.GetTag();
-
-
-
-
-    //this.http.post<any>('https://reqres.in/invalid-url', { title: 'Angular POST Request Example' }).subscribe({
-    //  next: data => {
-    //    this.postId = data.id;
-    //  },
-
   }
 }

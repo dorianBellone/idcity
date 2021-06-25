@@ -108,9 +108,6 @@ export class NavComponent implements OnInit {
     this.experience = false;
     this.pratique = false;
     this.apiService.getFileByClasse("B1");
-    //this.myTestText = this.apiService.TEST_get();
-   
-    
   }
 
   sendTextValue(matiere) {

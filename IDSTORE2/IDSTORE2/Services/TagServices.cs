@@ -87,7 +87,7 @@ namespace IDSTORE2.Services
             try
             {
                 if (_tag == null || String.IsNullOrEmpty(_tag.Name)) return false;
-
+                if (context.Tag.FirstOrDefault() == null) return false;
                 _tag.TagId = 0;
 
                 await context.Tag.AddAsync(_tag);

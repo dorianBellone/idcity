@@ -4,29 +4,17 @@
       ID STORE
     </h6>
 
-    <div *ngIf="adminMode" style="margin-left:70%;">
+    <div *ngIf="adminMode" style="margin-left:65%;">
       <button (click)="openDialogAddCours()" mat-raised-button style="background-color:black; color:white; margin-right:20px"
               matBadgePosition="before" matBadgeColor="accent">
         Ajouter un cours
       </button>
       <button mat-raised-button style="background-color:black; color:white"
               matBadgePosition="before" matBadgeColor="accent" (click)="navigatToAdmin()">
-        Mode Administrateur
+        Panel Administrateur
       </button>
     </div>
-
-
-
-
-
-    <div class="container-fluid">
-      <div class="row backcolor size">
-        <div class="col-md-10 ml-2">
-
-        </div>
-      </div>
-    </div>
-  </mat-toolbar-row>
+      </mat-toolbar-row>
 </mat-toolbar>
 
 
@@ -37,7 +25,6 @@
         <mat-label style="color: white;">Choix de la classe</mat-label>
         <mat-select [(ngModel)]="selectedValue" (ngModelChange)="sendClasseValue($event)" name="classe">
           <mat-option *ngFor="let classe of classes" [value]="classe.nom">
-            >
             {{classe.nom}}
           </mat-option>
         </mat-select>

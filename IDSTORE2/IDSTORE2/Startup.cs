@@ -34,17 +34,12 @@ namespace IDSTORE2
             // SQL
             services.AddDbContext<APIContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("SQL_Connection")));
-            // SQL LITE
-            //services.AddDbContext<APIContext>(options =>
-            //options.UseSqlite(Configuration.GetConnectionString("SQL_LiteConnection")));
-
+            
+            // Inject Dependance
             services.AddScoped<APIContext>();
             services.AddScoped<LogServices>();
             services.AddScoped<ArchivesServices>();
             services.AddScoped<TagServices>();
-
-
-
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllers();
 
@@ -53,35 +48,27 @@ namespace IDSTORE2
                 Console.WriteLine("----------");
                 Console.WriteLine(_env.EnvironmentName);
                 Console.WriteLine("----------");
-                Console.WriteLine(_env.WebRootPath);
-
-                Console.WriteLine("----------");
                 services.AddSpaStaticFiles(configuration =>
                 {
                     configuration.RootPath = "ClientApp/dist";
                 });
-                // ADD BR TEST uplaod 
-                services.Configure<FormOptions>(o => {
-                    o.ValueLengthLimit = int.MaxValue;
-                    o.MultipartBodyLengthLimit = int.MaxValue;
-                    o.MemoryBufferThreshold = int.MaxValue;
-                });
+                // Configure for Upload
+                //services.Configure<FormOptions>(o => {
+                //    o.ValueLengthLimit = int.MaxValue;
+                //    o.MultipartBodyLengthLimit = int.MaxValue;
+                //    o.MemoryBufferThreshold = int.MaxValue;
+                //});
             }
             if (_env.IsProduction())
             {
                 Console.WriteLine("----------");
                 Console.WriteLine(_env.EnvironmentName);
-                
                 Console.WriteLine("----------");
 
                 services.AddSpaStaticFiles(configuration =>
                 {
                     configuration.RootPath = "wwwroot";
                 });
-
-                Console.WriteLine("----------");
-                Console.WriteLine("c.RootPath = \"wwwroot\"    c'est fait !!!! ");
-                Console.WriteLine("----------");
             }
         }
 
@@ -89,7 +76,6 @@ namespace IDSTORE2
         public void Configure(IApplicationBuilder app)
         {
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
-
             if (_env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -112,25 +98,21 @@ namespace IDSTORE2
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
-
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
-
                 if (_env.IsDevelopment())
                 {
                     //spa.UseAngularCliServer(npmScript: "start");
                     spa.Options.SourcePath = "ClientApp";
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
-                    //// ADD By B.R 29/04 https://code-maze.com/upload-files-dot-net-core-angular/
                     app.UseStaticFiles(new StaticFileOptions()
                     {
                         FileProvider = new PhysicalFileProvider("C:\\RessourceFile"),
                         RequestPath = new PathString("/ResourcesFile")
                     });
                 }
-
                 if (_env.IsProduction())
                 {
                     spa.Options.SourcePath = "wwwroot";
@@ -141,10 +123,7 @@ namespace IDSTORE2
                     //    RequestPath = new PathString("/RessourceFile")
                     //});
                 }
-
             });
-
-            Console.WriteLine();
         }
     }
 }

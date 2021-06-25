@@ -34,8 +34,6 @@ namespace TestIDStore
             }
         }
 
-
-
         [Fact]
         public void ArchiveUpdateFile_Test()
         {
@@ -43,7 +41,7 @@ namespace TestIDStore
             typeArchives = TypeArchives.Update;
             String classe = "B1";
 
-            Services.ArchiveFile(typeArchives, ArchivePath + NameArchiveFile, classe,"");
+            Services.ArchiveFile(typeArchives, ArchivePath + NameArchiveFile, classe,"TestIDStore");
         }
        
     }

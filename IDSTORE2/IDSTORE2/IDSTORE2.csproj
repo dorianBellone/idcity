@@ -75,6 +75,8 @@
     <Compile Include="Migrations\20210624104606_UpdateDB_5.Designer.cs" />
     <Compile Include="Migrations\20210624104725_UpdateDB_6.cs" />
     <Compile Include="Migrations\20210624104725_UpdateDB_6.Designer.cs" />
+    <Compile Include="Migrations\20210625010802_Update06.cs" />
+    <Compile Include="Migrations\20210625010802_Update06.Designer.cs" />
     <Compile Include="Migrations\APIContextModelSnapshot.cs" />
     <TypeScriptCompile Remove="ClientApp\src\app\admin\admin-panel.component.spec.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\admin\admin-panel.component.ts" />

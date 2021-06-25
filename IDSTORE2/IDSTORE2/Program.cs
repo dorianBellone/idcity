@@ -18,7 +18,6 @@ namespace IDSTORE2
     {
         public static void Main(string[] args)
         {
-            //CreateHostBuilder(args).Build().Run();
             Console.WriteLine("---- START IDSTORE ----");
             Console.WriteLine("---- By Ben&Dodo ----");
             Console.WriteLine("---- IDCity ----");
@@ -28,7 +27,6 @@ namespace IDSTORE2
             CreateDbIfNotExists(host);
             // Write in Console all environment variables
             var config = host.Services.GetRequiredService<IConfiguration>();
-
             foreach (var c in config.AsEnumerable())
             {
                 Console.WriteLine(c.Key + " = " + c.Value);
@@ -56,9 +54,9 @@ namespace IDSTORE2
                     var env = services.GetRequiredService<IWebHostEnvironment>();
                     var httpContextAccessor = services.GetRequiredService<IHttpContextAccessor>();
                     var logServices = services.GetRequiredService<LogServices>();
-                    Console.WriteLine("Création de la DB : début !");
+                    Console.WriteLine("Création/Initilisation de la DB : début !");
                     DbInitializer.Initialize(logger, context, config, env, httpContextAccessor, logServices);
-                    Console.WriteLine("Création de la DB : fin !");
+                    Console.WriteLine("Création/Initilisation de la DB : fin !");
                 }
                 catch (Exception ex)
                 {
@@ -78,45 +76,43 @@ namespace IDSTORE2
             context.Database.EnsureCreated();
             // Insert TypeLog if don't exist. 
             int countTypeLog = context.TypeLog.Count();
-            if (countTypeLog != 7)
+            if (countTypeLog != 11)
             {
                 context.TypeLog.RemoveRange(context.TypeLog);
-
-
                 Models.TypeLog typeLog = new Models.TypeLog();
                 typeLog.TypeLogId = 1;
                 typeLog.Name = "Add";
-                var result = context.TypeLog.Add(typeLog);
+                context.TypeLog.Add(typeLog);
                 context.SaveChanges();
                 typeLog = new Models.TypeLog();
                 typeLog.TypeLogId = 2;
                 typeLog.Name = "Get";
-                result = context.TypeLog.Add(typeLog);
+                context.TypeLog.Add(typeLog);
                 context.SaveChanges();
                 typeLog = new Models.TypeLog();
                 typeLog.TypeLogId = 3;
                 typeLog.Name = "Update";
-                result = context.TypeLog.Add(typeLog);
+                context.TypeLog.Add(typeLog);
                 context.SaveChanges();
                 typeLog = new Models.TypeLog();
                 typeLog.TypeLogId = 4;
                 typeLog.Name = "Delete";
-                result = context.TypeLog.Add(typeLog);
+                context.TypeLog.Add(typeLog);
                 context.SaveChanges();
                 typeLog = new Models.TypeLog();
                 typeLog.TypeLogId = 5;
                 typeLog.Name = "Rename";
-                result = context.TypeLog.Add(typeLog);
+                context.TypeLog.Add(typeLog);
                 context.SaveChanges();
                 typeLog = new Models.TypeLog();
                 typeLog.TypeLogId = 6;
                 typeLog.Name = "ArchivesFileDelete";
-                result = context.TypeLog.Add(typeLog);
+                context.TypeLog.Add(typeLog);
                 context.SaveChanges();
                 typeLog = new Models.TypeLog();
                 typeLog.TypeLogId = 7;
                 typeLog.Name = "ArchivesFileUpdate";
-                result = context.TypeLog.Add(typeLog);
+                context.TypeLog.Add(typeLog);
                 context.SaveChanges();
             }
 
@@ -125,7 +121,8 @@ namespace IDSTORE2
             if (count != 0)
             {
                 context.File.RemoveRange(context.File);
-                //return;   // DB has been seeded
+                context.SaveChanges();
+                //return;
             }
             FileController fileController = new FileController(logger, context, config, env, logServices);
             String path = String.Empty;
@@ -138,19 +135,19 @@ namespace IDSTORE2
                 path = config.GetSection("PathFile").GetSection("PathFileDev").Value;
             }
             IEnumerable<File> Files = FileServices.GetAllFile(path);
+            List<Tag> tags = new List<Tag>();
+            tags = context.Tag.ToList();
+            foreach (File f in Files)
+            {
+               var file = new File { Name = f.Name, Description = f.Description, Type = f.Type, Path = f.Path };
+               context.File.Add(file);
+               if(f.Tags.First() != null && !string.IsNullOrWhiteSpace(f.Tags.First().Name) && tags.FirstOrDefault(t => t.Name == f.Tags.First().Name) == null) {
+                    context.Tag.Add(f.Tags.First());
+               }
+            }
+            context.SaveChanges();
 
-            //foreach (FileOverride f in Files)
-            //{
-            //    var file = new File { Name = f.Name, Description = f.Description, Type = f.Type, Path = f.Path };
-            //    context.File.Add(file);
-            //}
-            //context.SaveChanges();
-
-            //var FilesDB = context.Files;
-            //Dictionary<Guid, String> dico = new Dictionary<Guid, string>(Files.Count);
-            //foreach (File _file in Files)
-
-
+            var FilesDB = context.File.ToList();
 
         }
     }

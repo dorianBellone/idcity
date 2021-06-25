@@ -82,8 +82,7 @@ namespace IDSTORE2.Services
             else if (env.IsProduction())
             {
                 nameFile = _filePath.Split('/').Last();
-                type = nameFile.Split('.').Last();
-                nameFile = nameFile.Split('.').First();
+                type = Path.GetExtension(_filePath);
                 newPath += _classe + "/" + nameFile;
             }
             else return false;
@@ -109,43 +108,39 @@ namespace IDSTORE2.Services
                     if (String.IsNullOrWhiteSpace(type))
                         newPath += "_" + (filesInDir.Count() + 1).ToString();
                     else
-                        newPath += "_" + (filesInDir.Count() + 1).ToString() + "." + type;
+                        newPath += "_" + (filesInDir.Count() + 1).ToString() + type;
                 }
                 else
                 {
                     if (String.IsNullOrWhiteSpace(type))
                         newPath += "_" + (filesInDir.Count() + 1).ToString();
                     else
-                        newPath += "_" + (filesInDir.Count() + 1).ToString() + "." + type;
+                        newPath += "_" + (filesInDir.Count() + 1).ToString() + type;
                 }
             }
 
             System.IO.File.Move(_filePath, newPath);
+            System.IO.File.Delete(_filePath);
+            if (testMode)
+            {
+                return true;
+            }
 
-            //if (!testMode)
-            //{
             var typeslog = logService.GetTypeLog();
             var typeLog = typeslog.FirstOrDefault(tl => tl.Name.Contains("ArchivesFile" + _typeArchives));
-            //}
-
-            // si typelog == update => Move le file dans les archive 
+            // si typelog == update => Move le file dans les archive + delete ancien path + log ArchiveFileUpdate
             if (typeLog.Name == "ArchivesFileUpdate")
             {
-                String message = "ArchivesFileUpdate Fichier : " + _filePath + " To " + newPath + " By : " + _user;
+                String message = "Archives after update, File : " + _filePath + " To " + newPath + " By : " + _user;
                 return await logService.AddLog(typeLog, _user, message);
             }
+            // si typelog == delete ==> Move le file dans les archive + log ArchiveFilDelete
             else if (typeLog.Name == "ArchivesFileDelete")
             {
-                String message = "ArchivesFileDelete Fichier : " + _filePath + " To " + newPath + " By : " + _user;
+                String message = "Archives after delete, file : " + _filePath + " To " + newPath + " By : " + _user;
                 return await logService.AddLog(typeLog, _user, message);
-            }
-            // si typelog == delete ==> Move le file dans les archive + log deletfileArhcive
-
-            return false;
-
-
+            } 
+            return true;
         }
-
-       
     }
 }
